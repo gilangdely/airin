@@ -22,6 +22,12 @@ $nav = [
             'route' => 'tagihan.index',
             'permissions' => ['tagihan view']
         ],
+        [
+            "title" => "Pembayaran",
+            "icon" => '<i class="menu-icon tf-icons bx bx-credit-card-front"></i>',
+            'route' => 'pembayaran.index',
+            'permissions' => ['pembayaran view']
+        ],
     ],
     "Master" => [
         [

@@ -7,6 +7,7 @@ use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MeteranController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemakaianController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TarifLayananController;
 
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('layanan', LayananController::class);
     Route::resource('pemakaian', PemakaianController::class);
+    // Route::resource('pembayaran', PembayaranController::class);
     // Route::resource('kriteria-layanan', KriteriaLayananController::class);
     // Route::resource('tarif-layanan', TarifLayananController::class);
 
@@ -65,6 +67,15 @@ Route::middleware('auth')->group(function () {
     Route::get('meteran/{meteran}/edit', [MeteranController::class, 'edit'])->name('meteran.edit');
     Route::put('meteran/{meteran}', [MeteranController::class, 'update'])->name('meteran.update');
     Route::delete('meteran/{meteran}', [MeteranController::class, 'destroy'])->name('meteran.destroy');
+
+    Route::get('pembayaran/{pembayaran}/cetakkuitansi', [PembayaranController::class, 'cetakkuitansi'])->name('pembayaran.cetakkuitansi');
+    Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('pembayaran/create/{tagihan}', [PembayaranController::class, 'create'])->name('pembayaran.create');
+    Route::post('pembayaran', [PembayaranController::class, 'store'])->name('pembayaran.store');
+    Route::get('pembayaran/{pembayaran}', [PembayaranController::class, 'show'])->name('pembayaran.show');
+    Route::get('pembayaran/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
+    Route::put('pembayaran/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+    Route::delete('pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
     
 
 });

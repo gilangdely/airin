@@ -57,4 +57,8 @@ class Meteran extends Model
 	{
 		return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
 	}
+
+	public function tagihan(){
+		return $this->hasMany(Tagihan::class, 'id_meteran');
+	}
 }

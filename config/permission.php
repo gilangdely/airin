@@ -286,5 +286,16 @@ return [
                 
             ]
         ],
+        [
+            'group' => 'pembayaran',
+            'pengguna' => ['peserta', 'admin'],
+            'access' => [
+                'pembayaran view',
+                'pembayaran create',
+                'pembayaran edit',
+                'pembayaran delete',
+                
+            ]
+        ],
     ]
 ];

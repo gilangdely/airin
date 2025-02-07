@@ -38,4 +38,5 @@ class Bulan extends Model
 	public function pemakaian(){
 		return $this->hasMany(Pemakaian::class, 'bulan', 'id_bulan');
 	}
+
 }

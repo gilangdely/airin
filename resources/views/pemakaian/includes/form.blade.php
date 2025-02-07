@@ -15,24 +15,13 @@
                 <div class="mb-4">
                     <label for="bulan" class="form-label">Bulan</label>
                     <input 
-                        type="text" 
+                        type="month" 
                         name="bulan" 
                         class="form-control {{ $errors->has('bulan') ? 'is-invalid' : '' }}" 
                         id="bulan" 
                         value="{{ old('bulan', $pemakaian?->bulan) }}" 
                         placeholder="Masukkan Bulan" />
                     @error('bulan')<small class="invalid-feedback">{{ $message }}</small>@enderror
-                </div>
-                <div class="mb-4">
-                    <label for="tahun" class="form-label">Tahun</label>
-                    <input 
-                        type="text" 
-                        name="tahun" 
-                        class="form-control {{ $errors->has('tahun') ? 'is-invalid' : '' }}" 
-                        id="tahun" 
-                        value="{{ old('tahun', $pemakaian?->tahun) }}" 
-                        placeholder="Masukkan Tahun" />
-                    @error('tahun')<small class="invalid-feedback">{{ $message }}</small>@enderror
                 </div>
                 <div class="mb-4">
                     <label for="akhir" class="form-label">Akhir</label>

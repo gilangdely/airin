@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailTagihan;
+use Carbon\Carbon;
 use App\Models\Meteran;
+use App\Models\Tagihan;
 use App\Models\Pelanggan;
 use App\Models\Pemakaian;
-use App\Models\Tagihan;
+use Illuminate\View\View;
 use App\Models\TarifLayanan;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
-use \Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controllers\Middleware;
+use \Illuminate\Routing\Controllers\HasMiddleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 class TagihanController extends Controller implements HasMiddleware
@@ -91,7 +94,8 @@ class TagihanController extends Controller implements HasMiddleware
 
     public function show(Tagihan $tagihan): View
     {
-        return view('tagihan.show', compact('tagihan'));
+        $detailtagihan = DetailTagihan::where('id_tagihan', $tagihan->id_tagihan)->get();
+        return view('tagihan.show', compact('tagihan','detailtagihan'));
     }
 
     public function edit(Tagihan $tagihan): View
@@ -148,7 +152,48 @@ class TagihanController extends Controller implements HasMiddleware
 
 
     public function cektagihanpelanggan(Meteran $meteran)
-    {
+    {   
+        $bulanSekarang = Carbon::now()->month;
+        $tahunSekarang = Carbon::now()->year;
+
+        //cek apakah sudah ada tagihan untuk bulan ini atau belum
+        $tagihan = Tagihan::where('id_meteran', $meteran->id_meteran)
+        ->where('id_bulan', $bulanSekarang)
+        ->where('tahun', $tahunSekarang)
+        ->where('id_pelanggan', $meteran->id_pelanggan)
+        ->where('status_pembayaran', 0) //jika status_pembayaran = 0 maka artinya belum dibayar
+        ->where('status_tagihan', 1) //jika status-tagihan = 1 artinya tagihan masih aktif/belum dibayar
+        ->get();
+
+        if($tagihan->isNotEmpty()){
+            return redirect()->back()
+                ->with('error', 'Terdapat tagihan aktif di bulan ini!.');
+        }
+
+        //siapkan data untuk tagihan
+        $id_tagihan = $tahunSekarang.$bulanSekarang.$meteran->id_meteran.rand(100, 999);
+        $tanggal_awal = Carbon::createFromDate($tahunSekarang, $bulanSekarang, 1)->startOfMonth()->toDateString();
+        $tanggal_akhir = Carbon::createFromDate($tahunSekarang, $bulanSekarang, 1)->endOfMonth()->toDateString();
+
+        $datatagihan['id_tagihan'] = $id_tagihan;
+        $datatagihan['id_bulan'] = $bulanSekarang;
+        $datatagihan['tahun'] = $tahunSekarang;
+        $datatagihan['id_pelanggan'] = $meteran->id_pelanggan;
+        $datatagihan['id_meteran'] = $meteran->id_meteran;
+        $datatagihan['waktu_awal'] = $tanggal_awal;
+        $datatagihan['waktu_akhir'] = $tanggal_akhir;
+        $datatagihan['status_tagihan'] = 1;
+        $datatagihan['status_pembayaran'] = 0;
+        $datatagihan['created_by'] = Auth::id();
+        $datatagihan['updated_by'] = Auth::id();
+
+        try {
+            Tagihan::create($datatagihan);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan saat membuat data tagihan.');
+        }
+
         $pemakaianList = DB::table('pemakaian')
             ->where('id_meteran', $meteran->id_meteran)
             ->where('status_pembayaran', 0)
@@ -157,7 +202,8 @@ class TagihanController extends Controller implements HasMiddleware
             ->get();
 
         if ($pemakaianList->isEmpty()) {
-            return "Tidak ada tagihan yang perlu dibayar.";
+            return redirect()->back()
+                ->with('error', 'Tidak ada tagihan yang perlu dibayar.');
         }
 
         // Ambil semua ID layanan yang ada dalam pemakaian
@@ -196,12 +242,19 @@ class TagihanController extends Controller implements HasMiddleware
 
             // Simpan rincian tagihan
             $rincianTagihan[] = [
+                'id_tagihan' => $id_tagihan,
                 'id_pakai' => $pemakaian->id_pakai,
-                'pemakaian' => $totalPakai,
+                'pakai' => $totalPakai,
                 'tarif' => $tarif->tarif,
                 'subtotal' => $tagihanBulanIni
             ];
         }
+
+        DetailTagihan::insert($rincianTagihan);
+
+        $tagihan = Tagihan::find($id_tagihan);
+        $tagihan->nominal = $totalTagihan;
+        $tagihan->update();
 
         return [
             'total_tagihan' => $totalTagihan,

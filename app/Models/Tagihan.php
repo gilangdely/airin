@@ -33,6 +33,7 @@ class Tagihan extends Model
 {
 	protected $table = 'tagihan';
 	protected $primaryKey = 'id_tagihan';
+	protected $with = ['pelanggan', 'meteran', 'bulan'];
 
 	protected $casts = [
 		'tahun' => 'int',
@@ -44,14 +45,18 @@ class Tagihan extends Model
 	];
 
 	protected $fillable = [
+		'id_tagihan',
 		'id_bulan',
 		'tahun',
 		'id_pelanggan',
+		'id_meteran',
 		'nominal',
 		'waktu_awal',
 		'waktu_akhir',
 		'status_tagihan',
-		'status_pembayaran'
+		'status_pembayaran',
+		'created_by',
+		'updated_by'
 	];
 
 	public function bulan()
@@ -63,4 +68,13 @@ class Tagihan extends Model
 	{
 		return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
 	}
+
+	public function meteran(){
+		return $this->belongsTo(Meteran::class,'id_meteran');
+	}
+
+	public function detailtagihan(){
+		return $this->hasMany(DetailTagihan::class, 'id_tagihan');
+	}
 }
+
