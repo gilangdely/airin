@@ -3,6 +3,7 @@
 use App\Http\Controllers\KriteriaLayananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LaporanPembayaranController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MeteranController;
 use App\Http\Controllers\PelangganController;
@@ -76,4 +77,6 @@ Route::middleware('auth')->group(function () {
     Route::get('pembayaran/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
     Route::put('pembayaran/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
     Route::delete('pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+
+    Route::get('laporan-pembayaran', [LaporanPembayaranController::class, 'index'])->name('laporan-pembayaran.index');
 });
