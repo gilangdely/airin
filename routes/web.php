@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('kriteria-layanan/{kriteria_layanan}/edit', [KriteriaLayananController::class, 'edit'])->name('kriteria-layanan.edit');
     Route::put('kriteria-layanan/{kriteria_layanan}', [KriteriaLayananController::class, 'update'])->name('kriteria-layanan.update');
     Route::delete('kriteria-layanan/{kriteria_layanan}', [KriteriaLayananController::class, 'destroy'])->name('kriteria-layanan.destroy');
-    
+
     Route::get('tarif-layanan', [TarifLayananController::class, 'index'])->name('tarif-layanan.index');
     Route::get('tarif-layanan/create/{id_layanan}', [TarifLayananController::class, 'create'])->name('tarif-layanan.create');
     Route::post('tarif-layanan', [TarifLayananController::class, 'store'])->name('tarif-layanan.store');
@@ -50,8 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::get('tarif-layanan/{tarif_layanan}/edit', [TarifLayananController::class, 'edit'])->name('tarif-layanan.edit');
     Route::put('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'update'])->name('tarif-layanan.update');
     Route::delete('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'destroy'])->name('tarif-layanan.destroy');
-    
-    Route::get('tagihan/cektagihanpelanggan/{meteran}',[TagihanController::class, 'cektagihanpelanggan'])->name('tagihan.cektagihanpelanggan');
+
+    Route::get('tagihan/cektagihanpelanggan/{meteran}', [TagihanController::class, 'cektagihanpelanggan'])->name('tagihan.cektagihanpelanggan');
     Route::get('tagihan', [TagihanController::class, 'index'])->name('tagihan.index');
     Route::get('tagihan/create', [TagihanController::class, 'create'])->name('tagihan.create');
     Route::post('tagihan', [TagihanController::class, 'store'])->name('tagihan.store');
@@ -76,6 +76,4 @@ Route::middleware('auth')->group(function () {
     Route::get('pembayaran/{pembayaran}/edit', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
     Route::put('pembayaran/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
     Route::delete('pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
-    
-
 });
