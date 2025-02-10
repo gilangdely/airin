@@ -74,16 +74,16 @@
                                                 // 'headerOptions' => ['class' => 'text-center'],
                                                 // 'contentOptions' => ['class' => 'text-right'],
                                             ],
-                                            [
-                                                'class' => 'callback',
-                                                'title' => 'PERIODE PEMBAYARAN',
-                                                'value' => function ($model) {
-                                                    return date('d/m/Y', strtotime($model->tagihan->waktu_awal)) . ' - ' . date('d/m/Y', strtotime($model->tagihan->waktu_akhir));
-                                                },
-                                                'format' => 'raw',
+                                            // [
+                                            //     'class' => 'callback',
+                                            //     'title' => 'PERIODE PEMBAYARAN',
+                                            //     'value' => function ($model) {
+                                            //         return date('d/m/Y', strtotime($model->tagihan->waktu_awal)) . ' - ' . date('d/m/Y', strtotime($model->tagihan->waktu_akhir));
+                                            //     },
+                                            //     'format' => 'raw',
                                                 // 'headerOptions' => ['class' => 'text-center'],
                                                 // 'contentOptions' => ['class' => 'text-center'],
-                                            ],
+                                            // ],
                                             [
                                                 'class' => 'callback',
                                                 'title' => 'STATUS',
@@ -95,16 +95,16 @@
                                                 // 'headerOptions' => ['class' => 'text-center'],
                                                 // 'contentOptions' => ['class' => 'text-center'],
                                             ],
-                                            [
-                                                'class' => 'callback',
-                                                'title' => 'LAST UPDATE',
-                                                'value' => function ($model) {
-                                                    return date('d-m-Y H:i:s', strtotime($model->tagihan->updated_at));
-                                                },
-                                                'format' => 'raw',
+                                            // [
+                                            //     'class' => 'callback',
+                                            //     'title' => 'LAST UPDATE',
+                                            //     'value' => function ($model) {
+                                            //         return date('d-m-Y H:i:s', strtotime($model->tagihan->updated_at));
+                                            //     },
+                                            //     'format' => 'raw',
                                                 // 'headerOptions' => ['class' => 'text-center'],
                                                 // 'contentOptions' => ['class' => 'text-center'],
-                                            ],
+                                            //],
                                         ],
                                     ])
                                 </div>
