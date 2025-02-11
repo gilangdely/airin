@@ -5,8 +5,8 @@ $nav = [
         [
             "title" => "Laporan Pembayaran",
             "icon" => '<i class="menu-icon tf-icons bx bx-line-chart"></i>',
-            'route' => null,
-            'permissions' => null
+            'route' => 'laporan-pembayaran.index',
+            'permissions' => ['laporan-pembayaran view']
         ],
         [
             "title" => "Laporan Pelanggan",
