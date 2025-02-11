@@ -2,15 +2,16 @@
     <div class="col-md-12">
         
                 <div class="mb-4">
-                    <label for="id_meteran" class="form-label">Id Meteran</label>
+                    <label for="nomor_meteran" class="form-label">Nomor Meteran</label>
                     <input 
                         type="text" 
-                        name="id_meteran" 
-                        class="form-control {{ $errors->has('id_meteran') ? 'is-invalid' : '' }}" 
-                        id="id_meteran" 
-                        value="{{ old('id_meteran', $pemakaian?->id_meteran) }}" 
-                        placeholder="Masukkan Id Meteran" />
-                    @error('id_meteran')<small class="invalid-feedback">{{ $message }}</small>@enderror
+                        name="nomor_meteran" 
+                        class="form-control {{ $errors->has('nomor_meteran') ? 'is-invalid' : '' }}" 
+                        id="nomor_meteran" 
+                        readonly
+                        value="{{ $pemakaian->nomor_meteran ? $pemakaian->nomor_meteran : $meteran->nomor_meteran }}" 
+                        placeholder="Masukkan Nomor Meteran" />
+                    @error('nomor_meteran')<small class="invalid-feedback">{{ $message }}</small>@enderror
                 </div>
                 <div class="mb-4">
                     <label for="bulan" class="form-label">Bulan</label>
@@ -24,10 +25,19 @@
                     @error('bulan')<small class="invalid-feedback">{{ $message }}</small>@enderror
                 </div>
                 <div class="mb-4">
-                    <label for="akhir" class="form-label">Akhir</label>
+                    <label for="akhir" class="form-label">Meteran bulan lalu {{ $pemakaian?->tblbulan?->nama_bulan ? '('.$pemakaian->tblbulan->nama_bulan.')' : '' }}</label>
                     <x-input.currency name="akhir" id="akhir"
-                        value="{{ old('akhir', $pemakaian?->akhir) }}" 
-                        placeholder="Masukkan Akhir"
+                        value="{{ $pemakaian->akhir ?? 0 }}" 
+                        placeholder="Masukkan meteran saat ini"
+                        readonly
+                        class="form-control text-end {{ $errors->has('akhir') ? 'is-invalid' : '' }}" />
+                    @error('akhir')<small class="invalid-feedback">{{ $message }}</small>@enderror
+                </div>
+                <div class="mb-4">
+                    <label for="akhir" class="form-label">Meteran saat ini</label>
+                    <x-input.currency name="akhir" id="akhir"
+                        value="{{ old('akhir') }}" 
+                        placeholder="Masukkan meteran saat ini"
                         class="form-control text-end {{ $errors->has('akhir') ? 'is-invalid' : '' }}" />
                     @error('akhir')<small class="invalid-feedback">{{ $message }}</small>@enderror
                 </div>

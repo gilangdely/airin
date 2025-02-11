@@ -70,7 +70,7 @@ class PembayaranController extends Controller implements HasMiddleware
     {
         $validatedData = $request->validate([
             'id_tagihan' => 'required|integer',
-            'id_meteran' => 'required|integer',
+            'nomor_meteran' => 'required|integer',
             'id_bulan' => 'required|string|max:3',
             'tahun' => 'required|integer',
             'total_nominal' => 'required|numeric',

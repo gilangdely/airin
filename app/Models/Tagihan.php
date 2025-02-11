@@ -49,7 +49,7 @@ class Tagihan extends Model
 		'id_bulan',
 		'tahun',
 		'id_pelanggan',
-		'id_meteran',
+		'nomor_meteran',
 		'nominal',
 		'waktu_awal',
 		'waktu_akhir',
@@ -70,7 +70,7 @@ class Tagihan extends Model
 	}
 
 	public function meteran(){
-		return $this->belongsTo(Meteran::class,'id_meteran');
+		return $this->belongsTo(Meteran::class,'nomor_meteran');
 	}
 
 	public function detailtagihan(){

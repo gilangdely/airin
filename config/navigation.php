@@ -8,6 +8,12 @@ $nav = [
             'route' => null,
             'permissions' => null
         ],
+        [
+            "title" => "Laporan Pelanggan",
+            "icon" => '<i class="menu-icon tf-icons bx bx-line-chart"></i>',
+            'route' => null,
+            'permissions' => null
+        ],
     ],
     "Transaksi" => [
         [

@@ -10,6 +10,7 @@
                     <th class="align-middle">Awal</th>
                     <th class="align-middle">Akhir</th>
                     <th class="align-middle">Pakai</th>
+                    <th class="align-middle">Status Bayar</th>
                 <th class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -24,6 +25,13 @@
                     <td>{{ $row?->awal }}</td>
                     <td>{{ $row?->akhir }}</td>
                     <td>{{ $row?->pakai }}</td>
+                    <td>
+                        @if ($row?->status_pembayaran == 1)
+                            <span class="badge bg-label-success">Lunas</span>
+                        @else
+                            <span class="badge bg-label-danger">Belum Bayar</span>
+                        @endif
+                    </td>
                     <td class="text-center">
                         <div class="btn-group" role="group">
                             @can('pemakaian view')

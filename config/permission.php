@@ -216,7 +216,7 @@ return [
                 'pelanggan view',
                 'pelanggan create',
                 'pelanggan edit',
-                'pelanggan delete',
+                'pelanggan delete', 
                 
             ]
         ],

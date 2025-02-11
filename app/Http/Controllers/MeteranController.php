@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Layanan;
 use App\Models\Meteran;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -42,7 +44,7 @@ class MeteranController extends Controller implements HasMiddleware
                 }
             });
         }
-        
+
         $meteran = $query->paginate(10);
 
         if ($request->header('HX-Request')) {
@@ -55,19 +57,21 @@ class MeteranController extends Controller implements HasMiddleware
     public function create(): View
     {
         $meteran = new Meteran();
+        $pelanggans = Pelanggan::where('status',1)->get();
+        $layanans = Layanan::all();
 
-        return view('meteran.create', compact('meteran'));
+        return view('meteran.create', compact('meteran','pelanggans','layanans'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            	'id_pelanggan' => 'required|string|max:50',
-	'nomor_meteran' => 'required|integer',
-	'id_layanan' => 'required|integer',
-	'lokasi_pemasangan' => 'required|string',
-	'tanggal_pemasangan' => 'required|date',
-	'status' => 'required|boolean',
+            'id_pelanggan' => 'required|string|max:50',
+            'nomor_meteran' => 'required|integer',
+            'id_layanan' => 'required|integer',
+            'lokasi_pemasangan' => 'required|string',
+            'tanggal_pemasangan' => 'required|date',
+            'status' => 'required|boolean',
         ]);
 
         try {
@@ -95,12 +99,12 @@ class MeteranController extends Controller implements HasMiddleware
     public function update(Request $request, Meteran $meteran): RedirectResponse
     {
         $validatedData = $request->validate([
-            	'id_pelanggan' => 'required|string|max:50',
-	'nomor_meteran' => 'required|integer',
-	'id_layanan' => 'required|integer',
-	'lokasi_pemasangan' => 'required|string',
-	'tanggal_pemasangan' => 'required|date',
-	'status' => 'required|boolean',
+            'id_pelanggan' => 'required|string|max:50',
+            'nomor_meteran' => 'required|integer',
+            'id_layanan' => 'required|integer',
+            'lokasi_pemasangan' => 'required|string',
+            'tanggal_pemasangan' => 'required|date',
+            'status' => 'required|boolean',
         ]);
 
         try {
@@ -135,5 +139,15 @@ class MeteranController extends Controller implements HasMiddleware
 
         return redirect()->route('meteran.index')
             ->with('success', 'Meteran berhasil dihapus');
+    }
+
+    public function mapping(Request $request): RedirectResponse
+    {
+        $nomor_meteran = $request->nomor_meteran;
+        $meteran = Meteran::find($nomor_meteran);
+        $meteran->update(['chip_kartu' => $request->chip_kartu]);
+
+        return redirect()->route('meteran.show', $nomor_meteran)
+            ->with('success', 'Kartu berhasil dimapping!');
     }
 }
