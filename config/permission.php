@@ -297,5 +297,12 @@ return [
                 
             ]
         ],
+        [
+            'group' => 'laporan-pembayaran',
+            'pengguna' => ['peserta', 'admin'],
+            'access' => [
+                'laporan-pembayaran view',
+            ]
+        ],
     ]
 ];

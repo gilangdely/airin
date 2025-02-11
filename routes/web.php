@@ -10,6 +10,7 @@ use App\Http\Controllers\PemakaianController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TarifLayananController;
+use App\Http\Controllers\LaporanPembayaranController;
 
 require('auth.php');
 
@@ -77,5 +78,5 @@ Route::middleware('auth')->group(function () {
     Route::put('pembayaran/{pembayaran}', [PembayaranController::class, 'update'])->name('pembayaran.update');
     Route::delete('pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
     
-
+    Route::get('laporan-pembayaran', [LaporanPembayaranController::class, 'index'])->name('laporan-pembayaran.index');
 });
