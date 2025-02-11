@@ -1,6 +1,6 @@
-<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme "
     id="layout-navbar"
-    style="height: 5.5rem;border-color: rgba(255,255,255,.68); background: rgba(255,255,255,.38); z-index: 500;">
+    style="height: 5.5rem;border-color: rgba(255,255,255,.68); background: rgba(255,255,255,.38); z-index: 500; position: sticky; top: 20px;">
     {{-- <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
         <a class="px-0 nav-item nav-link me-xl-6" href="javascript:void(0)">
             <i class="bx bx-menu bx-md"></i>

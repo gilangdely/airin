@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                 </section>
 
                 {{-- end hero --}}
@@ -98,7 +98,7 @@
                 <br>
 
                 <div class="container mt-5">
-                    <h2 class="text-center mb-4">Apa Kata Pelanggan Kami?</h2>
+                    <h2 class="text-center mb-4" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
                     <div id="testimoniCarousel" class="carousel slide" data-bs-ride="carousel">
 
                         <div class="carousel-inner">
@@ -210,7 +210,7 @@
                     </div>
                     <div class="landing-hero-blank"></div>
                 </section> --}}
-                <section class="">
+                {{-- <section class="">
                     <div class="row justify-content-center align-items-center mx-10 px-10">
                         <div class="col">
                             <div class="card ">
@@ -235,7 +235,8 @@
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center">
                                             <div class="landing-hero-btn  mt-5 mx-auto">
-                                                <a href="{{ route('login') }}" class="btn btn-outline-primary btn-md">Coba
+                                                <a href="{{ route('login') }}"
+                                                    class="btn btn-outline-primary btn-md">Coba
                                                     Sekarang!</a>
                                             </div>
                                         </div>
@@ -243,7 +244,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">                        
+                        <div class="col">
                             <div class="card  bg-primary">
                                 <div class="card-body my-10">
                                     <div class="card-title text-center mb-5">
@@ -255,7 +256,7 @@
                                         <div class="flex fs-5 justify-content-center">
                                             <i class="bi bi-check-lg text-success me-2"></i>
                                             <span class="card-text text-white fw-medium">Fitur 1</span>
-                                        </div>  
+                                        </div>
                                         <div class="flex fs-5 justify-content-center">
                                             <i class="bi bi-check-lg text-success me-2"></i>
                                             <span class="card-text text-white fw-medium">Fitur 1</span>
@@ -266,7 +267,8 @@
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center">
                                             <div class="landing-hero-btn  mt-5 mx-auto">
-                                                <a href="{{ route('login') }}" class="btn btn-light btn-md text-primary">Coba
+                                                <a href="{{ route('login') }}"
+                                                    class="btn btn-light btn-md text-primary">Coba
                                                     Sekarang!</a>
                                             </div>
                                         </div>
@@ -308,12 +310,8 @@
                         </div>
                     </div>
 
-                </section>
+                </section> --}}
 
-                <div class="container">
-                    <p class="h1 @media (min-width: 768px) { h5 }">Haloo </p>
-                </div>
-                
             </div>
             <!-- / Content -->
 
