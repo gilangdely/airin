@@ -9,6 +9,7 @@ use App\Http\Controllers\MeteranController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemakaianController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\RekapPembayaran;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TarifLayananController;
 
@@ -91,4 +92,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 
     Route::get('laporan-pembayaran', [LaporanPembayaranController::class, 'index'])->name('laporan-pembayaran.index');
+
+    Route::get('/rekap', [RekapPembayaran::class, 'index'])->name('rekap.index');
 });

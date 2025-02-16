@@ -61,7 +61,7 @@ class TagihanController extends Controller implements HasMiddleware
         return view('tagihan.index', compact('tagihan', 'columns', 'selectedColumns'));
     }
 
-    public function create(Meteran $meteran): View
+    public function create(Meteran $meteran)
     {
         $now = new DateTime();
 
@@ -94,6 +94,11 @@ class TagihanController extends Controller implements HasMiddleware
             ->get()
             ->groupBy('id_layanan');
 
+        if($tarifLayanan->isEmpty()){
+            return redirect()->back()
+                ->with('error', "Tidak ada tarif yang tersedia untuk layanan tersebut.");
+        }
+
         $totalTagihan = 0;
         $rincianTagihan = [];
 
@@ -111,7 +116,8 @@ class TagihanController extends Controller implements HasMiddleware
             });
 
             if (!$tarif) {
-                throw new \Exception("Tarif tidak ditemukan untuk pemakaian $totalPakai m³.");
+                return redirect()->back()
+                ->with('error', "Tidak ada tarif yang cocok untuk pemakaian $totalPakai m³.");
             }
 
             // Hitung tagihan bulan ini
@@ -199,6 +205,8 @@ class TagihanController extends Controller implements HasMiddleware
             ->orderBy('min_pemakaian', 'asc')
             ->get()
             ->groupBy('id_layanan');
+
+        // dd($tarifLayanan);
 
         $totalTagihan = 0;
         $rincianTagihan = [];

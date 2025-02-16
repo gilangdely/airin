@@ -14,6 +14,12 @@ $nav = [
             'route' => null,
             'permissions' => null
         ],
+        [
+            "title" => "Rekap Pembayaran",
+            "icon" => '<i class="menu-icon tf-icons bx bx-credit-card-front"></i>',
+            'route' => 'rekap.index',
+            'permissions' => ['rekap view']
+        ],
     ],
     "Transaksi" => [
         [

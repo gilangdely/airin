@@ -304,5 +304,12 @@ return [
                 'laporan-pembayaran view',
             ]
         ],
+        [
+            'group' => 'rekap',
+            'pengguna' => ['peserta', 'admin'],
+            'access' => [
+                'rekap view',
+            ]
+        ],
     ]
 ];
