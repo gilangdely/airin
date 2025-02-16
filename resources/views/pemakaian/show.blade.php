@@ -14,11 +14,9 @@
                     </a>
 
                     <div>
-                        @can('pemakaian view')
-                            <a href="{{ route('pemakaian.create') }}" class="btn btn-sm btn-info">
-                                <i class="bx bx-plus me-1"></i>Baru
-                            </a>
-                        @endcan
+                        <a href="{{ route('tagihan.create', $pemakaian->nomor_meteran) }}" class="btn btn-sm btn-success">
+                            <i class='bx bx-receipt me-1'></i> Generate Tagihan
+                        </a>
                         @can('pemakaian edit')
                             <a href="{{ route('pemakaian.edit', $pemakaian) }}" class="btn btn-sm btn-primary">
                                 <i class="bx bx-pencil me-1"></i>Edit

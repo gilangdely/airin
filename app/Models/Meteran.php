@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
 class Meteran extends Model
 {
 	protected $table = 'meteran';
-	protected $primaryKey = 'id_meteran';
+	protected $primaryKey = 'nomor_meteran';
 
 	protected $casts = [
 		'nomor_meteran' => 'int',
@@ -40,12 +40,13 @@ class Meteran extends Model
 	];
 
 	protected $fillable = [
-		'id_pelanggan',
 		'nomor_meteran',
+		'id_pelanggan',
 		'id_layanan',
 		'lokasi_pemasangan',
 		'tanggal_pemasangan',
-		'status'
+		'status',
+		'chip_kartu'
 	];
 
 	public function layanan()
@@ -59,6 +60,6 @@ class Meteran extends Model
 	}
 
 	public function tagihan(){
-		return $this->hasMany(Tagihan::class, 'id_meteran');
+		return $this->hasMany(Tagihan::class, 'nomor_meteran');
 	}
 }

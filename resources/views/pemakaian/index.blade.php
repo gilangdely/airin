@@ -8,13 +8,13 @@
         <div class="card">
             <div class="card-header">
                 <div class="row g-3 justify-content-between align-items-center">
-                    @can('pemakaian create')
+                    {{-- @can('pemakaian create') --}}
                         <div class="col-12 col-md-auto">
-                            <a href="{{ route('pemakaian.create') }}" class="btn btn-primary w-100 w-md-fit">
+                            <a href="{{ route('pemakaian.cekmeteran') }}" class="btn btn-primary w-100 w-md-fit">
                                 <span class="bx bx-plus me-1"></span>Tambah Data
                             </a>
                         </div>
-                    @endcan
+                    {{-- @endcan --}}
                     
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="input-group">

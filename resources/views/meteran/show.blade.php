@@ -14,6 +14,13 @@
                     </a>
 
                     <div>
+                        {{-- <a href="#" class="btn btn-sm btn-success">
+                            <i class='bx bx-credit-card me-1'></i> Mapping
+                        </a> --}}
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                            data-bs-target="#modalMapping">
+                            <i class='bx bx-credit-card me-1'></i> Mapping
+                        </button>
                         @can('meteran view')
                             <a href="{{ route('meteran.create') }}" class="btn btn-sm btn-info">
                                 <i class="bx bx-plus me-1"></i>Baru
@@ -63,15 +70,58 @@
                     <div class="col-md-4">
                         <label for="first-name-horizontal">Status</label>
                     </div>
-                    <div class="col-md-8 form-group">: 
+                    <div class="col-md-8 form-group">:
                         @if ($meteran?->status == 1)
                             <span class="badge bg-label-success">Aktif</span>
                         @else
                             <span class="badge bg-label-danger">Tidak Aktif</span>
                         @endif
                     </div>
+                    <div class="col-md-4">
+                        <label for="first-name-horizontal">Chip Kartu</label>
+                    </div>
+                    <div class="col-md-8 form-group">:
+                        @isset($meteran->chip_kartu)
+                            {{ $meteran->chip_kartu }}</div>
+                    @else
+                        <span class="badge bg-label-danger">Belum Terdaftar</span>
+                    @endisset
                 </form>
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalMapping" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalMappingLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ route('meteran.mapping') }}" method="POST">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalMappingLabel">Mapping Kartu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="hidden" name="nomor_meteran" value="{{ $meteran->nomor_meteran }}">
+                            <label for="chip_kartu" class="form-label">Chip</label>
+                            <input type="text" name="chip_kartu" class="form-control" id="chip_kartu"
+                                value="{{ $meteran?->chip_kartu }}" placeholder="Tap kartu ke RFID Reader" autofocus>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary me-2"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Mapping</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </x-layout.app>
+
+@push('script')
+    <script></script>
+@endpush

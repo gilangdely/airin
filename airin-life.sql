@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 06, 2025 at 09:54 AM
+-- Generation Time: Feb 11, 2025 at 08:00 AM
 -- Server version: 8.0.30
--- PHP Version: 8.2.7
+-- PHP Version: 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `templatelaravel`
+-- Database: `airin-life`
 --
 
 -- --------------------------------------------------------
@@ -69,9 +69,9 @@ CREATE TABLE `cache` (
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 ('admin@admin.com127.0.0.1', 'i:1;', 1738645187),
 ('admin@admin.com127.0.0.1:timer', 'i:1738645187;', 1738645187),
-('admin127.0.0.1', 'i:2;', 1738834560),
-('admin127.0.0.1:timer', 'i:1738834560;', 1738834560),
-('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:39:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:20:\"user change-password\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:12:\"user profile\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:9:\"user view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:11:\"user create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:9:\"user edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:11:\"user delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:26:\"user change-password-admin\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:22:\"role & permission view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:24:\"role & permission create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:9;a:4:{s:1:\"a\";i:10;s:1:\"b\";s:22:\"role & permission edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:4:{s:1:\"a\";i:11;s:1:\"b\";s:24:\"role & permission delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:11;a:4:{s:1:\"a\";i:20;s:1:\"b\";s:14:\"pelanggan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:4:{s:1:\"a\";i:21;s:1:\"b\";s:16:\"pelanggan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:13;a:4:{s:1:\"a\";i:22;s:1:\"b\";s:14:\"pelanggan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:4:{s:1:\"a\";i:23;s:1:\"b\";s:16:\"pelanggan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:4:{s:1:\"a\";i:24;s:1:\"b\";s:12:\"layanan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:4:{s:1:\"a\";i:25;s:1:\"b\";s:14:\"layanan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:17;a:4:{s:1:\"a\";i:26;s:1:\"b\";s:12:\"layanan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:4:{s:1:\"a\";i:27;s:1:\"b\";s:14:\"layanan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:19;a:3:{s:1:\"a\";i:32;s:1:\"b\";s:21:\"kriteria-layanan view\";s:1:\"c\";s:3:\"web\";}i:20;a:4:{s:1:\"a\";i:33;s:1:\"b\";s:23:\"kriteria-layanan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:21;a:4:{s:1:\"a\";i:34;s:1:\"b\";s:21:\"kriteria-layanan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:22;a:4:{s:1:\"a\";i:35;s:1:\"b\";s:23:\"kriteria-layanan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:23;a:4:{s:1:\"a\";i:36;s:1:\"b\";s:14:\"pemakaian view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:24;a:4:{s:1:\"a\";i:37;s:1:\"b\";s:16:\"pemakaian create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:25;a:4:{s:1:\"a\";i:38;s:1:\"b\";s:14:\"pemakaian edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:26;a:4:{s:1:\"a\";i:39;s:1:\"b\";s:16:\"pemakaian delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:27;a:4:{s:1:\"a\";i:40;s:1:\"b\";s:18:\"tarif-layanan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:28;a:4:{s:1:\"a\";i:41;s:1:\"b\";s:20:\"tarif-layanan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:29;a:4:{s:1:\"a\";i:42;s:1:\"b\";s:18:\"tarif-layanan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:30;a:4:{s:1:\"a\";i:43;s:1:\"b\";s:20:\"tarif-layanan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:31;a:4:{s:1:\"a\";i:44;s:1:\"b\";s:12:\"tagihan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:32;a:4:{s:1:\"a\";i:45;s:1:\"b\";s:14:\"tagihan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:33;a:4:{s:1:\"a\";i:46;s:1:\"b\";s:12:\"tagihan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:34;a:4:{s:1:\"a\";i:47;s:1:\"b\";s:14:\"tagihan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:35;a:4:{s:1:\"a\";i:48;s:1:\"b\";s:12:\"meteran view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:36;a:4:{s:1:\"a\";i:49;s:1:\"b\";s:14:\"meteran create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:37;a:4:{s:1:\"a\";i:50;s:1:\"b\";s:12:\"meteran edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:38;a:4:{s:1:\"a\";i:51;s:1:\"b\";s:14:\"meteran delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}}s:5:\"roles\";a:1:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:5:\"Admin\";s:1:\"c\";s:3:\"web\";}}}', 1738920914);
+('admin127.0.0.1', 'i:1;', 1739260537),
+('admin127.0.0.1:timer', 'i:1739260537;', 1739260537),
+('spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:44:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:20:\"user change-password\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:12:\"user profile\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:9:\"user view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:11:\"user create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:9:\"user edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:11:\"user delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:26:\"user change-password-admin\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:22:\"role & permission view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:24:\"role & permission create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:9;a:4:{s:1:\"a\";i:10;s:1:\"b\";s:22:\"role & permission edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:4:{s:1:\"a\";i:11;s:1:\"b\";s:24:\"role & permission delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:11;a:4:{s:1:\"a\";i:20;s:1:\"b\";s:14:\"pelanggan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:4:{s:1:\"a\";i:21;s:1:\"b\";s:16:\"pelanggan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:13;a:4:{s:1:\"a\";i:22;s:1:\"b\";s:14:\"pelanggan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:4:{s:1:\"a\";i:23;s:1:\"b\";s:16:\"pelanggan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:4:{s:1:\"a\";i:24;s:1:\"b\";s:12:\"layanan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:4:{s:1:\"a\";i:25;s:1:\"b\";s:14:\"layanan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:17;a:4:{s:1:\"a\";i:26;s:1:\"b\";s:12:\"layanan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:4:{s:1:\"a\";i:27;s:1:\"b\";s:14:\"layanan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:19;a:3:{s:1:\"a\";i:32;s:1:\"b\";s:21:\"kriteria-layanan view\";s:1:\"c\";s:3:\"web\";}i:20;a:4:{s:1:\"a\";i:33;s:1:\"b\";s:23:\"kriteria-layanan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:21;a:4:{s:1:\"a\";i:34;s:1:\"b\";s:21:\"kriteria-layanan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:22;a:4:{s:1:\"a\";i:35;s:1:\"b\";s:23:\"kriteria-layanan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:23;a:4:{s:1:\"a\";i:36;s:1:\"b\";s:14:\"pemakaian view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:24;a:4:{s:1:\"a\";i:37;s:1:\"b\";s:16:\"pemakaian create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:25;a:4:{s:1:\"a\";i:38;s:1:\"b\";s:14:\"pemakaian edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:26;a:4:{s:1:\"a\";i:39;s:1:\"b\";s:16:\"pemakaian delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:27;a:4:{s:1:\"a\";i:40;s:1:\"b\";s:18:\"tarif-layanan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:28;a:4:{s:1:\"a\";i:41;s:1:\"b\";s:20:\"tarif-layanan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:29;a:4:{s:1:\"a\";i:42;s:1:\"b\";s:18:\"tarif-layanan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:30;a:4:{s:1:\"a\";i:43;s:1:\"b\";s:20:\"tarif-layanan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:31;a:4:{s:1:\"a\";i:44;s:1:\"b\";s:12:\"tagihan view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:32;a:4:{s:1:\"a\";i:45;s:1:\"b\";s:14:\"tagihan create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:33;a:4:{s:1:\"a\";i:46;s:1:\"b\";s:12:\"tagihan edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:34;a:4:{s:1:\"a\";i:47;s:1:\"b\";s:14:\"tagihan delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:35;a:4:{s:1:\"a\";i:48;s:1:\"b\";s:12:\"meteran view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:36;a:4:{s:1:\"a\";i:49;s:1:\"b\";s:14:\"meteran create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:37;a:4:{s:1:\"a\";i:50;s:1:\"b\";s:12:\"meteran edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:38;a:4:{s:1:\"a\";i:51;s:1:\"b\";s:14:\"meteran delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:39;a:4:{s:1:\"a\";i:52;s:1:\"b\";s:15:\"pembayaran view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:40;a:4:{s:1:\"a\";i:53;s:1:\"b\";s:17:\"pembayaran create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:41;a:4:{s:1:\"a\";i:54;s:1:\"b\";s:15:\"pembayaran edit\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:42;a:4:{s:1:\"a\";i:55;s:1:\"b\";s:17:\"pembayaran delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:43;a:4:{s:1:\"a\";i:56;s:1:\"b\";s:23:\"laporan-pembayaran view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}}s:5:\"roles\";a:1:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:5:\"Admin\";s:1:\"c\";s:3:\"web\";}}}', 1739346989);
 
 -- --------------------------------------------------------
 
@@ -88,12 +88,39 @@ CREATE TABLE `cache_locks` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `detail_pembayaran`
+--
+
+CREATE TABLE `detail_pembayaran` (
+  `id` bigint UNSIGNED NOT NULL,
+  `id_pembayaran` varchar(125) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_pakai` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_bulan` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun` int NOT NULL,
+  `pakai` int NOT NULL,
+  `tarif` decimal(10,2) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `detail_pembayaran`
+--
+
+INSERT INTO `detail_pembayaran` (`id`, `id_pembayaran`, `id_pakai`, `id_bulan`, `tahun`, `pakai`, `tarif`, `subtotal`, `created_at`, `updated_at`) VALUES
+(10, 'admin-2025258784174637082025-02-10-22:35:47', 'TRX2025015878417463', '1', 2025, 30, '6655.00', '199650.00', '2025-02-10 15:35:47', '2025-02-10 15:35:47'),
+(11, 'admin-2025258784174637082025-02-10-22:35:47', 'TRX2025025878417463', '2', 2025, 35, '6655.00', '232925.00', '2025-02-10 15:35:47', '2025-02-10 15:35:47');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `detail_tagihan`
 --
 
 CREATE TABLE `detail_tagihan` (
   `id` bigint UNSIGNED NOT NULL,
-  `id_tagihan` int UNSIGNED NOT NULL,
+  `id_tagihan` bigint UNSIGNED NOT NULL,
   `id_pakai` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `pakai` int NOT NULL,
   `tarif` decimal(10,2) NOT NULL,
@@ -101,6 +128,14 @@ CREATE TABLE `detail_tagihan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `detail_tagihan`
+--
+
+INSERT INTO `detail_tagihan` (`id`, `id_tagihan`, `id_pakai`, `pakai`, `tarif`, `subtotal`, `created_at`, `updated_at`) VALUES
+(20, 202525878417463933, 'TRX2025015878417463', 30, '6655.00', '199650.00', NULL, NULL),
+(21, 202525878417463933, 'TRX2025025878417463', 35, '6655.00', '232925.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -163,7 +198,7 @@ CREATE TABLE `kriteria_layanan` (
   `id_kriteria_layanan` int NOT NULL,
   `id_layanan` int NOT NULL,
   `kriteria` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kriteria_layanan`
@@ -198,7 +233,7 @@ INSERT INTO `kriteria_layanan` (`id_kriteria_layanan`, `id_layanan`, `kriteria`)
 CREATE TABLE `layanan` (
   `id_layanan` int NOT NULL,
   `nama_layanan` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `layanan`
@@ -218,13 +253,13 @@ INSERT INTO `layanan` (`id_layanan`, `nama_layanan`) VALUES
 --
 
 CREATE TABLE `meteran` (
-  `id_meteran` int UNSIGNED NOT NULL,
-  `id_pelanggan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nomor_meteran` int NOT NULL,
+  `nomor_meteran` bigint NOT NULL,
+  `id_pelanggan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_layanan` int NOT NULL,
-  `lokasi_pemasangan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lokasi_pemasangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal_pemasangan` date NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `chip_kartu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -233,8 +268,8 @@ CREATE TABLE `meteran` (
 -- Dumping data for table `meteran`
 --
 
-INSERT INTO `meteran` (`id_meteran`, `id_pelanggan`, `nomor_meteran`, `id_layanan`, `lokasi_pemasangan`, `tanggal_pemasangan`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'PLG0001', 1231231, 3, 'Purwokerto Barat', '2025-02-04', 1, '2025-02-04 14:44:17', '2025-02-04 14:44:17');
+INSERT INTO `meteran` (`nomor_meteran`, `id_pelanggan`, `id_layanan`, `lokasi_pemasangan`, `tanggal_pemasangan`, `status`, `chip_kartu`, `created_at`, `updated_at`) VALUES
+(5878417463, 'PLG0001', 3, 'Purwokerto Barat', '2025-02-07', 1, '1060380630', '2025-02-08 04:32:19', '2025-02-08 04:37:59');
 
 -- --------------------------------------------------------
 
@@ -262,7 +297,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2025_02_03_212821_create_tagihan', 4),
 (8, '2025_02_03_221313_create_detail_tagihan', 5),
 (9, '2025_02_03_222446_create_detail_tagihan2', 6),
-(10, '2025_02_04_211559_create_meteran', 7);
+(10, '2025_02_04_211559_create_meteran', 7),
+(11, '2025_02_06_225314_create_pembayaran', 8),
+(12, '2025_02_06_230428_create_detail_pembayaran', 9),
+(13, '2025_02_07_101703_add_nomor_kartu_to_meteran', 10),
+(14, '2025_02_07_152911_create_personal_access_tokens_table', 11);
 
 -- --------------------------------------------------------
 
@@ -320,7 +359,7 @@ CREATE TABLE `pelanggan` (
   `alamat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `no_hp` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pelanggan`
@@ -338,7 +377,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `no_ktp`, `alamat`, `
 
 CREATE TABLE `pemakaian` (
   `id_pakai` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_meteran` int UNSIGNED NOT NULL,
+  `nomor_meteran` bigint NOT NULL,
   `bulan` char(3) NOT NULL,
   `id_layanan` int NOT NULL,
   `deskripsi` varchar(50) NOT NULL,
@@ -357,9 +396,32 @@ CREATE TABLE `pemakaian` (
 -- Dumping data for table `pemakaian`
 --
 
-INSERT INTO `pemakaian` (`id_pakai`, `id_meteran`, `bulan`, `id_layanan`, `deskripsi`, `tahun`, `awal`, `akhir`, `pakai`, `status_pembayaran`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
-('TRX25021', 1, '1', 3, 'Rumah A 1', '2025', 0, 10, 10, 0, '2025-02-05 10:49:50', '2025-02-05 11:10:06', 1, 1),
-('TRX2521', 1, '2', 3, 'Rumah A 1', '2025', 10, 23, 13, 0, '2025-02-05 11:15:15', '2025-02-05 11:15:15', 1, 1);
+INSERT INTO `pemakaian` (`id_pakai`, `nomor_meteran`, `bulan`, `id_layanan`, `deskripsi`, `tahun`, `awal`, `akhir`, `pakai`, `status_pembayaran`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+('TRX2025015878417463', 5878417463, '1', 3, 'Rumah A 1', '2025', 0, 30, 30, 0, '2025-02-08 05:09:31', '2025-02-10 15:35:47', 1, 1),
+('TRX2025025878417463', 5878417463, '2', 3, 'Rumah A 1', '2025', 30, 65, 35, 0, '2025-02-08 17:48:59', '2025-02-10 15:35:47', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran`
+--
+
+CREATE TABLE `pembayaran` (
+  `id_pembayaran` varchar(125) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_tagihan` bigint UNSIGNED NOT NULL,
+  `nomor_meteran` bigint NOT NULL,
+  `id_bulan` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tahun` int NOT NULL,
+  `total_nominal` decimal(10,2) NOT NULL,
+  `waktu_pembayaran` timestamp NOT NULL,
+  `metode_pembayaran` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `catatan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `petugas` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` bigint NOT NULL,
+  `updated_by` bigint NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -418,7 +480,31 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (48, 'meteran view', 'web', '2025-02-04 14:32:06', '2025-02-04 14:32:06'),
 (49, 'meteran create', 'web', '2025-02-04 14:32:06', '2025-02-04 14:32:06'),
 (50, 'meteran edit', 'web', '2025-02-04 14:32:06', '2025-02-04 14:32:06'),
-(51, 'meteran delete', 'web', '2025-02-04 14:32:06', '2025-02-04 14:32:06');
+(51, 'meteran delete', 'web', '2025-02-04 14:32:06', '2025-02-04 14:32:06'),
+(52, 'pembayaran view', 'web', '2025-02-06 16:19:38', '2025-02-06 16:19:38'),
+(53, 'pembayaran create', 'web', '2025-02-06 16:19:38', '2025-02-06 16:19:38'),
+(54, 'pembayaran edit', 'web', '2025-02-06 16:19:38', '2025-02-06 16:19:38'),
+(55, 'pembayaran delete', 'web', '2025-02-06 16:19:38', '2025-02-06 16:19:38'),
+(56, 'laporan-pembayaran view', 'web', '2025-02-11 07:56:23', '2025-02-11 07:56:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -439,7 +525,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'web', '2025-02-03 03:40:13', '2025-02-04 14:32:31');
+(1, 'Admin', 'web', '2025-02-03 03:40:13', '2025-02-11 07:56:29');
 
 -- --------------------------------------------------------
 
@@ -494,7 +580,12 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (48, 1),
 (49, 1),
 (50, 1),
-(51, 1);
+(51, 1),
+(52, 1),
+(53, 1),
+(54, 1),
+(55, 1),
+(56, 1);
 
 -- --------------------------------------------------------
 
@@ -516,7 +607,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('U9FzetgWZjyvZH4syC91GnNv8K23OlsiTWhnMPZC', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMjl2c3EyUnM0VzNJVk1ZdkN4ODNieDN2RlhMVTVTeEJhcWRES080VSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcGVtYWthaWFuIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1738834517);
+('QLEGwjsBiaWXYcajyEYW6YOn9HNUmrWshcVExXWs', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYk5uVDdJWGVhcDlQYjNOMXBncHVBbHMzV3duN1N1ZTRuQ0twdWRLSCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sYXBvcmFuLXBlbWJheWFyYW4iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1739260592),
+('yaJdEv7cnuU8mW07JHs5s4iH58nrbQ7J0NDAVubJ', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRlQ3NG8yWXJHREVTZkpsbnlCdnhKdjRCaktBWXFMcVZ2d3lSaTlFZiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90YWdpaGFuL2NyZWF0ZS81ODc4NDE3NDYzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1739202525);
 
 -- --------------------------------------------------------
 
@@ -525,21 +617,28 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 
 CREATE TABLE `tagihan` (
-  `id_tagihan` int UNSIGNED NOT NULL,
+  `id_tagihan` bigint UNSIGNED NOT NULL,
   `id_bulan` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tahun` int NOT NULL,
   `id_pelanggan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_meteran` int NOT NULL,
-  `nominal` decimal(10,2) NOT NULL,
+  `nomor_meteran` bigint NOT NULL,
+  `nominal` decimal(10,2) DEFAULT NULL,
   `waktu_awal` date NOT NULL,
   `waktu_akhir` date NOT NULL,
   `status_tagihan` tinyint(1) NOT NULL,
   `status_pembayaran` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` bigint NOT NULL,
   `updated_by` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tagihan`
+--
+
+INSERT INTO `tagihan` (`id_tagihan`, `id_bulan`, `tahun`, `id_pelanggan`, `nomor_meteran`, `nominal`, `waktu_awal`, `waktu_akhir`, `status_tagihan`, `status_pembayaran`, `created_at`, `updated_at`, `created_by`, `updated_by`) VALUES
+(202525878417463933, '2', 2025, 'PLG0001', 5878417463, '432575.00', '2025-02-01', '2025-02-28', 1, 0, '2025-02-10 15:46:43', '2025-02-10 15:46:43', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -566,7 +665,7 @@ INSERT INTO `tarif_layanan` (`id_tarif_layanan`, `id_layanan`, `tier`, `min_pema
 (1, 1, 'Tarif 1', 0, 10, '1760.00', '2025-02-03 13:32:52', '2025-02-03 13:32:52'),
 (2, 1, 'Tarif 2', 11, 20, '2475.00', '2025-02-03 13:34:32', '2025-02-03 13:34:32'),
 (3, 1, 'Tarif 3', 21, 0, '4235.00', '2025-02-03 13:35:07', '2025-02-03 13:35:07'),
-(5, 3, 'Tarif 1', 0, 10, '2805.00', '2025-02-05 11:25:43', '2025-02-05 11:25:43'),
+(5, 3, 'Tarifff 1', 0, 10, '2805.00', '2025-02-05 11:25:43', '2025-02-08 08:31:09'),
 (6, 3, 'Tarif 2', 11, 20, '3905.00', '2025-02-05 11:26:16', '2025-02-05 11:26:16'),
 (7, 3, 'Tarif 3', 21, 0, '6655.00', '2025-02-05 11:26:43', '2025-02-05 11:26:43');
 
@@ -637,7 +736,23 @@ INSERT INTO `users_login_logs` (`id`, `user_id`, `username`, `ip_address`, `user
 (15, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-05 06:43:39'),
 (16, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-05 09:51:31'),
 (17, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'failed', 'Password salah', '2025-02-06 09:35:01'),
-(18, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-06 09:35:13');
+(18, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-06 09:35:13'),
+(19, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-06 14:16:38'),
+(20, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-06 22:41:52'),
+(21, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'failed', 'Password salah', '2025-02-07 03:02:33'),
+(22, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-07 03:02:41'),
+(23, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-07 06:17:40'),
+(24, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-07 08:57:49'),
+(25, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-08 03:45:37'),
+(26, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-08 08:25:53'),
+(27, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-08 13:55:41'),
+(28, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-08 16:54:55'),
+(29, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-08 22:57:26'),
+(30, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-09 10:04:26'),
+(31, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-09 22:55:04'),
+(32, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'Chrome', 'Windows', 'WebKit', 'success', NULL, '2025-02-10 13:10:03'),
+(33, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', 'Edge', 'Windows', 'WebKit', 'success', NULL, '2025-02-11 07:38:50'),
+(34, 1, 'admin', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', 'Edge', 'Windows', 'WebKit', 'success', NULL, '2025-02-11 07:54:38');
 
 --
 -- Indexes for dumped tables
@@ -662,12 +777,21 @@ ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
 
 --
+-- Indexes for table `detail_pembayaran`
+--
+ALTER TABLE `detail_pembayaran`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pembayaran` (`id_pembayaran`),
+  ADD KEY `id_pakai` (`id_pakai`),
+  ADD KEY `id_bulan` (`id_bulan`);
+
+--
 -- Indexes for table `detail_tagihan`
 --
 ALTER TABLE `detail_tagihan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `detail_tagihan_id_tagihan_foreign` (`id_tagihan`),
-  ADD KEY `id_pakai` (`id_pakai`);
+  ADD KEY `id_pakai` (`id_pakai`),
+  ADD KEY `detail_tagihan_id_tagihan_foreign` (`id_tagihan`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -706,7 +830,7 @@ ALTER TABLE `layanan`
 -- Indexes for table `meteran`
 --
 ALTER TABLE `meteran`
-  ADD PRIMARY KEY (`id_meteran`),
+  ADD PRIMARY KEY (`nomor_meteran`),
   ADD KEY `meteran_id_pelanggan_foreign` (`id_pelanggan`),
   ADD KEY `meteran_id_layanan_foreign` (`id_layanan`);
 
@@ -750,8 +874,20 @@ ALTER TABLE `pemakaian`
   ADD KEY `bulan` (`bulan`),
   ADD KEY `pemakaian_created_by_foreign` (`created_by`),
   ADD KEY `pemakaian_updated_by_foreign` (`updated_by`),
-  ADD KEY `id_meteran` (`id_meteran`),
+  ADD KEY `id_meteran` (`nomor_meteran`),
   ADD KEY `id_layanan` (`id_layanan`);
+
+--
+-- Indexes for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`id_pembayaran`),
+  ADD KEY `id_tagihan` (`id_tagihan`),
+  ADD KEY `id_meteran` (`nomor_meteran`),
+  ADD KEY `id_bulan` (`id_bulan`),
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `updated_by` (`updated_by`),
+  ADD KEY `nomor_meteran` (`nomor_meteran`);
 
 --
 -- Indexes for table `permissions`
@@ -759,6 +895,14 @@ ALTER TABLE `pemakaian`
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
 -- Indexes for table `roles`
@@ -789,7 +933,7 @@ ALTER TABLE `tagihan`
   ADD PRIMARY KEY (`id_tagihan`),
   ADD KEY `tagihan_id_bulan_foreign` (`id_bulan`),
   ADD KEY `tagihan_id_pelanggan_foreign` (`id_pelanggan`),
-  ADD KEY `id_meteran` (`id_meteran`);
+  ADD KEY `id_meteran` (`nomor_meteran`);
 
 --
 -- Indexes for table `tarif_layanan`
@@ -818,10 +962,16 @@ ALTER TABLE `users_login_logs`
 --
 
 --
+-- AUTO_INCREMENT for table `detail_pembayaran`
+--
+ALTER TABLE `detail_pembayaran`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `detail_tagihan`
 --
 ALTER TABLE `detail_tagihan`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -848,34 +998,28 @@ ALTER TABLE `layanan`
   MODIFY `id_layanan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `meteran`
---
-ALTER TABLE `meteran`
-  MODIFY `id_meteran` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tagihan`
---
-ALTER TABLE `tagihan`
-  MODIFY `id_tagihan` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tarif_layanan`
@@ -893,18 +1037,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_login_logs`
 --
 ALTER TABLE `users_login_logs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `detail_pembayaran`
+--
+ALTER TABLE `detail_pembayaran`
+  ADD CONSTRAINT `detail_pembayaran_id_bulan_foreign` FOREIGN KEY (`id_bulan`) REFERENCES `bulan` (`id_bulan`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `detail_pembayaran_id_pakai_foreign` FOREIGN KEY (`id_pakai`) REFERENCES `pemakaian` (`id_pakai`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Constraints for table `detail_tagihan`
 --
 ALTER TABLE `detail_tagihan`
   ADD CONSTRAINT `detail_tagihan_ibfk_1` FOREIGN KEY (`id_pakai`) REFERENCES `pemakaian` (`id_pakai`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `detail_tagihan_id_tagihan_foreign` FOREIGN KEY (`id_tagihan`) REFERENCES `tagihan` (`id_tagihan`) ON DELETE RESTRICT;
+  ADD CONSTRAINT `detail_tagihan_id_tagihan_foreign` FOREIGN KEY (`id_tagihan`) REFERENCES `tagihan` (`id_tagihan`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `kriteria_layanan`
@@ -916,8 +1067,7 @@ ALTER TABLE `kriteria_layanan`
 -- Constraints for table `meteran`
 --
 ALTER TABLE `meteran`
-  ADD CONSTRAINT `meteran_id_layanan_foreign` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`) ON DELETE RESTRICT,
-  ADD CONSTRAINT `meteran_id_pelanggan_foreign` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`) ON DELETE RESTRICT;
+  ADD CONSTRAINT `meteran_id_layanan_foreign` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`) ON DELETE RESTRICT;
 
 --
 -- Constraints for table `model_has_permissions`
@@ -937,8 +1087,15 @@ ALTER TABLE `model_has_roles`
 ALTER TABLE `pemakaian`
   ADD CONSTRAINT `pemakaian_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT,
   ADD CONSTRAINT `pemakaian_id_layanan_foreign` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `pemakaian_id_meteran_foreign` FOREIGN KEY (`id_meteran`) REFERENCES `meteran` (`id_meteran`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `pemakaian_nomor_meteran_foreign` FOREIGN KEY (`nomor_meteran`) REFERENCES `meteran` (`nomor_meteran`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `pemakaian_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT;
+
+--
+-- Constraints for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD CONSTRAINT `pembayaran_id_bulan_foreign` FOREIGN KEY (`id_bulan`) REFERENCES `bulan` (`id_bulan`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `pembayaran_nomor_meteran_foreign` FOREIGN KEY (`nomor_meteran`) REFERENCES `meteran` (`nomor_meteran`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `role_has_permissions`

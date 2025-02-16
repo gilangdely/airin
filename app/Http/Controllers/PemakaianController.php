@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Carbon\Carbon;
 use App\Models\Meteran;
 use App\Models\Tagihan;
@@ -66,20 +67,53 @@ class PemakaianController extends Controller implements HasMiddleware
         return view('pemakaian.index', compact('pemakaian', 'columns', 'selectedColumns'));
     }
 
-    public function create(): View
+    public function cekmeteran()
     {
-        $pemakaian = new Pemakaian();
+        return view('pemakaian.cekmeteran');
+    }
 
-        return view('pemakaian.create', compact('pemakaian'));
+    public function storecekmeteran(Request $request)
+    {
+        $nomor_meteran = $request->nomor_meteran;
+        $meteran = Meteran::find($nomor_meteran);
+
+        if ($meteran) {
+            return redirect()->route('pemakaian.create', $meteran);
+        } else {
+            return redirect()->back()
+                ->withInput($request->all())
+                ->with('error', 'Nomor meteran tidak valid.');
+        }
+    }
+
+    public function create(Meteran $meteran): View
+    {
+        //ambil informasi bulan kemarin
+        // $tanggalBulanKemarin = new DateTime();
+        // $tanggalBulanKemarin->modify('first day of last month');
+        // $bulanSebelumnya = $tanggalBulanKemarin->format('n'); // Angka bulan (1-12)
+        // $tahunSebelumnya = $tanggalBulanKemarin->format('Y');
+
+        $pemakaian = Pemakaian::where('nomor_meteran', $meteran->nomor_meteran)
+            ->orderBy('bulan', 'desc') // Urutkan berdasarkan bulan terbaru
+            ->first();
+
+        //uncomment coding di atas ketika sudah production
+
+        // $pemakaian = new Pemakaian();
+
+        return view('pemakaian.create', compact('meteran', 'pemakaian'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'id_meteran' => 'required|integer',
+            'nomor_meteran' => 'required|integer',
             'bulan' => 'required',
             'akhir' => 'required|integer',
         ]);
+
+        $nomor_meteran = $request->nomor_meteran;
 
         $inputbulan = $request->bulan;
         $replace_bln = str_replace("-", "", $inputbulan);
@@ -93,6 +127,7 @@ class PemakaianController extends Controller implements HasMiddleware
         //cek apakah sudah pernah menginputkan pemakaian untuk bulan yang diinputkan, jika sudah jangan lakukan input
         $cekpemakaian = Pemakaian::where('bulan', $bulanSekarang)
             ->where('tahun', $tahunSekarang)
+            ->where('nomor_meteran', $nomor_meteran)
             ->first();
 
         if ($cekpemakaian) {
@@ -101,20 +136,27 @@ class PemakaianController extends Controller implements HasMiddleware
                 ->with('error', 'Data sudah pernah diinputkan!.');
         }
 
-        $id_meteran = $request->id_meteran;
-        $id_pakai = "TRX" . $replace_bln . $id_meteran;
 
-        //ambil pemakaian terakhir dari data sebelumnya
-        $pemakaian = Pemakaian::where('bulan', $bulanSebelumnya)
+
+        //ambil pemakaian terakhir sesuai dengan nomor_meteran dari data sebelumnya
+        $pemakaian = Pemakaian::where('nomor_meteran', $nomor_meteran)
+            ->where('bulan', $bulanSebelumnya)
             ->where('tahun', $tahunSebelumnya)
             ->latest('created_at')
             ->first();
         $pemakaiansebelumnya = $pemakaian->akhir ?? 0;
 
-        $meteran = Meteran::with('layanan')->where('id_meteran', $id_meteran)->first();
+        if ($request->akhir <= $pemakaiansebelumnya) {
+            return redirect()->back()
+                ->withInput($request->all())
+                ->with('error', 'Data pemakaian akhir tidak valid.');
+        }
 
+        $meteran = Meteran::with('layanan')->where('nomor_meteran', $nomor_meteran)->first();
+
+        $id_pakai = "TRX" . $replace_bln . $nomor_meteran;
         $validatedData['id_pakai'] = $id_pakai;
-        $validatedData['id_meteran'] = $id_meteran;
+        $validatedData['nomor_meteran'] = $nomor_meteran;
         $validatedData['bulan'] = $bulanSekarang;
         $validatedData['id_layanan'] = $meteran->id_layanan;
         $validatedData['deskripsi'] = $meteran->layanan->nama_layanan;
@@ -133,112 +175,8 @@ class PemakaianController extends Controller implements HasMiddleware
                 ->with('error', 'Terjadi kesalahan saat membuat data.');
         }
 
-        //cek apakah sudah ada tagihan untuk bulan ini atau belum
-        $tagihan = Tagihan::where('id_meteran', $meteran->id_meteran)
-            ->where('id_bulan', $bulanSekarang)
-            ->where('tahun', $tahunSekarang)
-            ->where('id_pelanggan', $meteran->id_pelanggan)
-            ->where('status_pembayaran', 0) //jika status_pembayaran = 0 maka artinya belum dibayar
-            ->where('status_tagihan', 1) //jika status-tagihan = 1 artinya tagihan masih aktif/belum dibayar
-            ->get();
-
-        // dd($tagihan);
-
-        if ($tagihan->isNotEmpty()) {
-            return redirect()->back()
-                ->with('error', 'Terdapat tagihan aktif di bulan ini!.');
-        }
-
-        //siapkan data untuk tagihan
-        $id_tagihan = $tahunSekarang . $bulanSekarang . $meteran->id_meteran . rand(100, 999);
-        $tanggal_awal = Carbon::createFromDate($tahunSekarang, $bulanSekarang, 1)->startOfMonth()->toDateString();
-        $tanggal_akhir = Carbon::createFromDate($tahunSekarang, $bulanSekarang, 1)->endOfMonth()->toDateString();
-
-        $datatagihan['id_tagihan'] = $id_tagihan;
-        $datatagihan['id_bulan'] = $bulanSekarang;
-        $datatagihan['tahun'] = $tahunSekarang;
-        $datatagihan['id_pelanggan'] = $meteran->id_pelanggan;
-        $datatagihan['id_meteran'] = $meteran->id_meteran;
-        $datatagihan['waktu_awal'] = $tanggal_awal;
-        $datatagihan['waktu_akhir'] = $tanggal_akhir;
-        $datatagihan['status_tagihan'] = 1;
-        $datatagihan['status_pembayaran'] = 0;
-        $datatagihan['created_by'] = Auth::id();
-        $datatagihan['updated_by'] = Auth::id();
-
-        try {
-            Tagihan::create($datatagihan);
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()
-                ->with('error', 'Terjadi kesalahan saat membuat data tagihan.');
-        }
-
-        $pemakaianList = DB::table('pemakaian')
-            ->where('id_meteran', $meteran->id_meteran)
-            ->where('status_pembayaran', 0)
-            ->orderBy('tahun', 'asc')
-            ->orderBy('bulan', 'asc')
-            ->get();
-
-        if ($pemakaianList->isEmpty()) {
-            return redirect()->back()
-                ->with('error', 'Tidak ada tagihan yang perlu dibayar.');
-        }
-
-        // Ambil semua ID layanan yang ada dalam pemakaian
-        $idLayananList = $pemakaianList->pluck('id_layanan')->unique();
-
-        // Ambil semua tarif untuk layanan yang digunakan
-        $tarifLayanan = DB::table('tarif_layanan')
-            ->whereIn('id_layanan', $idLayananList)
-            ->orderBy('min_pemakaian', 'asc')
-            ->get()
-            ->groupBy('id_layanan');
-
-        $totalTagihan = 0;
-        $rincianTagihan = [];
-
-        foreach ($pemakaianList as $pemakaian) {
-            $totalPakai = $pemakaian->pakai;
-            $idLayanan = $pemakaian->id_layanan;
-
-            // Ambil tarif sesuai layanan yang dipakai
-            $tarifList = $tarifLayanan[$idLayanan] ?? collect();
-
-            // Cari tarif yang sesuai untuk jumlah pemakaian ini
-            $tarif = $tarifList->firstWhere(function ($t) use ($totalPakai) {
-                return $t->min_pemakaian <= $totalPakai &&
-                    ($t->max_pemakaian === null || $t->max_pemakaian >= $totalPakai);
-            });
-
-            if (!$tarif) {
-                continue; // Skip jika tidak ada tarif yang cocok
-            }
-
-            // Hitung tagihan bulan ini
-            $tagihanBulanIni = $totalPakai * $tarif->tarif;
-            $totalTagihan += $tagihanBulanIni;
-
-            // Simpan rincian tagihan
-            $rincianTagihan[] = [
-                'id_tagihan' => $id_tagihan,
-                'id_pakai' => $pemakaian->id_pakai,
-                'pakai' => $totalPakai,
-                'tarif' => $tarif->tarif,
-                'subtotal' => $tagihanBulanIni
-            ];
-        }
-
-        DetailTagihan::insert($rincianTagihan);
-
-        $tagihan = Tagihan::find($id_tagihan);
-        $tagihan->nominal = $totalTagihan;
-        $tagihan->update();
-
-        
-
-        return redirect()->route('pemakaian.index')
-            ->with('success', 'Pemakaian berhasil dibuat');
+        return redirect()->route('pemakaian.show', $id_pakai)
+            ->with('success', 'Pemakaian berhasil diinput');
     }
 
     public function show(Pemakaian $pemakaian): View

@@ -36,7 +36,7 @@ class Pemakaian extends Model
 
 	protected $fillable = [
 		'id_pakai',
-		'id_meteran',
+		'nomor_meteran',
 		'bulan',
 		'tahun',
 		'awal',
@@ -52,7 +52,7 @@ class Pemakaian extends Model
 	];
 
 	public function meteran(){
-		return $this->belongsTo(Meteran::class, 'id_meteran','id_meteran');
+		return $this->belongsTo(Meteran::class, 'nomor_meteran','nomor_meteran');
 	}
 
 	public function tblbulan(){

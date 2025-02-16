@@ -1,6 +1,6 @@
 
                 <input type="hidden" name="id_tagihan" value="{{ $tagihan->id_tagihan }}">
-                <input type="hidden" name="id_meteran" value="{{ $tagihan->id_meteran }}">
+                <input type="hidden" name="nomor_meteran" value="{{ $tagihan->nomor_meteran }}">
                 <input type="hidden" name="id_bulan" value="{{ $tagihan->id_bulan }}">
                 <input type="hidden" name="tahun" value="{{ $tagihan->tahun }}">
                 <div class="mb-4">

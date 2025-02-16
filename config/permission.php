@@ -216,8 +216,8 @@ return [
                 'pelanggan view',
                 'pelanggan create',
                 'pelanggan edit',
-                'pelanggan delete',
-                
+                'pelanggan delete', 
+
             ]
         ],
         [
@@ -228,7 +228,7 @@ return [
                 'layanan create',
                 'layanan edit',
                 'layanan delete',
-                
+
             ]
         ],
         [
@@ -239,7 +239,7 @@ return [
                 'kriteria-layanan create',
                 'kriteria-layanan edit',
                 'kriteria-layanan delete',
-                
+
             ]
         ],
         [
@@ -250,7 +250,7 @@ return [
                 'pemakaian create',
                 'pemakaian edit',
                 'pemakaian delete',
-                
+
             ]
         ],
         [
@@ -261,7 +261,7 @@ return [
                 'tagihan create',
                 'tagihan edit',
                 'tagihan delete',
-                
+
             ]
         ],
         [
@@ -272,7 +272,7 @@ return [
                 'tarif-layanan create',
                 'tarif-layanan edit',
                 'tarif-layanan delete',
-                
+
             ]
         ],
         [
@@ -283,7 +283,7 @@ return [
                 'meteran create',
                 'meteran edit',
                 'meteran delete',
-                
+
             ]
         ],
         [
@@ -294,7 +294,14 @@ return [
                 'pembayaran create',
                 'pembayaran edit',
                 'pembayaran delete',
-                
+
+            ]
+        ],
+        [
+            'group' => 'laporan-pembayaran',
+            'pengguna' => ['peserta', 'admin'],
+            'access' => [
+                'laporan-pembayaran view',
             ]
         ],
         [

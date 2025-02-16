@@ -85,6 +85,20 @@
         integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous">
     </script>
 
+    {{-- CDN Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Pilih opsi",
+                allowClear: true
+            });
+        });
+    </script>
+
     <!-- END: Theme JS-->
     @stack('script')
 

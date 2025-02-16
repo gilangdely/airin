@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
@@ -28,25 +29,25 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-	use HasRoles;
+    use HasRoles, HasApiTokens;
 
-	protected $table = 'users';
+    protected $table = 'users';
 
-	protected $casts = [
-		'email_verified_at' => 'datetime'
-	];
+    protected $casts = [
+        'email_verified_at' => 'datetime'
+    ];
 
-	protected $hidden = [
-		'password',
-		'remember_token'
-	];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
-	protected $fillable = [
-		'name',
-		'username',
-		'email',
-		'email_verified_at',
-		'password',
-		'remember_token'
-	];
+    protected $fillable = [
+        'name',
+        'username',
+        'email',
+        'email_verified_at',
+        'password',
+        'remember_token'
+    ];
 }

@@ -43,7 +43,7 @@ class Pembayaran extends Model
 
 	protected $casts = [
 		'id_tagihan' => 'int',
-		'id_meteran' => 'int',
+		'nomor_meteran' => 'int',
 		'tahun' => 'int',
 		'total_nominal' => 'float',
 		'waktu_pembayaran' => 'datetime',
@@ -54,7 +54,7 @@ class Pembayaran extends Model
 	protected $fillable = [
 		'id_pembayaran',
 		'id_tagihan',
-		'id_meteran',
+		'nomor_meteran',
 		'id_bulan',
 		'tahun',
 		'total_nominal',
@@ -73,7 +73,7 @@ class Pembayaran extends Model
 
 	public function meteran()
 	{
-		return $this->belongsTo(Meteran::class, 'id_meteran');
+		return $this->belongsTo(Meteran::class, 'nomor_meteran');
 	}
 
 	public function tagihan()
