@@ -216,7 +216,7 @@ return [
                 'pelanggan view',
                 'pelanggan create',
                 'pelanggan edit',
-                'pelanggan delete', 
+                'pelanggan delete',
 
             ]
         ],
@@ -302,6 +302,13 @@ return [
             'pengguna' => ['peserta', 'admin'],
             'access' => [
                 'laporan-pembayaran view',
+            ]
+        ],
+        [
+            'group' => 'laporan-pelanggan',
+            'pengguna' => ['peserta', 'admin'],
+            'access' => [
+                'laporan-pelanggan view',
             ]
         ],
     ]
