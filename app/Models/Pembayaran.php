@@ -39,6 +39,12 @@ class Pembayaran extends Model
 {
 	protected $table = 'pembayaran';
 	protected $primaryKey = 'id_pembayaran';
+	protected $with = [
+		'bulan',
+		'meteran',
+		'tagihan'
+	];
+
 	public $incrementing = false;
 
 	protected $casts = [

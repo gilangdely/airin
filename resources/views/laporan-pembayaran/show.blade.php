@@ -1,42 +1,17 @@
-<x-layout.app title="Detail Pembayaran" activeMenu="pembayaran.show" :withError="true">
+<x-layout.app title="Laporan Pembayaran" activeMenu="laporan-pembayaran.show" :withError="true">
     <div class="container my-5">
         <x-breadcrumb title="Detail Pembayaran" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
-            ['label' => 'Pembayaran', 'url' => route('pembayaran.index')],
-            ['label' => 'Detail Pembayaran'],
+            ['label' => 'Pembayaran', 'url' => route('laporan-pembayaran.index')],
+            ['label' => 'Laporan Pembayaran'],
         ]" />
 
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('pembayaran.index') }}" class="btn btn-sm btn-secondary">
+                    <a href="{{ route('laporan-pembayaran.index') }}" class="btn btn-sm btn-secondary">
                         <i class="bx bx-arrow-back me-1"></i>Kembali
                     </a>
-
-                    <div>
-                        @if ($pembayaran->tagihan->status_tagihan == 1 && $pembayaran->tagihan->status_pembayaran == 0)
-                            @can('pembayaran edit')
-                                <a href="{{ route('pembayaran.edit', $pembayaran) }}" class="btn btn-sm btn-primary">
-                                    <i class="bx bx-pencil me-1"></i>Edit
-                                </a>
-                            @endcan
-                            @can('pembayaran delete')
-                                <form action="{{ route('pembayaran.destroy', $pembayaran) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf @method('DELETE')
-                                    <x-input.confirm-button text="Data pembayaran ini akan dihapus!" positive="Ya, hapus!"
-                                        icon="info" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                        data-bs-title="Hapus" data-bs-placement="top">
-                                        <i class="bx bx-trash me-1"></i>Hapus
-                                    </x-input.confirm-button>
-                                </form>
-                            @endcan
-                        @else
-                        <a href="{{ route('pembayaran.cetakkuitansi', $pembayaran) }}" class="btn btn-sm btn-danger">
-                            <i class='bx bx-printer' ></i> Cetak Kuitansi
-                        </a>
-                        @endif
-                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -108,7 +83,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($detailpembayaran as $row)
+                                @foreach ($detailPembayaran as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->pemakaian->tblbulan->nama_bulan }}</td>
@@ -119,8 +94,8 @@
                                 @endforeach
                                 <tr>
                                     <td colspan="3" style="text-align: right;">Total</td>
-                                    <td>{{ $detailpembayaran->sum('pakai') . ' m3' }}</td>
-                                    <td>{{ 'Rp ' . number_format($detailpembayaran->sum('subtotal'), 0, ',', '.') }}</td>
+                                    <td>{{ $detailPembayaran->sum('pakai') . ' m3' }}</td>
+                                    <td>{{ 'Rp ' . number_format($detailPembayaran->sum('subtotal'), 0, ',', '.') }}</td>
                                 </tr>
                             </tbody>
                         </table>

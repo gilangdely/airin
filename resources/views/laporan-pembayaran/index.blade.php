@@ -4,7 +4,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="order-last col-12 col-md-8 order-md-1">
-                        <h3>{{ __('Laporan Pambayaran') }}</h3>
+                        <h3>{{ __('Laporan Pembayaran') }}</h3>
                         <p class="text-subtitle text-muted">
                             {{ __('Below is a list of all laporan pembayaran.') }}
                         </p>
@@ -25,86 +25,70 @@
                                     @grid([
                                         'dataProvider' => $dataProvider,
                                         'rowsPerPage' => $perPage,
-                                        // 'tableOptions' => [
-                                        //     'class' => 'table table-striped table-bordered table-hover',
-                                        // ],
+                                        'columnOption' => [
+                                            'class' => 'attribute',
+                                            'formatters' => ['text', 'raw'],
+                                        ],
                                         'columns' => [
                                             [
                                                 'class' => 'raw',
-                                                'title' => 'No',
-                                                // 'headerOptions' => ['style' => 'width: 60px;', 'class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-center'],
+                                                'title' => 'NO',
                                                 'value' => function () use (&$i) {
                                                     return ++$i . '.';
                                                 },
                                             ],
                                             [
-                                                'title' => 'NAMA PELANGGAN',
-                                                'value' => 'tagihan.pelanggan.nama_pelanggan',
-                                                'format' => 'raw',
-                                                // 'headerOptions' => ['class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-left'],
-                                                // 'filter' => true,
-                                            ],
-                                            [
                                                 'title' => 'NO. METERAN',
-                                                'value' => 'meteran.nomor_meteran',
-                                                'format' => 'raw',
-                                                // 'headerOptions' => ['class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-center'],
-                                                // 'filter' => true,
+                                                'value' => 'nomor_meteran',
                                             ],
                                             [
-                                                'class' => 'callback',
-                                                'title' => 'PERIODE',
-                                                'value' => function ($model) {
-                                                    return $model->tagihan->bulan->nama_bulan . ' ' . $model->tagihan->tahun;
-                                                },
-                                                'format' => 'raw',
-                                                // 'headerOptions' => ['class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-center'],
+                                                'title' => 'NAMA PELANGGAN',
+                                                'value' => 'nama_pelanggan',
                                             ],
                                             [
-                                                'class' => 'callback',
-                                                'title' => 'NOMINAL',
-                                                'value' => function ($model) {
-                                                    return 'Rp ' . number_format($model->tagihan->nominal, 0, ',', '.');
-                                                },
-                                                'format' => 'raw',
-                                                // 'headerOptions' => ['class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-right'],
+                                                'title' => 'LAYANAN',
+                                                'value' => 'nama_layanan',
                                             ],
-                                            // [
-                                            //     'class' => 'callback',
-                                            //     'title' => 'PERIODE PEMBAYARAN',
-                                            //     'value' => function ($model) {
-                                            //         return date('d/m/Y', strtotime($model->tagihan->waktu_awal)) . ' - ' . date('d/m/Y', strtotime($model->tagihan->waktu_akhir));
-                                            //     },
-                                            //     'format' => 'raw',
-                                                // 'headerOptions' => ['class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-center'],
-                                            // ],
                                             [
-                                                'class' => 'callback',
-                                                'title' => 'STATUS',
-                                                'value' => function ($model) {
-                                                    $status = $model->tagihan->status_pembayaran ? '<span class="badge bg-success">Lunas</span>' : '<span class="badge bg-danger">Belum Lunas</span>';
-                                                    return $status;
-                                                },
-                                                'format' => 'raw',
-                                                // 'headerOptions' => ['class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-center'],
+                                                'title' => 'TANGGAL PEMBAYARAN',
+                                                'value' => 'waktu_pembayaran',
                                             ],
-                                            // [
-                                            //     'class' => 'callback',
-                                            //     'title' => 'LAST UPDATE',
-                                            //     'value' => function ($model) {
-                                            //         return date('d-m-Y H:i:s', strtotime($model->tagihan->updated_at));
-                                            //     },
-                                            //     'format' => 'raw',
-                                                // 'headerOptions' => ['class' => 'text-center'],
-                                                // 'contentOptions' => ['class' => 'text-center'],
-                                            //],
+                                            [
+                                                'title' => 'METODE PEMBAYARAN',
+                                                'value' => 'metode_pembayaran',
+                                            ],
+                                            [
+                                                'title' => 'TOTAL',
+                                                'class' => 'raw',
+                                                'formatters' => ['raw'],
+                                                'value' => function ($row) {
+                                                    return 'Rp. ' . number_format($row->total_nominal, 0, ',', '.');
+                                                },
+                                            ],
+                                            [
+                                                'title' => 'AKSI',
+                                                'class' => 'callback',
+                                                'formatters' => ['raw'],
+                                                'value' => function ($row) {
+                                                    $viewUrl = route("laporan-pembayaran.show", $row);
+                                                    return '
+                                                <div class="btn-group" role="group">
+                                                    ' . (auth()->user()->can('pembayaran view') ? '
+                                                    <div class="me-1">
+                                                        <a href="' . $viewUrl . '"
+                                                            class="btn btn-icon btn-outline-info btn-sm"
+                                                            data-bs-toggle="tooltip"
+                                                            data-bs-title="Detail"
+                                                            data-bs-placement="top">
+                                                            <span class="bx bx-show"></span>
+                                                        </a>
+                                                    </div>
+                                                    ' : '') . '
+                                                </div>
+                                            ';
+                                                }
+                                            ]
+
                                         ],
                                     ])
                                 </div>
