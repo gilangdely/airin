@@ -243,7 +243,7 @@ class TagihanController extends Controller implements HasMiddleware
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()
                 ->withInput($request->all())
-                ->with('error', 'Terjadi kesalahan saat membuat data. | error : '.$e->getMessage());
+                ->with('error', 'Terjadi kesalahan saat membuat data. | error : ' . $e->getMessage());
         }
 
         return redirect()->route('tagihan.index')

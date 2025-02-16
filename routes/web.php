@@ -3,6 +3,7 @@
 use App\Http\Controllers\KriteriaLayananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LaporanPelangganController;
 use App\Http\Controllers\LaporanPembayaranController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MeteranController;
@@ -91,4 +92,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('pembayaran/{pembayaran}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 
     Route::get('laporan-pembayaran', [LaporanPembayaranController::class, 'index'])->name('laporan-pembayaran.index');
+    Route::get('laporan-pelanggan', [LaporanPelangganController::class, 'index'])->name('laporan-pelanggan.index');
 });
