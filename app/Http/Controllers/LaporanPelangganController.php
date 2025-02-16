@@ -15,10 +15,7 @@ class LaporanPelangganController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('permission:layanan view', only: ['index', 'show']),
-            new Middleware('permission:layanan create', only: ['create', 'store']),
-            new Middleware('permission:layanan edit', only: ['edit', 'update']),
-            new Middleware('permission:layanan delete', only: ['destroy']),
+            new Middleware('permission:laporan-pelanggan view', only: ['index']),
         ];
     }
 
