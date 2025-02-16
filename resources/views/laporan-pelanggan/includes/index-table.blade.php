@@ -30,7 +30,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="8" class="text-center">Data tidak ditemukan</td>
+                    <td colspan="9" class="text-center">Data tidak ditemukan</td>
                 </tr>
             @endif
         </tbody>

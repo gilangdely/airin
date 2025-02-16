@@ -12,7 +12,7 @@ $nav = [
             "title" => "Laporan Per Meteran",
             "icon" => '<i class="menu-icon tf-icons bx bx-group"></i>',
             'route' => 'laporan-pelanggan.index',
-            'permissions' => null
+            'permissions' => ['laporan-pelanggan view']
         ],
     ],
     "Transaksi" => [

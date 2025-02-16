@@ -5,11 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Meteran;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\View;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
-class LaporanPelangganController extends Controller
+class LaporanPelangganController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:layanan view', only: ['index', 'show']),
+            new Middleware('permission:layanan create', only: ['create', 'store']),
+            new Middleware('permission:layanan edit', only: ['edit', 'update']),
+            new Middleware('permission:layanan delete', only: ['destroy']),
+        ];
+    }
+
     public function index(Request $request)
     {
         $query = Meteran::query();
