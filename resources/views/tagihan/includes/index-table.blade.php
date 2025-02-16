@@ -4,7 +4,7 @@
             <tr>
                 <th>No</th>
 
-                <th class="align-middle">Id Bulan</th>
+                <th class="align-middle">Bulan</th>
                 <th class="align-middle">Tahun</th>
                 <th class="align-middle">Nama Pelanggan</th>
                 <th class="align-middle">Nomor Meteran</th>

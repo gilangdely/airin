@@ -32,7 +32,17 @@
                                 </form>
                             @endcan
                         @else
-                        <a href="{{ route('pembayaran.cetakkuitansi', $pembayaran) }}" class="btn btn-sm btn-danger">
+                        <form action="{{ route('pembayaran.pembatalan', $pembayaran) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <x-input.confirm-button text="Pembayaran dibatalkan?" positive="Ya, Batalkan!"
+                                icon="info" class="btn btn-outline-danger btn-sm"
+                                data-bs-toggle="tooltip" data-bs-title="Batalkan!" data-bs-placement="top">
+                                <span class="bx bx-x"></span>
+                                Pembatalan Pembayaran
+                            </x-input.confirm-button>
+                        </form>
+                        <a href="{{ route('pembayaran.cetakkuitansi', $pembayaran) }}" class="btn btn-sm btn-primary">
                             <i class='bx bx-printer' ></i> Cetak Kuitansi
                         </a>
                         @endif

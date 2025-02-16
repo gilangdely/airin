@@ -93,6 +93,7 @@ class TagihanController extends Controller implements HasMiddleware
             ->orderBy('min_pemakaian', 'asc')
             ->get()
             ->groupBy('id_layanan');
+        
 
         $totalTagihan = 0;
         $rincianTagihan = [];
@@ -217,7 +218,9 @@ class TagihanController extends Controller implements HasMiddleware
             });
 
             if (!$tarif) {
-                throw new \Exception("Tarif tidak ditemukan untuk pemakaian $totalPakai m³.");
+                // throw new \Exception("Tarif tidak ditemukan untuk pemakaian $totalPakai m³.");
+                return redirect()->back()
+                ->with('error', "Tarif tidak ditemukan untuk pemakaian $totalPakai m³.");
             }
 
             // Hitung tagihan bulan ini

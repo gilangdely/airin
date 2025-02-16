@@ -9,7 +9,10 @@
     <title>Login - {{ !empty($title) ? $title : config('app.name', 'Prabubima Tech') }}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('assets/img/favicon/site.webmanifest') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +54,7 @@
                         <div class="app-brand justify-content-center">
                             <a href="{{ url('/') }}" class="gap-2 app-brand-link">
                                 <span class="app-brand-logo demo">
-                                    <img src="{{ asset('assets/img/logo/template_logo.png') }}" alt="" height="50px">
+                                    <img src="{{ asset('assets/img/logo/Airin-Logo.png') }}" alt="" height="50px">
                                 </span>
                                 <span class="app-brand-text demo text-heading fw-bold">Login
                                     {{ config('app.name') }}</span>

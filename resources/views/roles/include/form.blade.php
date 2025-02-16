@@ -60,7 +60,7 @@
                                 </script>
                             @endpush
                         </div>
-
+ 
                         <div class="mt-2">
                             @foreach ($permission['access'] as $access)
                                 @if (in_array($access, $existingPermissions))

@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::put('meteran/{meteran}', [MeteranController::class, 'update'])->name('meteran.update');
     Route::delete('meteran/{meteran}', [MeteranController::class, 'destroy'])->name('meteran.destroy');
 
+    Route::delete('pembayaran/{pembayaran}/pembatalan', [PembayaranController::class, 'pembatalan'])->name('pembayaran.pembatalan');
     Route::get('pembayaran/{pembayaran}/cetakkuitansi', [PembayaranController::class, 'cetakkuitansi'])->name('pembayaran.cetakkuitansi');
     Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('pembayaran/create/{tagihan}', [PembayaranController::class, 'create'])->name('pembayaran.create');

@@ -112,10 +112,18 @@ class PemakaianController extends Controller implements HasMiddleware
             'bulan' => 'required',
             'akhir' => 'required|integer',
         ]);
-
+        
         $nomor_meteran = $request->nomor_meteran;
-
         $inputbulan = $request->bulan;
+
+        // cek apakah bulan yang diinputkan itu bukan bulan depan
+        $currentDate = Carbon::now()->format('Y-m');
+        if($inputbulan > $currentDate){
+            return redirect()->back()
+                ->withInput($request->all())
+                ->with('error', 'Dilarang menginputkan pemakaian untuk bulan depan!.');
+        }
+
         $replace_bln = str_replace("-", "", $inputbulan);
 
         $tanggal = Carbon::createFromFormat('Y-m', $inputbulan);

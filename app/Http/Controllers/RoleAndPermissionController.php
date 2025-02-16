@@ -96,9 +96,9 @@ class RoleAndPermissionController extends Controller implements HasMiddleware
      */
     public function create(): View
     {
-        return view('roles.create');
+        return view('roles.create')->with('existingPermissions',  Permission::where('guard_name', 'web')->pluck('name')->toArray());;
     }
-
+ 
     /**
      * Store a newly created resource in storage.
      */

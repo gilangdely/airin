@@ -23,7 +23,13 @@
                     <td>{{ $row?->no_ktp }}</td>
                     <td>{{ $row?->alamat }}</td>
                     <td>{{ $row?->no_hp }}</td>
-                    <td>{{ $row?->status }}</td>
+                    <td>
+                        @if ($row?->status == 1)
+                            <span class="badge bg-label-success">Aktif</span>
+                        @else
+                            <span class="badge bg-label-danger">Tidak Aktif</span>
+                        @endif
+                    </td>
                     <td class="text-center">
                         <div class="btn-group" role="group">
                             @can('pelanggan view')

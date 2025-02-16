@@ -79,20 +79,20 @@ class PembayaranController extends Controller implements HasMiddleware
             'petugas' => 'required|string|max:50',
         ]);
 
-        $validatedData['id_pembayaran'] = strtolower(Auth::user()->name).'-'.$request->id_tagihan.Carbon::now()->format('Y-m-d-H:i:s');
+        $validatedData['id_pembayaran'] = strtolower(Auth::user()->name) . '-' . $request->id_tagihan . Carbon::now()->format('Y-m-d-H:i:s');
         $validatedData['waktu_pembayaran'] = now();
         $validatedData['created_by'] = Auth::id();
         $validatedData['updated_by'] = Auth::id();
 
         $tagihan = Tagihan::find($request->id_tagihan);
-        $tagihan->status_tagihan=0;
-        $tagihan->status_pembayaran=1;
+        $tagihan->status_tagihan = 0;
+        $tagihan->status_pembayaran = 1;
 
         //siapkan data untuk input detail pembayaran
-        $detailtagihan = DetailTagihan::with('pemakaian')->where('id_tagihan',$request->id_tagihan)->get();
+        $detailtagihan = DetailTagihan::with('pemakaian')->where('id_tagihan', $request->id_tagihan)->get();
         $detailbayar = [];
-        foreach($detailtagihan as $detail){
-            $detailbayar[]=[
+        foreach ($detailtagihan as $detail) {
+            $detailbayar[] = [
                 'id_pembayaran' => $validatedData['id_pembayaran'],
                 'id_pakai' => $detail->id_pakai,
                 'id_bulan' => $detail->pemakaian->bulan,
@@ -115,7 +115,6 @@ class PembayaranController extends Controller implements HasMiddleware
 
             //update status pembayaran di table pemakaian
             Pemakaian::whereIn('id_pakai', $getIdPakai)->update(['status_pembayaran' => 1]);
-
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()
                 ->withInput($request->all())
@@ -123,16 +122,16 @@ class PembayaranController extends Controller implements HasMiddleware
                 ->with('error', $e->getMessage());
         }
 
-        return redirect()->route('tagihan.show',$request->id_tagihan)
+        return redirect()->route('tagihan.show', $request->id_tagihan)
             ->with('success', 'Pembayaran berhasil dibuat');
     }
 
     public function show(Pembayaran $pembayaran): View
     {
-        $detailpembayaran = DetailPembayaran::where('id_pembayaran',$pembayaran->id_pembayaran)->get();
-        return view('pembayaran.show', compact('pembayaran','detailpembayaran'));
+        $detailpembayaran = DetailPembayaran::where('id_pembayaran', $pembayaran->id_pembayaran)->get();
+        return view('pembayaran.show', compact('pembayaran', 'detailpembayaran'));
     }
- 
+
     public function edit(Pembayaran $pembayaran): View
     {
         return view('pembayaran.edit', compact('pembayaran'));
@@ -186,9 +185,41 @@ class PembayaranController extends Controller implements HasMiddleware
             ->with('success', 'Pembayaran berhasil dihapus');
     }
 
-    public function cetakkuitansi(Pembayaran $pembayaran) : View
+    public function cetakkuitansi(Pembayaran $pembayaran): View
     {
         $detailpembayaran = DetailPembayaran::where('id_pembayaran', $pembayaran->id_pembayaran)->get();
-        return view('pembayaran.cetakkuitansi', compact('pembayaran','detailpembayaran'));
+        return view('pembayaran.cetakkuitansi', compact('pembayaran', 'detailpembayaran'));
+    }
+
+    public function pembatalan(Pembayaran $pembayaran)
+    {
+        try {
+            // Update status tagihan dan pembayaran pada tabel tagihan
+            Tagihan::where('id_tagihan', $pembayaran->id_tagihan)->update([
+                'status_tagihan' => 1,
+                'status_pembayaran' => 0
+            ]);
+
+            // Cari semua data detailpembayaran berdasarkan id_pembayaran
+            $detailpembayaran = DetailPembayaran::where('id_pembayaran', $pembayaran->id_pembayaran)->get();
+
+            if ($detailpembayaran->isNotEmpty()) {
+                // Ambil semua id_pemakaian untuk mengupdate status_pembayaran
+                $list_id_pakai = $detailpembayaran->pluck('id_pakai')->toArray();
+                Pemakaian::whereIn('id_pakai', $list_id_pakai)->update(['status_pembayaran' => 0]);
+
+                // Hapus semua detail pembayaran
+                DetailPembayaran::where('id_pembayaran', $pembayaran->id_pembayaran)->delete();
+            }
+
+            // Hapus data pembayaran
+            $pembayaran->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('pembayaran.index')
+                ->with('error', 'Terjadi kesalahan saat membatalkan pembayaran.');
+        }
+
+        return redirect()->route('pembayaran.index')
+            ->with('success', 'Pembayaran berhasil dibatalkan!');
     }
 }

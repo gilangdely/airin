@@ -22,7 +22,7 @@
                     <td>{{ $row?->nomor_meteran }}</td>
                     <td>{{ $row->layanan?->nama_layanan }}</td>
                     <td>{{ $row?->lokasi_pemasangan }}</td>
-                    <td>{{ $row?->tanggal_pemasangan }}</td>
+                    <td>{{ date('d-M-Y', strtotime($row?->tanggal_pemasangan)) }}</td>
                     <td>
                         @if ($row?->status == 1)
                             <span class="badge bg-label-success">Aktif</span>

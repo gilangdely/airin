@@ -24,5 +24,19 @@
             </div>
         </div>
     </div>
-</x-layout.app>
 
+    @push('script')
+        <script>
+            // Ambil tanggal sekarang
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = today.getMonth() + 1; // getMonth() dimulai dari 0 (Januari = 0)
+
+            // Format YYYY-MM
+            let maxMonth = `${year}-${month.toString().padStart(2, '0')}`;
+
+            // Set atribut max pada input
+            document.getElementById("bulan").setAttribute("max", maxMonth);
+        </script>
+    @endpush
+</x-layout.app>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meteran;
 use App\Models\Pelanggan;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
-use \Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use \Illuminate\Routing\Controllers\HasMiddleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 class PelangganController extends Controller implements HasMiddleware
@@ -84,7 +85,8 @@ class PelangganController extends Controller implements HasMiddleware
 
     public function show(Pelanggan $pelanggan): View
     {
-        return view('pelanggan.show', compact('pelanggan'));
+        $meterans = Meteran::where('id_pelanggan', $pelanggan->id_pelanggan)->get();
+        return view('pelanggan.show', compact('pelanggan','meterans'));
     }
 
     public function edit(Pelanggan $pelanggan): View

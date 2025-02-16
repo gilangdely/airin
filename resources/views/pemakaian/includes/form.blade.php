@@ -9,7 +9,7 @@
                         class="form-control {{ $errors->has('nomor_meteran') ? 'is-invalid' : '' }}" 
                         id="nomor_meteran" 
                         readonly
-                        value="{{ $pemakaian->nomor_meteran ? $pemakaian->nomor_meteran : $meteran->nomor_meteran }}" 
+                        value="{{ isset($pemakaian->nomor_meteran) ? $pemakaian->nomor_meteran : $meteran->nomor_meteran }}" 
                         placeholder="Masukkan Nomor Meteran" />
                     @error('nomor_meteran')<small class="invalid-feedback">{{ $message }}</small>@enderror
                 </div>
