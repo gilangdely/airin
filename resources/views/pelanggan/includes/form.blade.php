@@ -45,7 +45,7 @@
                         placeholder="Masukkan Alamat" />
                     @error('alamat')<small class="invalid-feedback">{{ $message }}</small>@enderror
                 </div>
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="status" class="form-label">Status</label>
                     <input 
                         type="text" 
@@ -55,6 +55,24 @@
                         value="{{ old('status', $pelanggan?->status) }}" 
                         placeholder="Masukkan Status" />
                     @error('status')<small class="invalid-feedback">{{ $message }}</small>@enderror
+                </div> --}}
+                <div class="mb-4">
+                    <label for="status" class="form-label">Status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="1" name="status" id="status2"
+                            {{ ($meteran->status ?? null) == 1 ? 'checked' : '' }}>
+                        <label class="form-check-label" for="status2">Aktif</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="0" name="status" id="status1"
+                            {{ ($meteran->status ?? null) == 0 ? 'checked' : '' }}>
+                        <label class="form-check-label" for="status1">Tidak Aktif</label>
+                    </div>
+        
+        
+                    @error('status')
+                        <small class="invalid-feedback">{{ $message }}</small>
+                    @enderror
                 </div>
     </div>
 </div>

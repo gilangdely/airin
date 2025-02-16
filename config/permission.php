@@ -311,5 +311,12 @@ return [
                 'laporan-pelanggan view',
             ]
         ],
+        [
+            'group' => 'rekap',
+            'pengguna' => ['peserta', 'admin'],
+            'access' => [
+                'rekap view',
+            ]
+        ],
     ]
 ];
