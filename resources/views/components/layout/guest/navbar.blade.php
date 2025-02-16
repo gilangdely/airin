@@ -28,6 +28,9 @@
                 <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
                     <a class="nav-link fw-medium collapsed" href="#contact-us">Contact Us</a>
                 </li>
+                <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
+                    <a class="nav-link fw-medium collapsed" href="#our-team">Team</a>
+                </li>
                 <li>
                     <a href="{{ route('login') }}" class="btn btn-primary" style="border-radius: 50px;">
                         <span class="tf-icons bx bx-log-in-circle scaleX-n1-rtl me-md-1"></span>

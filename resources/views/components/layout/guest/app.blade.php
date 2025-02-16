@@ -55,60 +55,117 @@
 
     <style>
         .main-container {
-            position: relative;
-            height: 100vh;
+        position: relative;
+        height: 100vh;
         }
 
         .main-bg {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* z-index: -1; */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
         }
 
         h4.section-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            text-transform: uppercase;
-            position: relative;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        text-transform: uppercase;
+        position: relative;
         }
 
         h4.section-title:before {
-            content: "";
-            position: absolute;
-            display: block;
-            width: 160px;
-            height: 2px;
-            background: color-mix(in srgb, var(--bs-white), transparent 60%);
-            left: 0;
-            right: 0;
-            bottom: 1px;
-            margin: auto;
+        content: "";
+        position: absolute;
+        display: block;
+        width: 160px;
+        height: 2px;
+        background: color-mix(in srgb, var(--bs-white), transparent 60%);
+        left: 0;
+        right: 0;
+        bottom: 1px;
+        margin: auto;
         }
 
         h4.section-title::after {
-            content: "";
-            position: absolute;
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--bs-primary);
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
+        content: "";
+        position: absolute;
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: var(--bs-primary);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
         }
-    </style>
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .team-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 0 10px;
+        }
+
+        .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-card .card-body {
+        padding: 1.5rem;
+        }
+
+        .team-card .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        }
+
+        .team-card .card-text {
+        font-size: 0.9rem;
+        }
+
+        .team-card .rounded-circle {
+        border: 4px solid #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card .social-icon {
+        transition: color 0.3s ease;
+        }
+
+        .team-card .social-icon:hover {
+        color: #007bff !important;
+        }
+
+        #our-team .row {
+        margin: 0 -10px;
+        }
+
+        @media (max-width: 991.98px) {
+        .col {
+        margin-top: 4.5rem !important;
+        }
+        }
+
+        @media (min-width: 992px) {
+        .col {
+        margin-top: 3.5rem;
+        }
+        }
+
+        </style>
 </head>
 
 <body>
-
     <div class="layout-wrapper layout-content-navbar layout-without-menu">
         <div class="layout-container">
             <!-- Toast default -->

@@ -54,7 +54,8 @@
                         <div class="app-brand justify-content-center">
                             <a href="{{ url('/') }}" class="gap-2 app-brand-link">
                                 <span class="app-brand-logo demo">
-                                    <img src="{{ asset('assets/img/logo/Airin-Logo.png') }}" alt="" height="50px">
+                                    <img src="{{ asset('assets/img/logo/Airin-Logo.png') }}" alt=""
+                                        height="35px">
                                 </span>
                                 <span class="app-brand-text demo text-heading fw-bold">Login
                                     {{ config('app.name') }}</span>
