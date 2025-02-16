@@ -9,9 +9,9 @@ $nav = [
             'permissions' => ['laporan-pembayaran view']
         ],
         [
-            "title" => "Laporan Pelanggan",
-            "icon" => '<i class="menu-icon tf-icons bx bx-line-chart"></i>',
-            'route' => null,
+            "title" => "Laporan Per Meteran",
+            "icon" => '<i class="menu-icon tf-icons bx bx-group"></i>',
+            'route' => 'laporan-pelanggan.index',
             'permissions' => null
         ],
     ],

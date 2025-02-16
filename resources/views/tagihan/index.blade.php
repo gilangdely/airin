@@ -1,29 +1,18 @@
 <x-layout.app title="Tagihan" activeMenu="tagihan" :withError="true">
     <div class="my-5 container-fluid">
-        <x-breadcrumb title="Tagihan" :breadcrumbs="[
-            ['label' => 'Dashboard', 'url' => url('/')],
-            ['label' => 'Tagihan'],
-        ]" />
-        
+        <x-breadcrumb title="Tagihan" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Tagihan']]" />
+
         <div class="card">
             <div class="card-header">
                 <div class="row g-3 justify-content-between align-items-center">
-                                        
+
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="input-group">
-                            <input 
-                                type="text" 
-                                name="search" 
-                                class="form-control"
-                                placeholder="Cari tagihan..."
-                                value="{{ old('search', request('search')) }}"
-                                hx-get="{{ route('tagihan.index') }}"
-                                hx-trigger="keyup[keyCode==13], keyup changed delay:500ms"
-                                hx-target="#tagihan-table"
-                                hx-push-url="true"
-                                hx-indicator="#search-loading"
-                                hx-include="#filter-checkboxes input:checked"
-                            >
+                            <input type="text" name="search" class="form-control" placeholder="Cari tagihan..."
+                                value="{{ old('search', request('search')) }}" hx-get="{{ route('tagihan.index') }}"
+                                hx-trigger="keyup[keyCode==13], keyup changed delay:500ms" hx-target="#tagihan-table"
+                                hx-push-url="true" hx-indicator="#search-loading"
+                                hx-include="#filter-checkboxes input:checked">
 
                             <button class="btn btn-outline-secondary dropdown-toggle" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
@@ -41,7 +30,7 @@
                                         <div class="mx-2 form-check">
                                             <x-input.checkbox class="form-check-input" id="checkbox-{{ $column }}"
                                                 name="col[]" value="{{ $column }}" :checked="in_array($column, $selectedColumns)"
-                                                parentId="checkbox-all" />                                        
+                                                parentId="checkbox-all" />
                                             <label class="form-check-label" for="checkbox-{{ $column }}">
                                                 {{ str()->title(str()->replace('_', ' ', $column)) }}
                                             </label>
