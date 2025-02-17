@@ -39,7 +39,11 @@
                                             ],
                                             [
                                                 'title' => 'NO. METERAN',
-                                                'value' => 'nomor_meteran',
+                                                'class' => 'raw',
+                                                'formatters' => ['raw'],
+                                                'value' => function ($row) {
+                                                    return $row->nomor_meteran;
+                                                },
                                             ],
                                             [
                                                 'title' => 'NAMA PELANGGAN',
