@@ -176,7 +176,7 @@
                                     </span>
                                     <h5 class="card-title mt-3">Chat untuk info</h5>
                                     <p class="card-text">Ada pertanyaan tanyakan saja pada kami.</p>
-                                    <a href="https://wa.me/6288806946074" class="btn btn-primary">+6288-0694-6074</a>
+                                    <a href="https://wa.me/6288806946074" class="btn btn-primary">Mulai bertanya</a>
                                 </div>
                             </div>
                         </div>
