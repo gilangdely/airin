@@ -5,39 +5,42 @@
         <x-layout.guest.navbar />
 
         <!-- Content wrapper -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="padding-top: 6rem;">
 
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
 
                 <!-- Hero -->
-                <section class="my-5 py-5 rounded-1 hero section"
-                    style="min-height: 30vh; background: rgba(255, 255, 255, 0.5);">
-                    <div class="container text-center">
-                        <h2 class="text-primary fw-extrabold" style="line-height: 3.8rem;">Airin – Bayar & Kelola
-                            Tagihan Air Jadi Lebih Praktis!</h2>
-                        <p class="fs-5 mt-4 mb-4">Kelola air dengan mudah dan efisien menggunakan sistem otomatis kami!
-                            Pantau konsumsi air real-time, dapatkan tagihan transparan, dan bayar dengan cepat tanpa
-                            ribet. Hemat waktu, kurangi pemborosan, dan nikmati kontrol penuh atas penggunaan air Anda.
-                            Mulai hidup lebih praktis dan hemat bersama kami solusi pintar untuk kebutuhan air
-                            sehari-hari!</p>
-                        <div class="landing-hero-btn">
-                            <a href="{{ route('login') }}" class="btn btn-primary btn-md">Coba Sekarang!</a>
+                <section class="px-4 py-5 my-5 text-center">
+                    <div class="container">
+                        <h1 class="fw-extrabold title" style="color: #161b2c">
+                            Revolusi Baru <br>
+                            <span class="text-gradient">Pembayaran dan Pengelolaan Air</span>
+                        </h1>
+                        <div class="col-lg-6 mx-auto mt-7">
+                            <p class="lead mb-4">
+                                Nikmati pengalaman mudah, aman, dan instan dalam mengelola air. Pantau,
+                                bayar, dan kendalikan penggunaan air dengan efisiensi maksimal serta integrasi layanan
+                                pintar untuk kemudahan sehari-hari.
+                            </p>
+                        </div>
+                        <div class="justify-content-center mt-8">
+                            <a href="{{ route('login') }}" class="btn-gradient btn-lg px-6">Mulai Sekarang</a>
                         </div>
                     </div>
                 </section>
                 <!-- End Hero -->
 
                 <!-- Features -->
-                <section style="margin-top: 3rem;">
-                    <h3 class="text-primary fw-bold text-center">Kenapa memilih airin?</h3>
-                    <div class="row align-items-center" style="rgba(255, 255, 255, 0.5);">
+                <section style="margin-top: 3.8rem;">
+                    <div class="row align-items-center">
+                        <!-- Card 1 - Tagihan Transparan -->
                         <div class="col-md-4 mb-4 feature-card">
-                            <div class="card h-100 shadow-sm">
+                            <div class="card h-100 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
                                 <div class="card-body">
                                     <p class="text-start card-title mb-4">
-                                        <i
-                                            class="text-success bi bi-cash-stack rounded h4 bg-success px-3 py-2 rounded bg-opacity-25 border border-success border-opacity-50 me-4"></i>
+                                        <i class="bi bi-wallet2 rounded h4 text-white px-3 py-2 me-4"
+                                            style="background: linear-gradient(45deg, #28a745, #81c784);"></i>
                                         <span class="h5 fw-bold">Tagihan Transparan</span>
                                     </p>
                                     <p class="card-text text-start">Sistem kami mencatat penggunaan air secara akurat,
@@ -45,37 +48,40 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Card 2 - Monitoring Real-time -->
                         <div class="col-md-4 mb-4 feature-card">
-                            <div class="card h-100 shadow-sm">
+                            <div class="card h-100 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
                                 <div class="card-body">
                                     <p class="text-start card-title mb-4">
-                                        <i
-                                            class="text-danger bi bi-clock rounded h4 bg-danger px-3 py-2 rounded bg-opacity-25 border border-danger border-opacity-50 me-4"></i>
+                                        <i class="bi bi-clock rounded h4 text-white px-3 py-2 me-4"
+                                            style="background: linear-gradient(45deg, #ff6f61, #f8d7da);"></i>
                                         <span class="h5 fw-bold">Monitoring Real-time</span>
                                     </p>
                                     <p class="card-text text-start">Pantau penggunaan air secara real-time dan terima
                                         notifikasi instan untuk setiap perubahan, memberi Anda kendali penuh atas
-                                        konsumsi
-                                        air.</p>
+                                        konsumsi air.</p>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Card 3 - Layanan Responsif -->
                         <div class="col-md-4 mb-4 feature-card">
-                            <div class="card h-100 shadow-sm">
+                            <div class="card h-100 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
                                 <div class="card-body">
                                     <p class="text-start card-title mb-4">
-                                        <i
-                                            class="text-warning bi bi-lightning-charge rounded h4 bg-warning px-3 py-2 rounded bg-opacity-25 border border-warning border-opacity-50 me-4"></i>
+                                        <i class="bi bi-lightning-charge rounded h4 text-white px-3 py-2 me-4"
+                                            style="background: linear-gradient(45deg, #ffc107, #ff9800);"></i>
                                         <span class="h5 fw-bold">Layanan Responsif</span>
                                     </p>
                                     <p class="card-text text-start">Kami menyediakan layanan cepat dan responsif,
-                                        memastikan
-                                        setiap kebutuhan pelanggan ditangani dengan segera dan efektif.</p>
+                                        memastikan setiap kebutuhan pelanggan ditangani dengan segera dan efektif.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+                <!-- End Features -->
 
                 <!-- Testimonials -->
                 <section class="mt-8">
@@ -199,11 +205,11 @@
                 <!-- End Contact -->
 
                 <!-- Our Team -->
-                <section id="our-team" class="container mt-5" data-aos="fade-up" data-aos-duration="1200">
+                <section id="our-team" class="container mt-5" data-aos="fade-up" data-aos-duration="1000">
                     <h3 class="text-primary fw-bold my-5 text-center">Tim Kami</h3>
                     <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
                         <!-- Card 1 -->
-                        <div class="col">
+                        <div class="col" data-aos="fade-up" data-aos-duration="1400">
                             <div class="card h-100 shadow-sm position-relative team-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Firman.jpg"
@@ -212,18 +218,21 @@
                                     <h5 class="card-title mt-5 pt-5">Firman Zamzami</h5>
                                     <p class="card-text text-muted">Team Leader</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
-                                        <a href="https://github.com/GwFirman" class="text-decoration-none social-icon"><i
+                                        <a href="https://github.com/GwFirman" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://gwfirman.my.id/" class="text-decoration-none social-icon"><i
+                                        <a href="https://gwfirman.my.id/" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-globe fs-5 text-globe"></i></a>
-                                        <a href="https://www.instagram.com/gw_firman/?hl=id" class="text-decoration-none social-icon"><i
+                                        <a href="https://www.instagram.com/gw_firman/?hl=id" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 2 -->
-                        <div class="col">
+                        <div class="col" data-aos="fade-up" data-aos-duration="1800">
                             <div class="card h-100 shadow-sm position-relative team-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Gilang.png"
@@ -232,18 +241,21 @@
                                     <h5 class="card-title mt-5 pt-5">Gilang Dely</h5>
                                     <p class="card-text text-muted">Creative Director</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
-                                        <a href="https://github.com/gilangdely" class="text-decoration-none social-icon"><i
+                                        <a href="https://github.com/gilangdely" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://wa.me/6282133781736" class="text-decoration-none social-icon"><i
+                                        <a href="https://wa.me/6282133781736" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-whatsapp fs-5 text-whatsapp"></i></a>
-                                        <a href="https://www.instagram.com/gilang.dm/?hl=id" class="text-decoration-none social-icon"><i
+                                        <a href="https://www.instagram.com/gilang.dm/?hl=id" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 3 -->
-                        <div class="col">
+                        <div class="col" data-aos="fade-up" data-aos-duration="2200">
                             <div class="card h-100 shadow-sm position-relative team-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Fauzan.jpg"
@@ -252,18 +264,21 @@
                                     <h5 class="card-title mt-5 pt-5">Akhmad Fauzan</h5>
                                     <p class="card-text text-muted">Software Engineer</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
-                                        <a href="https://github.com/ozan-fn" class="text-decoration-none social-icon"><i
+                                        <a href="https://github.com/ozan-fn" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://ozan.my.id" class="text-decoration-none social-icon"><i
+                                        <a href="https://ozan.my.id" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-globe fs-5 text-globe"></i></a>
-                                        <a href="https://www.instagram.com/ozan.fn/?hl=id" class="text-decoration-none social-icon"><i
+                                        <a href="https://www.instagram.com/ozan.fn/?hl=id" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 4 -->
-                        <div class="col">
+                        <div class="col" data-aos="fade-up" data-aos-duration="2600">
                             <div class="card h-100 shadow-sm position-relative team-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Dodo.jpg"
@@ -272,16 +287,18 @@
                                     <h5 class="card-title mt-5 pt-5">Afridho Zaki</h5>
                                     <p class="card-text text-muted">Software Engineer</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
-                                        <a href="https://github.com/dhodo999" class="text-decoration-none social-icon"><i
+                                        <a href="https://github.com/dhodo999" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://www.instagram.com/dhoodo.69/?hl=id" class="text-decoration-none social-icon"><i
+                                        <a href="https://www.instagram.com/dhoodo.69/?hl=id" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Card 5 -->
-                        <div class="col">
+                        <div class="col" data-aos="fade-up" data-aos-duration="3000">
                             <div class="card h-100 shadow-sm position-relative team-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Iyan.jpg"
@@ -290,9 +307,11 @@
                                     <h5 class="card-title mt-5 pt-5">Muhammad Agus</h5>
                                     <p class="card-text text-muted">Designer Ui/Ux</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
-                                        <a href="https://github.com/Astha4Study" class="text-decoration-none social-icon"><i
+                                        <a href="https://github.com/Astha4Study" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://www.instagram.com/rheiyn._/?hl=id" class="text-decoration-none social-icon"><i
+                                        <a href="https://www.instagram.com/rheiyn._/?hl=id" target="_blank"
+                                            class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
                                     </div>
                                 </div>
