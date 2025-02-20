@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -29,37 +30,40 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Meteran extends Model
 {
-	protected $table = 'meteran';
-	protected $primaryKey = 'nomor_meteran';
+    use HasFactory;
 
-	protected $casts = [
-		'nomor_meteran' => 'int',
-		'id_layanan' => 'int',
-		'tanggal_pemasangan' => 'datetime',
-		'status' => 'bool'
-	];
+    protected $table = 'meteran';
+    protected $primaryKey = 'nomor_meteran';
 
-	protected $fillable = [
-		'nomor_meteran',
-		'id_pelanggan',
-		'id_layanan',
-		'lokasi_pemasangan',
-		'tanggal_pemasangan',
-		'status',
-		'chip_kartu'
-	];
+    protected $casts = [
+        'nomor_meteran' => 'int',
+        'id_layanan' => 'int',
+        'tanggal_pemasangan' => 'datetime',
+        'status' => 'bool'
+    ];
 
-	public function layanan()
-	{
-		return $this->belongsTo(Layanan::class, 'id_layanan');
-	}
+    protected $fillable = [
+        'nomor_meteran',
+        'id_pelanggan',
+        'id_layanan',
+        'lokasi_pemasangan',
+        'tanggal_pemasangan',
+        'status',
+        'chip_kartu'
+    ];
 
-	public function pelanggan()
-	{
-		return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
-	}
+    public function layanan()
+    {
+        return $this->belongsTo(Layanan::class, 'id_layanan');
+    }
 
-	public function tagihan(){
-		return $this->hasMany(Tagihan::class, 'nomor_meteran');
-	}
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
+    }
+
+    public function tagihan()
+    {
+        return $this->hasMany(Tagihan::class, 'nomor_meteran');
+    }
 }

@@ -64,7 +64,7 @@ class LayananController extends Controller implements HasMiddleware
     public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            	'nama_layanan' => 'required|string|max:25',
+            	'nama_layanan' => 'required|string|max:50',
         ]);
 
         try {
@@ -94,7 +94,7 @@ class LayananController extends Controller implements HasMiddleware
     public function update(Request $request, Layanan $layanan): RedirectResponse
     {
         $validatedData = $request->validate([
-            	'nama_layanan' => 'required|string|max:25',
+            	'nama_layanan' => 'required|string|max:50',
         ]);
 
         try {

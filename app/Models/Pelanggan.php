@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,25 +24,27 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pelanggan extends Model
 {
-	protected $table = 'pelanggan';
-	protected $primaryKey = 'id_pelanggan';
-	public $incrementing = false;
-	public $timestamps = false;
+    use HasFactory;
 
-	protected $casts = [
-		'status' => 'bool'
-	];
+    protected $table = 'pelanggan';
+    protected $primaryKey = 'id_pelanggan';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $fillable = [
-		'id_pelanggan',
-		'nama_pelanggan',
-		'no_ktp',
-		'alamat',
-		'no_hp',
-		'status'
-	];
+    protected $casts = [
+        'status' => 'bool'
+    ];
 
-	protected static function boot()
+    protected $fillable = [
+        'id_pelanggan',
+        'nama_pelanggan',
+        'no_ktp',
+        'alamat',
+        'no_hp',
+        'status'
+    ];
+
+    protected static function boot()
     {
         parent::boot();
 
@@ -50,7 +53,7 @@ class Pelanggan extends Model
         });
     }
 
-	public static function generateId()
+    public static function generateId()
     {
         $latest = DB::table('pelanggan')->lockForUpdate()->latest('id_pelanggan')->first();
         if (!$latest) {
@@ -62,7 +65,13 @@ class Pelanggan extends Model
         return 'PLG' . str_pad($number, 4, '0', STR_PAD_LEFT);
     }
 
-	public function pemakaian(){
-		return $this->hasMany(Pemakaian::class, 'id_pelanggan','id_pelanggan');
-	}
+    public function pemakaian()
+    {
+        return $this->hasMany(Pemakaian::class, 'id_pelanggan', 'id_pelanggan');
+    }
+
+    public function meterans()
+    {
+        return $this->hasMany(Meteran::class, 'id_pelanggan');
+    }
 }
