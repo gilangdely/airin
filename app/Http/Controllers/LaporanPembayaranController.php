@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
-use App\Models\DetailPembayaran;
 use Illuminate\Http\Request;
 use Woo\GridView\DataProviders\EloquentDataProvider;
+use App\Models\DetailPembayaran;
 
 class LaporanPembayaranController extends Controller
 {
@@ -16,7 +15,13 @@ class LaporanPembayaranController extends Controller
             ->join("meteran", "meteran.nomor_meteran", "=", "pembayaran.nomor_meteran")
             ->join("layanan", "meteran.id_layanan", "=", "layanan.id_layanan")
             ->join("pelanggan", "pelanggan.id_pelanggan", "=", "meteran.id_pelanggan")
-            ->select("pembayaran.*", "tagihan.*", "meteran.*", "pelanggan.*", "layanan.*");
+            ->select(
+                "pembayaran.*",
+                // "meteran.*",
+                "pelanggan.*",
+                "layanan.*"
+            );
+
         $dataProvider = new EloquentDataProvider($query);
         $perPage = 15;
 
