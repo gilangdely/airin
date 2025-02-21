@@ -61,24 +61,20 @@ $nav = [
             'permissions' => ['meteran view']
         ],
     ],
-    "Misc" => [
+    "Settings" => [
         [
-            "title" => "Manajemen Users",
-            "icon" => '<i class="menu-icon tf-icons bx bx-lock-open-alt"></i>',
-            "submenus" => [
-                [
-                    'title' => 'Users',
-                    'route' => 'users.index',
-                    'permissions' => ['user view']
-                ],
-                [
-                    'title' => 'Roles',
-                    'route' => 'roles.index',
-                    'permissions' => ['role & permission view']
-                ],
-            ],
+            "title" => "User",
+            "icon" => '<i class="menu-icon tf-icons bx bx-group"></i>',
+            'route' => 'users.index',
+            'permissions' => ['user view']
         ],
-    ]
+        [
+            "title" => "Roles & Permissions",
+            "icon" => '<i class="menu-icon tf-icons bx bx-shield-quarter"></i>',
+            'route' => 'roles.index',
+            'permissions' => ['role & permission view']
+        ],
+    ],
 ];
 
 return $nav;

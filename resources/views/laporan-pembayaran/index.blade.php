@@ -39,7 +39,7 @@
                                             ],
                                             [
                                                 'title' => 'NO. METERAN',
-                                                'value' => 'nomor_meteran',
+                                                'value' => 'meteran.nomor_meteran',
                                             ],
                                             [
                                                 'title' => 'NAMA PELANGGAN',
