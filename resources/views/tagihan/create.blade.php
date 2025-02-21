@@ -117,4 +117,34 @@
             </div>
         </div>
     </div>
+
+@push('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let today = new Date();
+        let firstDay = new Date(today.getFullYear(), today.getMonth(), 1); // Tanggal 1 bulan ini
+        let lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0); // Tanggal terakhir bulan ini
+        
+        flatpickr("#waktu_awal", {
+            dateFormat: "Y-m-d",
+            minDate: firstDay, // Tanggal 1 bulan ini
+            maxDate: lastDay,  // Tanggal terakhir bulan ini
+            onChange: function(selectedDates, dateStr, instance) {
+                let tglAkhirPicker = document.querySelector("#waktu_akhir")._flatpickr;
+                if (tglAkhirPicker) {
+                    tglAkhirPicker.set("minDate", dateStr); // waktu_akhir tidak boleh kurang dari waktu_awal
+                }
+            }
+        });
+
+        flatpickr("#waktu_akhir", {
+            dateFormat: "Y-m-d",
+            minDate: firstDay, // Default minDate = tanggal 1 bulan ini
+            maxDate: lastDay,  // Tanggal terakhir bulan ini
+        });
+
+    });
+</script>
+
+@endpush
 </x-layout.app>

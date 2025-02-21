@@ -6,7 +6,8 @@
             <select class="select2 form-select" name="id_pelanggan" aria-label="Default select example">
                 <option>Pilih pelanggan</option>
                 @foreach ($pelanggans as $pelanggan)
-                    <option value="{{ $pelanggan->id_pelanggan }}">
+                    <option value="{{ $pelanggan->id_pelanggan }}"
+                        {{ $meteran->id_pelanggan == $pelanggan->id_pelanggan ? 'selected' : '' }}>
                         {{ $pelanggan->id_pelanggan . ' - ' . $pelanggan->nama_pelanggan }}</option>
                 @endforeach
             </select>
@@ -28,7 +29,8 @@
             <select class="select2 form-select" name="id_layanan" aria-label="Default select example">
                 <option>Pilih layanan</option>
                 @foreach ($layanans as $layanan)
-                    <option value="{{ $layanan->id_layanan }}">
+                    <option value="{{ $layanan->id_layanan }}"
+                        {{ $meteran->id_layanan == $layanan->id_layanan ? 'selected' : '' }}>
                         {{ $layanan->id_layanan . ' - ' . $layanan->nama_layanan }}
                     </option>
                 @endforeach
@@ -52,7 +54,7 @@
             <label for="tanggal_pemasangan" class="form-label">Tanggal Pemasangan</label>
             <input type="date" name="tanggal_pemasangan"
                 class="form-control {{ $errors->has('tanggal_pemasangan') ? 'is-invalid' : '' }}"
-                id="tanggal_pemasangan" value="{{ old('tanggal_pemasangan', $meteran?->tanggal_pemasangan) }}"
+                id="tanggal_pemasangan" value="{{ old('tanggal_pemasangan', date('Y-m-d',strtotime($meteran?->tanggal_pemasangan))) }}"
                 placeholder="Masukkan Tanggal Pemasangan" />
             @error('tanggal_pemasangan')
                 <small class="invalid-feedback">{{ $message }}</small>

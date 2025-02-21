@@ -77,7 +77,7 @@ class KriteriaLayananController extends Controller implements HasMiddleware
         return redirect()->route('layanan.show',$request->id_layanan)
             ->with('success', 'Kriteria Layanan berhasil dibuat');
     }
-
+ 
     public function show(KriteriaLayanan $kriteriaLayanan): View
     {
         return view('kriteria-layanan.show', compact('kriteriaLayanan'));
