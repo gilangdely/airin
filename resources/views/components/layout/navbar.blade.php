@@ -29,29 +29,29 @@
         @php
             $navConfig = config('navigation', []);
             $currentGroup = '';
+
         @endphp
 
         @foreach ($navConfig as $group => $menus)
-            @if ($group != $currentGroup)
-                <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">{{ $group }}</span>
-                </li>
+            @php
+                $permissionsGroup = collect($menus)->pluck('permissions')->flatten()->toArray();
+            @endphp
+            @if (auth()->user()->canAny($permissionsGroup))
+                @if ($group != $currentGroup)
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">{{ $group }}</span>
+                    </li>
+                @endif
             @endif
 
             @foreach ($menus as $menu)
                 @if (isset($menu['submenus']))
                     @php
-                        $submenuPermission = collect($menu['submenus'])
-                            ->pluck('permissions')
-                            ->flatten()
-                            ->toArray();
+                        $submenuPermission = collect($menu['submenus'])->pluck('permissions')->flatten()->toArray();
                     @endphp
                     @if ($submenuPermission || is_null($submenuPermission))
                         <li
-                            class="menu-item {{ in_array(
-                                request()->route()->getName(),
-                                collect($menu['submenus'])->pluck('route')->toArray(),
-                            )
+                            class="menu-item {{ in_array(request()->route()->getName(), collect($menu['submenus'])->pluck('route')->toArray())
                                 ? 'active open'
                                 : '' }}">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">

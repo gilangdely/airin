@@ -18,7 +18,7 @@ use \Illuminate\Routing\Controllers\HasMiddleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 use function Laravel\Prompts\error;
-
+ 
 class PemakaianController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
