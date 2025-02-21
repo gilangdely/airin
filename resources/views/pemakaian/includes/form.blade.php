@@ -42,3 +42,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth());
+
+    flatpickr("#bulan", {
+        plugins: [
+            new monthSelectPlugin({
+                shorthand: true,
+                dateFormat: "Y-m",
+                altFormat: "F Y",
+            })
+        ],
+        allowInput: true,
+        maxDate: maxDate
+    });
+</script>
