@@ -93,7 +93,9 @@ class MeteranController extends Controller implements HasMiddleware
 
     public function edit(Meteran $meteran): View
     {
-        return view('meteran.edit', compact('meteran'));
+        $pelanggans = Pelanggan::where('status',1)->get();
+        $layanans = Layanan::all();
+        return view('meteran.edit', compact('meteran','pelanggans','layanans'));
     }
 
     public function update(Request $request, Meteran $meteran): RedirectResponse
@@ -123,7 +125,7 @@ class MeteranController extends Controller implements HasMiddleware
         return redirect()->route('meteran.index')
             ->with('success', 'Meteran berhasil diperbarui');
     }
-
+ 
     public function destroy(Meteran $meteran): RedirectResponse
     {
         try {

@@ -3,7 +3,7 @@
         <x-breadcrumb title="Profile" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Profile']]" />
  
         <x-error-list />
-
+ 
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('profile') }}" method="POST" role="form">

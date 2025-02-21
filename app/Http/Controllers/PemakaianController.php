@@ -17,6 +17,8 @@ use Illuminate\Routing\Controllers\Middleware;
 use \Illuminate\Routing\Controllers\HasMiddleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
+use function Laravel\Prompts\error;
+
 class PemakaianController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
@@ -112,13 +114,13 @@ class PemakaianController extends Controller implements HasMiddleware
             'bulan' => 'required',
             'akhir' => 'required|integer',
         ]);
-        
+
         $nomor_meteran = $request->nomor_meteran;
         $inputbulan = $request->bulan;
 
         // cek apakah bulan yang diinputkan itu bukan bulan depan
         $currentDate = Carbon::now()->format('Y-m');
-        if($inputbulan > $currentDate){
+        if ($inputbulan > $currentDate) {
             return redirect()->back()
                 ->withInput($request->all())
                 ->with('error', 'Dilarang menginputkan pemakaian untuk bulan depan!.');
@@ -200,11 +202,16 @@ class PemakaianController extends Controller implements HasMiddleware
     public function update(Request $request, Pemakaian $pemakaian): RedirectResponse
     {
         $validatedData = $request->validate([
-            'id_meteran' => 'required|integer',
-            'bulan' => 'required|string|max:3',
-            'tahun' => 'required|string|max:4',
+            'nomor_meteran' => 'required|integer',
+            'bulan' => 'required|string',
+            // 'tahun' => 'required|string|max:4',
             'akhir' => 'required|integer',
         ]);
+
+        $carbon = Carbon::createFromFormat('Y-m', $request->get('bulan'));
+
+        $validatedData['bulan'] = $carbon->format('n');
+        $validatedData['tahun'] = $carbon->format('Y');
 
         $validatedData['updated_by'] = Auth::id();
         $validatedData['pakai'] = (intval($pemakaian->akhir) - intval($pemakaian->awal));
@@ -212,6 +219,7 @@ class PemakaianController extends Controller implements HasMiddleware
         try {
             $pemakaian->update($validatedData);
         } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('error', $e->getMessage());
             if ($e->getCode() == '23000') {
                 return redirect()->back()
                     ->withInput($request->all())

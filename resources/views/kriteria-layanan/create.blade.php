@@ -18,7 +18,7 @@
 
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary me-2">Tambah</button>
-                        <a href="{{ route('kriteria-layanan.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('layanan.show',$id_layanan) }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </form>
             </div>
