@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaLayananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
@@ -27,9 +28,9 @@ Route::middleware('guest')->group(function () {
  * Perlu login untuk mengakses
  */
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('layanan', LayananController::class);
@@ -99,4 +100,6 @@ Route::middleware('auth')->group(function () {
     Route::get('laporan-pelanggan', [LaporanPelangganController::class, 'index'])->name('laporan-pelanggan.index');
 
     Route::get('/rekap', [RekapPembayaran::class, 'index'])->name('rekap.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/tunggakan/{id}', [DashboardController::class, 'showTunggakan'])->name('tunggakan.show');
 });
