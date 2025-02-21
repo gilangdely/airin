@@ -131,6 +131,12 @@
             color: #1e90ff;
         }
 
+        .testimoni-text-gradient {
+            background: linear-gradient(90deg, #1e90ff, #9370db);
+            background-clip: text;
+            color: transparent;
+        }
+
         .feature-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -142,6 +148,9 @@
         .team-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .team-card:hover {
@@ -151,6 +160,10 @@
 
         .team-card .card-body {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .team-card .card-title {
@@ -165,6 +178,9 @@
         .team-card .rounded-circle {
             border: 4px solid #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
         }
 
         .team-card .social-icon {
@@ -179,22 +195,239 @@
             margin: 0 -10px;
         }
 
-        @media (max-width: 991.98px) {
-            .col {
-                margin-top: 4.5rem !important;
+        .gilang-card,
+        .fauzan-card,
+        .dodo-card,
+        .ian-card {
+            position: relative;
+        }
+
+        .footer {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        @keyframes ping {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
             }
         }
 
-        @media (min-width: 992px) {
-            .col {
-                margin-top: 3.5rem;
-            }
+        .animate-ping {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
 
-        @media (max-width: 728px) {
+        .accordion-button {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+
+        .accordion-body {
+            padding: 1rem 1.25rem;
+        }
+
+        .btn-acordion-wa {
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            font-size: 14px;
+            background: linear-gradient(90deg, #34a853, #0f9d58);
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-acordion-wa:hover {
+            background: linear-gradient(90deg, #4caf50, #1db954);
+            color: #fff;
+        }
+
+        .btn-acordion-gm {
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            font-size: 14px;
+            background: linear-gradient(90deg, #1e90ff, #9370db);
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-acordion-gm:hover {
+            background: linear-gradient(90deg, #4aa8ff, #ab8cff);
+            color: #fff;
+        }
+
+        /* Tombol outline */
+        .btn-outline-primary {
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .fancy-line {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #007bff, rgba(0, 0, 0, 0), #8a2be2);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .fancy-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 5px;
+            background-color: #000;
+            border-radius: 5px;
+        }
+
+
+        /* Atur margin dan posisi card untuk layar kecil (mobile) */
+        @media (max-width: 767.98px) {
             .title {
                 font-size: 2rem;
                 line-height: 2.5rem;
+            }
+
+            .gilang-card {
+                top: 30px;
+            }
+
+            .fauzan-card {
+                top: 60px;
+            }
+
+            .dodo-card {
+                top: 90px;
+            }
+
+            .ian-card {
+                top: 120px;
+            }
+
+            .col {
+                margin-top: 2rem !important;
+            }
+
+            .team-card .card-body {
+                padding: 1rem;
+            }
+
+            .team-card .rounded-circle {
+                width: 100px;
+                height: 100px;
+            }
+
+            /* Gaya dasar untuk tombol */
+            .btn-acordion-wa {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                margin-top: 8px;
+            }
+
+            .btn-acordion-gm {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                margin-top: 8px;
+            }
+
+            .footer {
+                top: 2rem;
+                padding: 1.5rem 0;
+            }
+
+            .footer p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Atur margin kolom untuk layar medium (tablet) */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .title {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+
+            .col {
+                margin-top: 2rem;
+            }
+
+            .team-card .card-body {
+                padding: 1.25rem;
+            }
+
+            .team-card .rounded-circle {
+                width: 110px;
+                height: 110px;
+            }
+        }
+
+        /* Atur margin kolom untuk layar besar (desktop) */
+        @media (min-width: 992px) {
+            .title {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+
+            .col {
+                margin-top: 2rem;
+            }
+
+            .team-card .card-body {
+                padding: 1.5rem;
+            }
+
+            .team-card .rounded-circle {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* Penyesuaian tambahan untuk layar sangat kecil (mobile kecil) */
+        @media (max-width: 576px) {
+            .title {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+
+            .team-card .card-body {
+                padding: 0.75rem;
+            }
+
+            .team-card .rounded-circle {
+                width: 90px;
+                height: 90px;
+            }
+
+            .footer {
+                top: 5rem;
             }
         }
     </style>

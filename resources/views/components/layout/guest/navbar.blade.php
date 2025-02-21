@@ -23,7 +23,7 @@
                 <a class="nav-link fw-medium collapsed" href="{{ url('/') }}">Home</a>
             </li>
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
-                <a class="nav-link fw-medium collapsed" href="#contact-us">Contact Us</a>
+                <a class="nav-link fw-medium collapsed" href="#FAQ">Info</a>
             </li>
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
                 <a class="nav-link fw-medium collapsed" href="#our-team">Team</a>
