@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::put('tagihan/{tagihan}', [TagihanController::class, 'update'])->name('tagihan.update');
     Route::delete('tagihan/{tagihan}', [TagihanController::class, 'destroy'])->name('tagihan.destroy');
 
+    Route::get('meteran/cetakkartu/{meteran}',[MeteranController::class, 'cetakkartu'])->name('meteran.cetakkartu');
     Route::get('meteran', [MeteranController::class, 'index'])->name('meteran.index');
     Route::get('meteran/create', [MeteranController::class, 'create'])->name('meteran.create');
     Route::post('meteran', [MeteranController::class, 'store'])->name('meteran.store');

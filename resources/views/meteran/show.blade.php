@@ -14,9 +14,9 @@
                     </a>
 
                     <div>
-                        {{-- <a href="#" class="btn btn-sm btn-success">
-                            <i class='bx bx-credit-card me-1'></i> Mapping
-                        </a> --}}
+                        <a href="{{ route('meteran.cetakkartu',$meteran) }}" class="btn btn-sm btn-success">
+                            <i class='bx bx-credit-card me-1'></i> Buat Kartu
+                        </a>
                         <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                             data-bs-target="#modalMapping">
                             <i class='bx bx-credit-card me-1'></i> Mapping
@@ -48,15 +48,15 @@
                 <form class="row g-3">
 
                     <div class="col-md-4">
-                        <label for="first-name-horizontal">Id Pelanggan</label>
+                        <label for="first-name-horizontal">Pelanggan</label>
                     </div>
-                    <div class="col-md-8 form-group">: {{ $meteran->id_pelanggan }}</div>
+                    <div class="col-md-8 form-group">: {{ $meteran->pelanggan->nama_pelanggan }}</div>
                     <div class="col-md-4">
                         <label for="first-name-horizontal">Nomor Meteran</label>
                     </div>
                     <div class="col-md-8 form-group">: {{ $meteran->nomor_meteran }}</div>
                     <div class="col-md-4">
-                        <label for="first-name-horizontal">Id Layanan</label>
+                        <label for="first-name-horizontal">Layanan</label>
                     </div>
                     <div class="col-md-8 form-group">: {{ $meteran->layanan->nama_layanan }}</div>
                     <div class="col-md-4">
@@ -66,7 +66,7 @@
                     <div class="col-md-4">
                         <label for="first-name-horizontal">Tanggal Pemasangan</label>
                     </div>
-                    <div class="col-md-8 form-group">: {{ $meteran->tanggal_pemasangan }}</div>
+                    <div class="col-md-8 form-group">: {{ date('d-M-Y',strtotime($meteran->tanggal_pemasangan)) }}</div>
                     <div class="col-md-4">
                         <label for="first-name-horizontal">Status</label>
                     </div>
