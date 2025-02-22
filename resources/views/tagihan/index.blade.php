@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-2">
                         <a href="{{ route('tagihan.cekkartumeteran') }}" class="btn btn-primary">
-                            Cek Tagihan Kartu
+                            <i class='bx bx-credit-card'></i> Pembayaran Tagihan
                         </a>
                     </div>
                 </div>
