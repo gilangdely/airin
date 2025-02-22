@@ -7,7 +7,6 @@ use App\Models\DetailPembayaran;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
-use App\Models\DetailPembayaran;
 
 class LaporanPembayaranController extends Controller implements HasMiddleware
 {

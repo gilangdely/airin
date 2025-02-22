@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header h4">{{ __('Dashboard') }}</div>
 
-            @role('Admin')
+            @role(['Admin', 'Kasir'])
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
