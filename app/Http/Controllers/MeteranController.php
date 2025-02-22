@@ -152,4 +152,9 @@ class MeteranController extends Controller implements HasMiddleware
         return redirect()->route('meteran.show', $nomor_meteran)
             ->with('success', 'Kartu berhasil dimapping!');
     }
+
+    public function cetakkartu(Meteran $meteran) {
+        
+        return view('meteran.cetakkartu');
+    }
 }

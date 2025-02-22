@@ -431,4 +431,15 @@ class TagihanController extends Controller implements HasMiddleware
             'rincian' => $rincianTagihan
         ];
     }
+
+    public function cekkartumeteran(){
+        return view('tagihan.cekkartumeteran');
+    }
+
+    public function proseskartumeteran(Request $request){
+        $nokartu = $request->rfid;
+        dd($request);
+        $meteran = Meteran::where('chip_kartu',$nokartu)->first();
+        return response()->json($meteran);
+    }
 }

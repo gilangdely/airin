@@ -5,6 +5,7 @@
                 <th>No</th>
                 
                     <th class="align-middle">Nomor Meteran</th>
+                    <th class="align-middle">Nama Pelanggan</th>
                     <th class="align-middle">Bulan</th>
                     <th class="align-middle">Tahun</th>
                     <th class="align-middle">Awal</th>
@@ -20,6 +21,7 @@
                     <td>{{ $loop->iteration + ($pemakaian->currentPage() - 1) * $pemakaian->perPage() }}</td>
                     
                     <td>{{ $row?->meteran->nomor_meteran }}</td>
+                    <td>{{ $row?->meteran->pelanggan->nama_pelanggan }}</td>
                     <td>{{ $row?->tblbulan->nama_bulan }}</td>
                     <td>{{ $row?->tahun }}</td>
                     <td>{{ $row?->awal }}</td>

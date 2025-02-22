@@ -9,7 +9,7 @@
                 <th class="align-middle">Nama Pelanggan</th>
                 <th class="align-middle">Nomor Meteran</th>
                 <th class="align-middle">Nominal</th>
-                <th class="align-middle">Status Tagihan</th>
+                {{-- <th class="align-middle">Status Tagihan</th> --}}
                 <th class="align-middle">Status Pembayaran</th>
                 <th class="text-center">Aksi</th>
             </tr>
@@ -24,13 +24,13 @@
                     <td>{{ $row?->pelanggan->nama_pelanggan }}</td>
                     <td>{{ $row?->meteran->nomor_meteran }}</td>
                     <td>{{ 'Rp ' . number_format($row?->nominal, 0, ',', '.') }}</td>
-                    <td>
+                    {{-- <td>
                         @if ($row?->status_tagihan == 1)
                             <span class="badge bg-label-success">Aktif</span>
                         @else
                             <span class="badge bg-label-danger">Tidak Aktif</span>
                         @endif
-                    </td>
+                    </td> --}}
                     <td>
                         @if ($row?->status_pembayaran == 1)
                             <span class="badge bg-label-success">Lunas</span>

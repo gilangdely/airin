@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaLayananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
@@ -27,9 +28,9 @@ Route::middleware('guest')->group(function () {
  * Perlu login untuk mengakses
  */
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('layanan', LayananController::class);
@@ -65,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::put('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'update'])->name('tarif-layanan.update');
     Route::delete('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'destroy'])->name('tarif-layanan.destroy');
 
+    Route::get('tagihan/cekkartumeteran', [TagihanController::class, 'cekkartumeteran'])->name('tagihan.cekkartumeteran');
+    Route::post('tagihan/proseskartumeteran', [TagihanController::class, 'proseskartumeteran'])->name('tagihan.proseskartumeteran');
     Route::get('tagihan/cektagihanpelanggan/{meteran}', [TagihanController::class, 'cektagihanpelanggan'])->name('tagihan.cektagihanpelanggan');
     Route::get('tagihan', [TagihanController::class, 'index'])->name('tagihan.index');
     Route::get('tagihan/create/{meteran}', [TagihanController::class, 'create'])->name('tagihan.create');
@@ -74,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::put('tagihan/{tagihan}', [TagihanController::class, 'update'])->name('tagihan.update');
     Route::delete('tagihan/{tagihan}', [TagihanController::class, 'destroy'])->name('tagihan.destroy');
 
+    Route::get('meteran/cetakkartu/{meteran}',[MeteranController::class, 'cetakkartu'])->name('meteran.cetakkartu');
     Route::get('meteran', [MeteranController::class, 'index'])->name('meteran.index');
     Route::get('meteran/create', [MeteranController::class, 'create'])->name('meteran.create');
     Route::post('meteran', [MeteranController::class, 'store'])->name('meteran.store');
@@ -99,4 +103,6 @@ Route::middleware('auth')->group(function () {
     Route::get('laporan-pelanggan', [LaporanPelangganController::class, 'index'])->name('laporan-pelanggan.index');
 
     Route::get('/rekap', [RekapPembayaran::class, 'index'])->name('rekap.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/tunggakan/{id}', [DashboardController::class, 'showTunggakan'])->name('tunggakan.show');
 });
