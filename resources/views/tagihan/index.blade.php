@@ -6,7 +6,7 @@
             <div class="card-header">
                 <div class="row g-3 justify-content-between align-items-center">
 
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-10 col-md-6 col-lg-4">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Cari tagihan..."
                                 value="{{ old('search', request('search')) }}" hx-get="{{ route('tagihan.index') }}"
@@ -39,6 +39,11 @@
                                 @endforeach
                             </ul>
                         </div>
+                    </div>
+                    <div class="col-2">
+                        <a href="{{ route('tagihan.cekkartumeteran') }}" class="btn btn-primary">
+                            Cek Tagihan Kartu
+                        </a>
                     </div>
                 </div>
             </div>

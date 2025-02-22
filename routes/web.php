@@ -66,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::put('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'update'])->name('tarif-layanan.update');
     Route::delete('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'destroy'])->name('tarif-layanan.destroy');
 
+    Route::get('tagihan/cekkartumeteran', [TagihanController::class, 'cekkartumeteran'])->name('tagihan.cekkartumeteran');
+    Route::post('tagihan/proseskartumeteran', [TagihanController::class, 'proseskartumeteran'])->name('tagihan.proseskartumeteran');
     Route::get('tagihan/cektagihanpelanggan/{meteran}', [TagihanController::class, 'cektagihanpelanggan'])->name('tagihan.cektagihanpelanggan');
     Route::get('tagihan', [TagihanController::class, 'index'])->name('tagihan.index');
     Route::get('tagihan/create/{meteran}', [TagihanController::class, 'create'])->name('tagihan.create');

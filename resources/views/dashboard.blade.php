@@ -208,7 +208,7 @@
             @else
                 <div class="card-body">
                     <p>
-                        Selamat datang User.
+                        Selamat datang <b>{{ auth()->user()->name; }}</b>.
                     </p>
                 </div>
             @endrole
