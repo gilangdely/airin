@@ -37,10 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('pemakaian/cekmeteran', [PemakaianController::class, 'cekmeteran'])->name('pemakaian.cekmeteran');
     Route::post('pemakaian/storecekmeteran', [PemakaianController::class, 'storecekmeteran'])->name('pemakaian.storecekmeteran');
-    // Route::resource('pemakaian', PemakaianController::class);
-    // Route::resource('pembayaran', PembayaranController::class);
-    // Route::resource('kriteria-layanan', KriteriaLayananController::class);
-    // Route::resource('tarif-layanan', TarifLayananController::class);
+    Route::post('pemakaian/storecekchipkartu', [PemakaianController::class, 'storecekchipkartu'])->name('pemakaian.storecekchipkartu');
 
     Route::get('pemakaian', [PemakaianController::class, 'index'])->name('pemakaian.index');
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create'])->name('pemakaian.create');
