@@ -15,7 +15,7 @@
                     <div class="container">
                         <h1 class="fw-extrabold title" style="color: #161b2c">
                             Revolusi Baru <br>
-                            <span class="text-gradient">Pembayaran dan Pengelolaan Air</span>
+                            <span class="text-gradient">Pembayaran dan Pengelolaan Airs</span>
                         </h1>
                         <div class="col-lg-6 mx-auto mt-7">
                             <p class="lead mb-4">
