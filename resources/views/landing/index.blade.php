@@ -137,7 +137,7 @@
                                                 <hr class="flex-grow-1"
                                                     style="border: 1px solid #8a2be2; margin: 0 10px;">
                                                 <p class="lh-sm mb-0 text-nowrap testimoni-text-gradient"
-                                                    style="font-weight: 600; font-size: 1.1rem;">Dika Kopling</p>
+                                                    style="font-weight: 600; font-size: 1.1rem;">Viki Mahardika</p>
                                                 <hr class="flex-grow-1"
                                                     style="border: 1px solid #8a2be2; margin: 0 10px;">
                                             </div>

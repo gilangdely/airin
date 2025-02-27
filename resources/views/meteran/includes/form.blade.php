@@ -54,7 +54,8 @@
             <label for="tanggal_pemasangan" class="form-label">Tanggal Pemasangan</label>
             <input type="date" name="tanggal_pemasangan"
                 class="form-control {{ $errors->has('tanggal_pemasangan') ? 'is-invalid' : '' }}"
-                id="tanggal_pemasangan" value="{{ old('tanggal_pemasangan', date('Y-m-d',strtotime($meteran?->tanggal_pemasangan))) }}"
+                id="tanggal_pemasangan"
+                value="{{ old('tanggal_pemasangan', isset($meteran->tanggal_pemasangan) ? $meteran->tanggal_pemasangan : date('Y-m-d')) }}"
                 placeholder="Masukkan Tanggal Pemasangan" />
             @error('tanggal_pemasangan')
                 <small class="invalid-feedback">{{ $message }}</small>
