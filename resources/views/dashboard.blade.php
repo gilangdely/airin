@@ -87,7 +87,17 @@
                         <div class="tab-content">
                             <div class="tab-pane show  active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="table-responsive">
-                                    <h5 class="card-header">Daftar tunggakan pemakaian</h5>
+                                    <div class="row justify-content-between align-items-center g-2">
+                                        <div class="col">
+                                            <h5 class="card-header">Daftar tunggakan</h5>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ route('pemakaian.index') }}"
+                                                class="btn btn-primary btn-sm float-end">
+                                                Lihat pemakaian
+                                            </a>
+                                        </div>
+                                    </div>
                                     <table class="table table-striped" id="data-table" style="height: 100px;">
                                         <thead>
                                             <tr>
@@ -141,6 +151,19 @@
                             </div>
                             <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="table-responsive">
+                                    <div class="row justify-content-between align-items-center g-2">
+                                        <div class="col">
+                                            <h5 class="card-header">Daftar pembayaran terakhir</h5>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ route('pembayaran.index') }}"
+                                                class="btn btn-primary btn-sm float-end">
+                                                Lihat semua
+                                            </a>
+                                        </div>
+                                    </div>
+
+
                                     <table class="table table-striped" id="data-table" style="height: 100px;">
                                         <thead>
                                             <tr>
