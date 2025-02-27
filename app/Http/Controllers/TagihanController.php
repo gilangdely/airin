@@ -431,4 +431,23 @@ class TagihanController extends Controller implements HasMiddleware
             'rincian' => $rincianTagihan
         ];
     }
+
+    public function cekkartumeteran(){
+        return view('tagihan.cekkartumeteran');
+    }
+
+    public function proseskartumeteran(Request $request){
+        $nokartu = $request->chip_kartu;
+        $meteran = Meteran::where('chip_kartu',$nokartu)->first(); //ambil data meteran berdasarkan chip_kartu
+
+        $tanggalSekarang = date('Y-m-d');
+
+        $tagihan = Tagihan::where('nomor_meteran',$meteran->nomor_meteran)
+        ->where('waktu_awal', '<=' , $tanggalSekarang)
+        ->where('waktu_akhir', '>=', $tanggalSekarang)
+        ->first();
+
+        return redirect()->route('tagihan.show',$tagihan->id_tagihan);
+        
+    }
 }

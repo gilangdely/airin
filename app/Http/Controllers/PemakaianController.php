@@ -18,7 +18,7 @@ use \Illuminate\Routing\Controllers\HasMiddleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 use function Laravel\Prompts\error;
-
+ 
 class PemakaianController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
@@ -85,6 +85,19 @@ class PemakaianController extends Controller implements HasMiddleware
             return redirect()->back()
                 ->withInput($request->all())
                 ->with('error', 'Nomor meteran tidak valid.');
+        }
+    }
+    public function storecekchipkartu(Request $request)
+    {
+        $chip_kartu = $request->chip_kartu;
+        $meteran = Meteran::where('chip_kartu',$chip_kartu)->first();
+
+        if ($meteran) {
+            return redirect()->route('pemakaian.create', $meteran);
+        } else {
+            return redirect()->back()
+                ->withInput($request->all())
+                ->with('error', 'Kartu tidak terdaftar.');
         }
     }
 

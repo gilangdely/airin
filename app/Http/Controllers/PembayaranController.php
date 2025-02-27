@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DetailPembayaran;
 use Carbon\Carbon;
 use App\Models\Tagihan;
+use App\Models\Pemakaian;
 use Illuminate\View\View;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Models\DetailTagihan;
-use App\Models\Pemakaian;
+use App\Models\DetailPembayaran;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controllers\Middleware;
@@ -193,6 +194,7 @@ class PembayaranController extends Controller implements HasMiddleware
 
     public function pembatalan(Pembayaran $pembayaran)
     {
+        DB::beginTransaction(); // Mulai transaksi
         try {
             // Update status tagihan dan pembayaran pada tabel tagihan
             Tagihan::where('id_tagihan', $pembayaran->id_tagihan)->update([
@@ -200,11 +202,11 @@ class PembayaranController extends Controller implements HasMiddleware
                 'status_pembayaran' => 0
             ]);
 
-            // Cari semua data detailpembayaran berdasarkan id_pembayaran
+            // Cari semua data detail pembayaran berdasarkan id_pembayaran
             $detailpembayaran = DetailPembayaran::where('id_pembayaran', $pembayaran->id_pembayaran)->get();
 
             if ($detailpembayaran->isNotEmpty()) {
-                // Ambil semua id_pemakaian untuk mengupdate status_pembayaran
+                // Ambil semua id_pakai untuk mengupdate status_pembayaran
                 $list_id_pakai = $detailpembayaran->pluck('id_pakai')->toArray();
                 Pemakaian::whereIn('id_pakai', $list_id_pakai)->update(['status_pembayaran' => 0]);
 
@@ -214,9 +216,13 @@ class PembayaranController extends Controller implements HasMiddleware
 
             // Hapus data pembayaran
             $pembayaran->delete();
-        } catch (\Illuminate\Database\QueryException $e) {
+
+            DB::commit(); // Commit transaksi jika tidak ada error
+        } catch (\Exception $e) {
+            DB::rollBack(); // Rollback transaksi jika terjadi kesalahan
+
             return redirect()->route('pembayaran.index')
-                ->with('error', 'Terjadi kesalahan saat membatalkan pembayaran.');
+                ->with('error', 'Terjadi kesalahan saat membatalkan pembayaran. ' . $e->getMessage());
         }
 
         return redirect()->route('pembayaran.index')

@@ -37,10 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('pemakaian/cekmeteran', [PemakaianController::class, 'cekmeteran'])->name('pemakaian.cekmeteran');
     Route::post('pemakaian/storecekmeteran', [PemakaianController::class, 'storecekmeteran'])->name('pemakaian.storecekmeteran');
-    // Route::resource('pemakaian', PemakaianController::class);
-    // Route::resource('pembayaran', PembayaranController::class);
-    // Route::resource('kriteria-layanan', KriteriaLayananController::class);
-    // Route::resource('tarif-layanan', TarifLayananController::class);
+    Route::post('pemakaian/storecekchipkartu', [PemakaianController::class, 'storecekchipkartu'])->name('pemakaian.storecekchipkartu');
 
     Route::get('pemakaian', [PemakaianController::class, 'index'])->name('pemakaian.index');
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create'])->name('pemakaian.create');
@@ -66,6 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::put('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'update'])->name('tarif-layanan.update');
     Route::delete('tarif-layanan/{tarif_layanan}', [TarifLayananController::class, 'destroy'])->name('tarif-layanan.destroy');
 
+    Route::get('tagihan/cekkartumeteran', [TagihanController::class, 'cekkartumeteran'])->name('tagihan.cekkartumeteran');
+    Route::post('tagihan/proseskartumeteran', [TagihanController::class, 'proseskartumeteran'])->name('tagihan.proseskartumeteran');
     Route::get('tagihan/cektagihanpelanggan/{meteran}', [TagihanController::class, 'cektagihanpelanggan'])->name('tagihan.cektagihanpelanggan');
     Route::get('tagihan', [TagihanController::class, 'index'])->name('tagihan.index');
     Route::get('tagihan/create/{meteran}', [TagihanController::class, 'create'])->name('tagihan.create');
@@ -75,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::put('tagihan/{tagihan}', [TagihanController::class, 'update'])->name('tagihan.update');
     Route::delete('tagihan/{tagihan}', [TagihanController::class, 'destroy'])->name('tagihan.destroy');
 
+    Route::get('meteran/cetakkartu/{meteran}',[MeteranController::class, 'cetakkartu'])->name('meteran.cetakkartu');
     Route::get('meteran', [MeteranController::class, 'index'])->name('meteran.index');
     Route::get('meteran/create', [MeteranController::class, 'create'])->name('meteran.create');
     Route::post('meteran', [MeteranController::class, 'store'])->name('meteran.store');

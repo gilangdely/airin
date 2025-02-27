@@ -111,7 +111,7 @@
 
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary me-2">Buat Tagihan</button>
-                        <a href="{{ route('tagihan.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </form>
             </div>
