@@ -387,6 +387,10 @@
                 width: 110px;
                 height: 110px;
             }
+
+            .footer {
+                top: 2rem;
+            }
         }
 
         /* Atur margin kolom untuk layar besar (desktop) */
@@ -407,6 +411,10 @@
             .team-card .rounded-circle {
                 width: 120px;
                 height: 120px;
+            }
+
+            .footer {
+                top: 2rem;
             }
         }
 

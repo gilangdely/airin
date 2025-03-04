@@ -359,9 +359,6 @@
                                         <a href="https://github.com/GwFirman" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://gwfirman.my.id/" target="_blank"
-                                            class="text-decoration-none social-icon"><i
-                                                class="bi bi-globe fs-5 text-globe"></i></a>
                                         <a href="https://www.instagram.com/gw_firman/?hl=id" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
@@ -382,9 +379,6 @@
                                         <a href="https://github.com/gilangdely" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://wa.me/6282133781736" target="_blank"
-                                            class="text-decoration-none social-icon"><i
-                                                class="bi bi-whatsapp fs-5 text-whatsapp"></i></a>
                                         <a href="https://www.instagram.com/gilang.dm/?hl=id" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
@@ -405,9 +399,6 @@
                                         <a href="https://github.com/ozan-fn" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://ozan.my.id" target="_blank"
-                                            class="text-decoration-none social-icon"><i
-                                                class="bi bi-globe fs-5 text-globe"></i></a>
                                         <a href="https://www.instagram.com/ozan.fn/?hl=id" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
