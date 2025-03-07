@@ -153,9 +153,9 @@
                                 <img src="{{ asset('assets/img/profile/Fauzan.jpg') }}" alt="">
                             </div>
                             <div class="card-info">
-                                <h3>Akhmad Fauzan</h3>
-                                <p>ID: 123456789</p>
-                                <p>Join Date: MN/DD/VY</p>
+                                <h3>{{ $meteran->pelanggan->nama_pelanggan }}</h3>
+                                <p>{{ $meteran->nomor_meteran }}</p>
+                                <p>{{ date('d-M-Y', strtotime($meteran->tanggal_pemasangan)) }}</p>
                             </div>
                         </div>
                     </div>

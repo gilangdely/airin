@@ -57,10 +57,10 @@ class MeteranController extends Controller implements HasMiddleware
     public function create(): View
     {
         $meteran = new Meteran();
-        $pelanggans = Pelanggan::where('status',1)->get();
+        $pelanggans = Pelanggan::where('status', 1)->get();
         $layanans = Layanan::all();
 
-        return view('meteran.create', compact('meteran','pelanggans','layanans'));
+        return view('meteran.create', compact('meteran', 'pelanggans', 'layanans'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -93,9 +93,9 @@ class MeteranController extends Controller implements HasMiddleware
 
     public function edit(Meteran $meteran): View
     {
-        $pelanggans = Pelanggan::where('status',1)->get();
+        $pelanggans = Pelanggan::where('status', 1)->get();
         $layanans = Layanan::all();
-        return view('meteran.edit', compact('meteran','pelanggans','layanans'));
+        return view('meteran.edit', compact('meteran', 'pelanggans', 'layanans'));
     }
 
     public function update(Request $request, Meteran $meteran): RedirectResponse
@@ -125,7 +125,7 @@ class MeteranController extends Controller implements HasMiddleware
         return redirect()->route('meteran.index')
             ->with('success', 'Meteran berhasil diperbarui');
     }
- 
+
     public function destroy(Meteran $meteran): RedirectResponse
     {
         try {
@@ -153,8 +153,9 @@ class MeteranController extends Controller implements HasMiddleware
             ->with('success', 'Kartu berhasil dimapping!');
     }
 
-    public function cetakkartu(Meteran $meteran) {
-        
+    public function cetakkartu(Meteran $meteran)
+    {
+
         return view('meteran.cetakkartu');
     }
 }
