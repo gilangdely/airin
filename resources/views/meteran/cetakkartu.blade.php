@@ -169,8 +169,8 @@
                                 <p>Airin</p>
                             </div>
                             <div class="qr-code">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=https://example.com&bgcolor=transparent"
-                                    alt="">
+                                <img src="{{ route('qrcode.generate', ['info' => $meteran->nomor_meteran]) }}"
+                                    alt="QRCode">
                             </div>
                             <div class="behind-card-info">
                                 <p>Scan Untuk Pembayaran</p>
