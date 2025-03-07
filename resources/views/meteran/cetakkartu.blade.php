@@ -150,7 +150,8 @@
                     <div class="col-xl-3 col-md-5 col-sm-6 d-flex justify-content-center">
                         <div class="front-card">
                             <div class="profile-card">
-                                <img src="{{ asset('assets/img/profile/Fauzan.jpg') }}" alt="">
+                                <img src="https://ui-avatars.com/api/?background=random&name={{ $meteran->pelanggan->nama_pelanggan }}"
+                                    alt="">
                             </div>
                             <div class="card-info">
                                 <h3>{{ $meteran->pelanggan->nama_pelanggan }}</h3>

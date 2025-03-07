@@ -156,6 +156,6 @@ class MeteranController extends Controller implements HasMiddleware
     public function cetakkartu(Meteran $meteran)
     {
 
-        return view('meteran.cetakkartu');
+        return view('meteran.cetakkartu', compact('meteran'));
     }
 }
