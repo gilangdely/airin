@@ -342,12 +342,12 @@
                 <!-- End FAQ -->
 
                 <!-- Our Team -->
-                <section id="our-team" class="container mt-8" data-aos="fade-up" data-aos-duration="1000">
-                    <h3 class="testimonial-title text-center fw-bold my-5">Tim Kami</h3>
+                <section id="our-team" class="container mt-8">
+                    <h3 class="testimonial-title text-center fw-bold my-5" data-aos="fade-up" data-aos-duration="1000">Tim Kami</h3>
                     <div
                         class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center mt-12">
                         <!-- Card 1 -->
-                        <div class="col" data-aos="fade-up" data-aos-duration="1400">
+                        <div class="col" data-aos="fade-up" data-aos-duration="500">
                             <div class="card h-100 shadow-sm position-relative team-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Firman.jpg"
@@ -359,9 +359,6 @@
                                         <a href="https://github.com/GwFirman" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://gwfirman.my.id/" target="_blank"
-                                            class="text-decoration-none social-icon"><i
-                                                class="bi bi-globe fs-5 text-globe"></i></a>
                                         <a href="https://www.instagram.com/gw_firman/?hl=id" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
@@ -370,7 +367,7 @@
                             </div>
                         </div>
                         <!-- Card 2 -->
-                        <div class="col" data-aos="fade-up" data-aos-duration="1800">
+                        <div class="col" data-aos="fade-up" data-aos-duration="1000">
                             <div class="card h-100 shadow-sm position-relative team-card gilang-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Gilang.png"
@@ -382,9 +379,6 @@
                                         <a href="https://github.com/gilangdely" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://wa.me/6282133781736" target="_blank"
-                                            class="text-decoration-none social-icon"><i
-                                                class="bi bi-whatsapp fs-5 text-whatsapp"></i></a>
                                         <a href="https://www.instagram.com/gilang.dm/?hl=id" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
@@ -393,7 +387,7 @@
                             </div>
                         </div>
                         <!-- Card 3 -->
-                        <div class="col" data-aos="fade-up" data-aos-duration="2200">
+                        <div class="col" data-aos="fade-up" data-aos-duration="1500">
                             <div class="card h-100 shadow-sm position-relative team-card fauzan-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Fauzan.jpg"
@@ -405,9 +399,6 @@
                                         <a href="https://github.com/ozan-fn" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-github fs-5 text-github"></i></a>
-                                        <a href="https://ozan.my.id" target="_blank"
-                                            class="text-decoration-none social-icon"><i
-                                                class="bi bi-globe fs-5 text-globe"></i></a>
                                         <a href="https://www.instagram.com/ozan.fn/?hl=id" target="_blank"
                                             class="text-decoration-none social-icon"><i
                                                 class="bi bi-instagram fs-5 text-instagram"></i></a>
@@ -416,12 +407,12 @@
                             </div>
                         </div>
                         <!-- Card 4 -->
-                        <div class="col" data-aos="fade-up" data-aos-duration="2600">
+                        <div class="col" data-aos="fade-up" data-aos-duration="2000">
                             <div class="card h-100 shadow-sm position-relative team-card dodo-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Dodo.jpg"
                                         class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
-                                        style="width: 120px; height: 120px; object-fit: cover; object-position: 20px -10 px;"></img>
+                                        style="width: 120px; height: 120px; object-fit: cover;"></img>
                                     <h5 class="card-title mt-5 pt-5">Afridho Zaki</h5>
                                     <p class="card-text text-muted">Software Engineer</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
@@ -436,6 +427,26 @@
                             </div>
                         </div>
                         <!-- Card 5 -->
+                        <div class="col" data-aos="fade-up" data-aos-duration="2500">
+                            <div class="card h-100 shadow-sm position-relative team-card auliaHamdi-card">
+                                <div class="card-body text-center">
+                                    <img src="assets\img\profile\AuliaHamdi.png"
+                                        class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
+                                        style="width: 120px; height: 120px; background-color: rgb(177,181,184); object-fit: cover; object-position: 15px 10px"></img>
+                                    <h5 class="card-title mt-5 pt-5">Aulia Hamdi</h5>
+                                    <p class="card-text text-muted">Visual Designer</p>
+                                    <div class="d-flex justify-content-center gap-3 mt-3">
+                                        <a href="https://dosen.amikompurwokerto.ac.id/main/profil_dosen?p=Aulia%20Hamdi" target="_blank"
+                                            class="text-decoration-none social-icon"><i
+                                                class="bi bi-person-circle fs-5 text-person"></i></a>
+                                        <a href="https://sinta.kemdikbud.go.id/authors/profile/6112151" target="_blank"
+                                            class="text-decoration-none social-icon"><i
+                                                class="bi bi-journals fs-5 text-journals"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 6 -->
                         <div class="col" data-aos="fade-up" data-aos-duration="3000">
                             <div class="card h-100 shadow-sm position-relative team-card ian-card">
                                 <div class="card-body text-center">
