@@ -14,7 +14,7 @@
                     </a>
 
                     <div>
-                        @can('layanan view')
+                        @can('layanan create')
                             <a href="{{ route('layanan.create') }}" class="btn btn-sm btn-info">
                                 <i class="bx bx-plus me-1"></i>Baru
                             </a>
@@ -53,8 +53,9 @@
                     <div class="d-flex gap-2">
                         <div>
                             @can('tarif-layanan create')
-                                <a href="{{ route('tarif-layanan.create',['id_layanan' => $layanan->id_layanan]) }}" class="btn btn-sm btn-info"
-                                    data-bs-toggle="tooltip" data-bs-title="Tambah" data-bs-placement="top">
+                                <a href="{{ route('tarif-layanan.create', ['id_layanan' => $layanan->id_layanan]) }}"
+                                    class="btn btn-sm btn-info" data-bs-toggle="tooltip" data-bs-title="Tambah"
+                                    data-bs-placement="top">
                                     <i class="bx bx-plus me-1"></i>Baru
                                 </a>
                             @endcan
@@ -73,7 +74,9 @@
                                     <th style="width: 15%">Min Pemakaian</th>
                                     <th style="width: 15%">Max Pemakaian</th>
                                     <th style="width: 22%">Tarif</th>
-                                    <th>Aksi</th>
+                                    @canany(['tarif-layanan edit', 'tarif-layanan delete'])
+                                        <th>Aksi</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,27 +86,30 @@
                                         <td>{{ $tarif->tier }}</td>
                                         <td>{{ $tarif->min_pemakaian }}</td>
                                         <td>{{ $tarif->max_pemakaian }}</td>
-                                        <td>{{ 'Rp '.number_format($tarif->tarif,0,',','.') }}</td>
-                                        <td>
-                                            @can('tarif-layanan edit')
-                                                <a href="{{ route('tarif-layanan.edit', $tarif->id_tarif_layanan) }}"
-                                                    class="btn btn-sm btn-primary">
-                                                    <i class="bx bx-pencil me-1"></i>Edit
-                                                </a>
-                                            @endcan
-                                            @can('tarif-layanan delete')
-                                                <form action="{{ route('tarif-layanan.destroy', $tarif->id_tarif_layanan) }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf @method('DELETE')
-                                                    <x-input.confirm-button text="Data tarif layanan ini akan dihapus!"
-                                                        positive="Ya, hapus!" icon="info" class="btn btn-danger btn-sm"
-                                                        data-bs-toggle="tooltip" data-bs-title="Hapus"
-                                                        data-bs-placement="top">
-                                                        <i class="bx bx-trash me-1"></i>Hapus
-                                                    </x-input.confirm-button>
-                                                </form>
-                                            @endcan
-                                        </td>
+                                        <td>{{ 'Rp ' . number_format($tarif->tarif, 0, ',', '.') }}</td>
+                                        @canany(['tarif-layanan edit', 'tarif-layanan delete'])
+                                            <td>
+                                                @can('tarif-layanan edit')
+                                                    <a href="{{ route('tarif-layanan.edit', $tarif->id_tarif_layanan) }}"
+                                                        class="btn btn-sm btn-primary">
+                                                        <i class="bx bx-pencil me-1"></i>Edit
+                                                    </a>
+                                                @endcan
+                                                @can('tarif-layanan delete')
+                                                    <form
+                                                        action="{{ route('tarif-layanan.destroy', $tarif->id_tarif_layanan) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf @method('DELETE')
+                                                        <x-input.confirm-button text="Data tarif layanan ini akan dihapus!"
+                                                            positive="Ya, hapus!" icon="info" class="btn btn-danger btn-sm"
+                                                            data-bs-toggle="tooltip" data-bs-title="Hapus"
+                                                            data-bs-placement="top">
+                                                            <i class="bx bx-trash me-1"></i>Hapus
+                                                        </x-input.confirm-button>
+                                                    </form>
+                                                @endcan
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -119,8 +125,9 @@
                     <div class="d-flex gap-2">
                         <div>
                             @can('kriteria-layanan create')
-                                <a href="{{ route('kriteria-layanan.create',['id_layanan' => $layanan->id_layanan]) }}" class="btn btn-sm btn-info"
-                                    data-bs-toggle="tooltip" data-bs-title="Tambah" data-bs-placement="top">
+                                <a href="{{ route('kriteria-layanan.create', ['id_layanan' => $layanan->id_layanan]) }}"
+                                    class="btn btn-sm btn-info" data-bs-toggle="tooltip" data-bs-title="Tambah"
+                                    data-bs-placement="top">
                                     <i class="bx bx-plus me-1"></i>Baru
                                 </a>
                             @endcan
@@ -136,7 +143,9 @@
                                 <tr>
                                     <th style="width: 5%">#</th>
                                     <th style="width: 65%">Kriteria</th>
-                                    <th>Aksi</th>
+                                    @canany(['kriteria-layanan edit', 'kriteria-layanan delete'])
+                                        <th>Aksi</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,26 +153,29 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->kriteria }}</td>
-                                        <td>
-                                            @can('kriteria-layanan edit')
-                                                <a href="{{ route('kriteria-layanan.edit', $row->id_kriteria_layanan) }}"
-                                                    class="btn btn-sm btn-primary">
-                                                    <i class="bx bx-pencil me-1"></i>Edit
-                                                </a>
-                                            @endcan
-                                            @can('kriteria-layanan delete')
-                                                <form action="{{ route('kriteria-layanan.destroy', $row->id_kriteria_layanan) }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf @method('DELETE')
-                                                    <x-input.confirm-button text="Data kriteria layanan ini akan dihapus!"
-                                                        positive="Ya, hapus!" icon="info" class="btn btn-danger btn-sm"
-                                                        data-bs-toggle="tooltip" data-bs-title="Hapus"
-                                                        data-bs-placement="top">
-                                                        <i class="bx bx-trash me-1"></i>Hapus
-                                                    </x-input.confirm-button>
-                                                </form>
-                                            @endcan
-                                        </td>
+                                        @canany(['kriteria-layanan edit', 'kriteria-layanan delete'])
+                                            <td>
+                                                @can('kriteria-layanan edit')
+                                                    <a href="{{ route('kriteria-layanan.edit', $row->id_kriteria_layanan) }}"
+                                                        class="btn btn-sm btn-primary">
+                                                        <i class="bx bx-pencil me-1"></i>Edit
+                                                    </a>
+                                                @endcan
+                                                @can('kriteria-layanan delete')
+                                                    <form
+                                                        action="{{ route('kriteria-layanan.destroy', $row->id_kriteria_layanan) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf @method('DELETE')
+                                                        <x-input.confirm-button text="Data kriteria layanan ini akan dihapus!"
+                                                            positive="Ya, hapus!" icon="info" class="btn btn-danger btn-sm"
+                                                            data-bs-toggle="tooltip" data-bs-title="Hapus"
+                                                            data-bs-placement="top">
+                                                            <i class="bx bx-trash me-1"></i>Hapus
+                                                        </x-input.confirm-button>
+                                                    </form>
+                                                @endcan
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                             </tbody>

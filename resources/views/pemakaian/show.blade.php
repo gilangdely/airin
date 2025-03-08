@@ -14,12 +14,14 @@
                     </a>
 
                     <div>
-                        @if ($pemakaian->status_pembayaran < 1)
-                            <a href="{{ route('tagihan.create', $pemakaian->nomor_meteran) }}"
-                                class="btn btn-sm btn-success">
-                                <i class='bx bx-receipt me-1'></i> Generate Tagihan
-                            </a>
-                        @endif
+                        @can('tagihan generatetagihan')
+                            @if ($pemakaian->status_pembayaran < 1)
+                                <a href="{{ route('tagihan.create', $pemakaian->nomor_meteran) }}"
+                                    class="btn btn-sm btn-success">
+                                    <i class='bx bx-receipt me-1'></i> Generate Tagihan
+                                </a>
+                            @endif
+                        @endcan
 
                         @can('pemakaian edit')
                             <a href="{{ route('pemakaian.edit', $pemakaian) }}" class="btn btn-sm btn-primary">

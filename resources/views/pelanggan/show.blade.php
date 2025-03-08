@@ -14,7 +14,7 @@
                     </a>
 
                     <div>
-                        @can('pelanggan view')
+                        @can('pelanggan create')
                             <a href="{{ route('pelanggan.create') }}" class="btn btn-sm btn-info">
                                 <i class="bx bx-plus me-1"></i>Baru
                             </a>

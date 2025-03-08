@@ -14,14 +14,18 @@
                     </a>
 
                     <div>
+                        @can('meteran buatkartu')
                         <a href="{{ route('meteran.cetakkartu',$meteran) }}" class="btn btn-sm btn-success">
                             <i class='bx bx-credit-card me-1'></i> Buat Kartu
                         </a>
+                        @endcan
+                        @can('meteran mapping')
                         <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                             data-bs-target="#modalMapping">
                             <i class='bx bx-credit-card me-1'></i> Mapping
                         </button>
-                        @can('meteran view')
+                        @endcan
+                        @can('meteran create')
                             <a href="{{ route('meteran.create') }}" class="btn btn-sm btn-info">
                                 <i class="bx bx-plus me-1"></i>Baru
                             </a>
