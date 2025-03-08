@@ -27,7 +27,11 @@ class DashboardController extends Controller
                 FacadesDB::raw('SUM(pemakaian.pakai) AS total_pakai')
             )
             ->where('pemakaian.status_pembayaran', 0)
-            ->groupBy('pemakaian.nomor_meteran')
+            ->groupBy(
+                'pelanggan.nama_pelanggan',
+                'pemakaian.nomor_meteran',
+                'meteran.id_pelanggan'
+            )
             ->having(FacadesDB::raw('COUNT(pemakaian.bulan)'), '>', 1)
             ->paginate(10);
 
@@ -72,11 +76,11 @@ class DashboardController extends Controller
             ->groupBy('pemakaian.nomor_meteran')
             ->first();
 
-            $detailTunggakan = Pemakaian::where('nomor_meteran', $id)
+        $detailTunggakan = Pemakaian::where('nomor_meteran', $id)
             ->where('status_pembayaran', 0)
             ->get();
 
 
-        return view('tunggakan.show', compact('tunggakan','detailTunggakan'));
+        return view('tunggakan.show', compact('tunggakan', 'detailTunggakan'));
     }
 }

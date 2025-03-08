@@ -105,15 +105,23 @@
                     </div>
                     <div class="card-footer">
                         <p>TERBILANG :
-                            {{ strtoupper(App\Helpers\Terbilang::convert($pembayaran->total_nominal) . ' RUPIAH') }}</p>
+                            {{ strtoupper(App\Helpers\Terbilang::convert($pembayaran->total_nominal) . ' RUPIAH') }}
+                        </p>
                         <hr>
                         <div class="row">
-                            <div class="col-md-3 offset-md-9 text-center">
+                            <div class="col-md-3  offset-md-6">
+                                <p>Petugas</p>
+                                <br>
+                                <br>
+                                <br>
+                                {{ auth()->user()->name }}
+                            </div>
+                            <div class="col-md-3 text-center">
                                 <p>Penyetor</p>
                                 <br>
                                 <br>
                                 <br>
-                                ............................
+                                {{ $pembayaran->meteran->pelanggan->nama_pelanggan }}
                             </div>
                         </div>
                     </div>

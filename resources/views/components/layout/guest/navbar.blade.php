@@ -20,13 +20,13 @@
         <!-- Navbar Menus -->
         <ul class="flex-row navbar-nav align-items-center ms-auto">
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
-                <a class="nav-link fw-medium collapsed" href="{{ url('/') }}">Home</a>
+                <a class="nav-link fw-medium collapsed" href="{{ url('/') }}">Branda</a>
             </li>
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
-                <a class="nav-link fw-medium collapsed" href="#FAQ">Info</a>
+                <a class="nav-link fw-medium collapsed" href="#FAQ">Tentang</a>
             </li>
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
-                <a class="nav-link fw-medium collapsed" href="#our-team">Team</a>
+                <a class="nav-link fw-medium collapsed" href="#our-team">Profile</a>
             </li>
             <li>
                 <a href="{{ route('login') }}" class="btn btn-primary" style="border-radius: 50px;">
