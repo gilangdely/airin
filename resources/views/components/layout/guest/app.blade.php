@@ -56,7 +56,6 @@
     <style>
         .main-container {
             position: relative;
-            height: 100vh;
         }
 
         .main-bg {
@@ -146,22 +145,21 @@
         }
 
         .team-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 0 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-radius: 12px;
             overflow: visible;
+            border: none;
+            margin-bottom: 15px;
         }
 
         .team-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .team-card .card-body {
             padding: 1.5rem;
+            padding-top: 4rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -170,12 +168,38 @@
         }
 
         .team-card .card-title {
-            font-size: 1.25rem;
-            font-weight: bold;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 8px;
+        }
+
+        .team-card .social-icon i {
+            transition: all 0.3s ease;
+        }
+
+        .team-card .social-icon:hover i.text-github {
+            color: #333 !important;
+            transform: scale(1.2);
+        }
+
+        .team-card .social-icon:hover i.text-instagram {
+            color: #e1306c !important;
+            transform: scale(1.2);
+        }
+
+        .team-card .social-icon:hover i.text-person {
+            color: #0077b5 !important;
+            transform: scale(1.2);
+        }
+
+        .team-card .social-icon:hover i.text-journals {
+            color: #ea4335 !important;
+            transform: scale(1.2);
         }
 
         .team-card .card-text {
             font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         .team-card .rounded-circle {
@@ -184,6 +208,7 @@
             width: 120px;
             height: 120px;
             object-fit: cover;
+            transform: scale(1.05);
         }
 
         .team-card .social-icon {
@@ -276,7 +301,6 @@
             color: #fff;
         }
 
-        /* Tombol outline */
         .btn-outline-primary {
             border-color: #007bff;
             color: #007bff;
@@ -307,12 +331,78 @@
             border-radius: 5px;
         }
 
-
-        /* Atur margin dan posisi card untuk layar kecil (mobile) */
-        @media (max-width: 767.98px) {
+        /* mini Mobile */
+        @media (max-width: 575.98px) {
             .title {
                 font-size: 2rem;
                 line-height: 2.5rem;
+            }
+
+            .left-faq {
+                text-align: center;
+                margin-bottom: 1.2rem;
+            }
+
+            .gilang-card {
+                top: 40px;
+            }
+
+            .fauzan-card {
+                top: 80px;
+            }
+
+            .dodo-card {
+                top: 120px;
+            }
+
+            .auliaHamdi-card {
+                top: 160px;
+            }
+
+            .ian-card {
+                top: 200px;
+            }
+
+            .team-card .card-body {
+                padding: 0.75rem;
+            }
+
+            .team-card .rounded-circle {
+                width: 80px;
+                height: 80px;
+            }
+
+            .team-card .card-title {
+                font-size: 1.1rem;
+            }
+
+            .team-card .card-text {
+                font-size: 0.8rem;
+            }
+
+            .team-card .social-icon i {
+                font-size: 1rem;
+            }
+
+            .footer {
+                top: 12rem;
+                padding-bottom: 10px;
+            }
+        }
+
+        /* Mobile */
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .title {
+                font-size: 2rem;
+                line-height: 2.5rem;
+            }
+
+            .left-faq {
+                margin-bottom: 2rem;
+            }
+
+            .faq-text {
+                text-align: center;
             }
 
             .gilang-card {
@@ -348,7 +438,14 @@
                 height: 100px;
             }
 
-            /* Gaya dasar untuk tombol */
+            .team-card .card-title {
+                font-size: 1.15rem;
+            }
+
+            .team-card .card-text {
+                font-size: 0.85rem;
+            }
+
             .btn-acordion-wa {
                 display: inline-flex;
                 align-items: center;
@@ -366,7 +463,7 @@
             }
 
             .footer {
-                padding-top: 7rem;
+                padding-top: 12rem;
             }
 
             .footer p {
@@ -374,7 +471,7 @@
             }
         }
 
-        /* Atur margin kolom untuk layar medium (tablet) */
+        /* mini Tab */
         @media (min-width: 768px) and (max-width: 991.98px) {
             .title {
                 font-size: 2rem;
@@ -384,7 +481,7 @@
             .dodo-card,
             .auliaHamdi-card,
             .ian-card {
-                top: 40px;
+                top: 30px;
             }
 
             .col {
@@ -400,20 +497,40 @@
                 height: 110px;
             }
 
+            .team-card .card-title {
+                font-size: 1.2rem;
+            }
+
+            .team-card .card-text {
+                font-size: 0.9rem;
+            }
+
             .footer {
                 padding: 1.5rem 0;
             }
         }
 
-        /* Atur margin kolom untuk layar besar (desktop) */
+        /* Desktop */
         @media (min-width: 992px) {
             .title {
                 font-size: 2rem;
                 line-height: 2.5rem;
             }
 
-            .ian-card {
-                top: 40px;
+            .height-hero-features {
+                height: 85vh;
+            }
+
+            .height-testimonials {
+                height: 55vh;
+            }
+
+            .height-faq {
+                height: 90vh;
+            }
+
+             .auliaHamdi-card, .ian-card {
+                top: 30px;
             }
 
             .col {
@@ -429,29 +546,28 @@
                 height: 120px;
             }
 
+            .team-card .card-title {
+                font-size: 1.25rem;
+            }
+
+            .team-card .card-text {
+                font-size: 0.9rem;
+            }
+
+            /* 4 kartu di atas, 2 kartu di bawah */
+            #our-team .row {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            #our-team .row .col {
+                flex: 0 0 25%;
+                /* 4 kartu per baris */
+                max-width: 25%;
+            }
+
             .footer {
                 padding-top: 1.5rem;
-            }
-        }
-
-        /* Penyesuaian tambahan untuk layar sangat kecil (mobile kecil) */
-        @media (max-width: 576px) {
-            .title {
-                font-size: 2rem;
-                line-height: 2.5rem;
-            }
-
-            .team-card .card-body {
-                padding: 0.75rem;
-            }
-
-            .team-card .rounded-circle {
-                width: 90px;
-                height: 90px;
-            }
-
-            .footer {
-                top: 5rem;
             }
         }
     </style>
