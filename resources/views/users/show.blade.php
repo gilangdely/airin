@@ -48,19 +48,19 @@
                                             <td class="fw-bold">{{ __('Name') }}</td>
                                             <td>{{ $user->name }}</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="fw-bold">{{ __('Email') }}</td>
                                             <td>{{ $user->email ?? '-' }}</td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td class="fw-bold">{{ __('Role') }}</td>
                                             <td>{{ $user->getRoleNames()->toArray() !== [] ? $user->getRoleNames()[0] : '-' }}</td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="fw-bold">{{ __('Unit Sekolah') }}</td>
                                             <td>{{ $user->unit_sekolah->nama_unit_sekolah ?? '-' }}
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         {{-- <tr>
                                         <td class="fw-bold">{{ __('Email verified at') }}</td>
                                         <td>{{ $user->email_verified_at ? $user->email_verified_at->format('Y-m-d H:i:s') : '-' }}

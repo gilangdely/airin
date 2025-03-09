@@ -27,7 +27,7 @@
                     <td>{{ $row?->awal }}</td>
                     <td>{{ $row?->akhir }}</td>
                     <td>{{ $row?->pakai }}</td>
-                    <td>{{ $row?->created_at }}</td>
+                    {{-- <td>{{ $row?->created_at }}</td> --}}
                     <td>
                         @if ($row?->status_pembayaran == 1)
                             <span class="badge bg-label-success">Lunas</span>

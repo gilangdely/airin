@@ -24,11 +24,12 @@
                     <td>{{ $row?->pelanggan->nama_pelanggan }}</td>
                     <td>{{ $row?->meteran->nomor_meteran }}</td>
                     <td>{{ 'Rp ' . number_format($row?->nominal, 0, ',', '.') }}</td>
+                    <td>{{ $row?->created_at }}</td>
                     {{-- <td>
                         @if ($row?->status_tagihan == 1)
-                            <span class="badge bg-label-success">Aktif</span>
+                        <span class="badge bg-label-success">Aktif</span>
                         @else
-                            <span class="badge bg-label-danger">Tidak Aktif</span>
+                        <span class="badge bg-label-danger">Tidak Aktif</span>
                         @endif
                     </td> --}}
                     <td>
@@ -51,9 +52,8 @@
                             @if ($row->status_tagihan == 1 && $row->status_pembayaran == 0)
                                 @can('tagihan edit')
                                     <div class="me-1">
-                                        <a href="{{ route('tagihan.edit', $row) }}"
-                                            class="btn btn-icon btn-outline-primary btn-sm" data-bs-toggle="tooltip"
-                                            data-bs-title="Edit" data-bs-placement="top">
+                                        <a href="{{ route('tagihan.edit', $row) }}" class="btn btn-icon btn-outline-primary btn-sm"
+                                            data-bs-toggle="tooltip" data-bs-title="Edit" data-bs-placement="top">
                                             <span class="bx bx-pencil"></span>
                                         </a>
                                     </div>
@@ -63,8 +63,8 @@
                                         @csrf
                                         @method('DELETE')
                                         <x-input.confirm-button text="Data tagihan ini akan dihapus!" positive="Ya, hapus!"
-                                            icon="info" class="btn btn-icon btn-outline-danger btn-sm"
-                                            data-bs-toggle="tooltip" data-bs-title="Hapus" data-bs-placement="top">
+                                            icon="info" class="btn btn-icon btn-outline-danger btn-sm" data-bs-toggle="tooltip"
+                                            data-bs-title="Hapus" data-bs-placement="top">
                                             <span class="bx bx-trash"></span>
                                         </x-input.confirm-button>
                                     </form>
