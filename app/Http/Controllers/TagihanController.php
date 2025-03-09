@@ -437,9 +437,17 @@ class TagihanController extends Controller implements HasMiddleware
     }
 
     public function proseskartumeteran(Request $request){
-        $nokartu = $request->rfid;
-        dd($request);
-        $meteran = Meteran::where('chip_kartu',$nokartu)->first();
-        return response()->json($meteran);
+        $nokartu = $request->chip_kartu;
+        $meteran = Meteran::where('chip_kartu',$nokartu)->first(); //ambil data meteran berdasarkan chip_kartu
+
+        $tanggalSekarang = date('Y-m-d');
+
+        $tagihan = Tagihan::where('nomor_meteran',$meteran->nomor_meteran)
+        ->where('waktu_awal', '<=' , $tanggalSekarang)
+        ->where('waktu_akhir', '>=', $tanggalSekarang)
+        ->first();
+
+        return redirect()->route('tagihan.show',$tagihan->id_tagihan);
+        
     }
 }

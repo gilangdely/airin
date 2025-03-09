@@ -18,7 +18,7 @@ use \Illuminate\Routing\Controllers\HasMiddleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 use function Laravel\Prompts\error;
- 
+
 class PemakaianController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
@@ -33,7 +33,7 @@ class PemakaianController extends Controller implements HasMiddleware
 
     public function index(Request $request): View
     {
-        $query = Pemakaian::query()->with(['meteran', 'tblbulan']);
+        $query = Pemakaian::query()->with(['meteran', 'tblbulan'])->orderBy('bulan', 'desc');
 
         // tambahkan kolom yang mau dikecualikan di pencarian
         $except = ['created_by', 'updated_by'];
@@ -85,6 +85,19 @@ class PemakaianController extends Controller implements HasMiddleware
             return redirect()->back()
                 ->withInput($request->all())
                 ->with('error', 'Nomor meteran tidak valid.');
+        }
+    }
+    public function storecekchipkartu(Request $request)
+    {
+        $chip_kartu = $request->chip_kartu;
+        $meteran = Meteran::where('chip_kartu', $chip_kartu)->first();
+
+        if ($meteran) {
+            return redirect()->route('pemakaian.create', $meteran);
+        } else {
+            return redirect()->back()
+                ->withInput($request->all())
+                ->with('error', 'Kartu tidak terdaftar.');
         }
     }
 

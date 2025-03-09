@@ -41,9 +41,11 @@
                         </div>
                     </div>
                     <div class="col-2">
+                        @can('tagihan pembayaran')
                         <a href="{{ route('tagihan.cekkartumeteran') }}" class="btn btn-primary">
-                            Cek Tagihan Kartu
+                            <i class='bx bx-credit-card'></i> Pembayaran Tagihan
                         </a>
+                        @endcan
                     </div>
                 </div>
             </div>

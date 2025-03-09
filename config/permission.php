@@ -261,7 +261,8 @@ return [
                 'tagihan create',
                 'tagihan edit',
                 'tagihan delete',
-
+                'tagihan pembayaran',
+                'tagihan generatetagihan'
             ]
         ],
         [
@@ -283,7 +284,8 @@ return [
                 'meteran create',
                 'meteran edit',
                 'meteran delete',
-
+                'meteran buatkartu',
+                'meteran mapping    '
             ]
         ],
         [
@@ -294,7 +296,8 @@ return [
                 'pembayaran create',
                 'pembayaran edit',
                 'pembayaran delete',
-
+                'pembayaran pembatalan',
+                'pembayaran cetakkuitansi'
             ]
         ],
         [

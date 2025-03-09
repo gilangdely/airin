@@ -14,28 +14,31 @@
                     </a>
 
                     <div>
-                        @if ($pemakaian->status_pembayaran < 1)
-                            <a href="{{ route('tagihan.create', $pemakaian->nomor_meteran) }}"
-                                class="btn btn-sm btn-success">
-                                <i class='bx bx-receipt me-1'></i> Generate Tagihan
-                            </a>
-                        @endif
+                        @can('tagihan generatetagihan')
+                            @if ($pemakaian->status_pembayaran < 1)
+                                <a href="{{ route('tagihan.create', $pemakaian->nomor_meteran) }}"
+                                    class="btn btn-sm btn-success">
+                                    <i class='bx bx-receipt me-1'></i> Generate Tagihan
+                                </a>
+                            @endif
+                        @endcan
 
-                        @can('pemakaian edit')
-                            <a href="{{ route('pemakaian.edit', $pemakaian) }}" class="btn btn-sm btn-primary">
-                                <i class="bx bx-pencil me-1"></i>Edit
-                            </a>
-                        @endcan
-                        @can('pemakaian delete')
-                            <form action="{{ route('pemakaian.destroy', $pemakaian) }}" method="POST" class="d-inline">
-                                @csrf @method('DELETE')
-                                <x-input.confirm-button text="Data pemakaian ini akan dihapus!" positive="Ya, hapus!"
-                                    icon="info" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
-                                    data-bs-title="Hapus" data-bs-placement="top">
-                                    <i class="bx bx-trash me-1"></i>Hapus
-                                </x-input.confirm-button>
-                            </form>
-                        @endcan
+                            @can('pemakaian edit')
+                                <a href="{{ route('pemakaian.edit', $pemakaian) }}" class="btn btn-sm btn-primary">
+                                    <i class="bx bx-pencil me-1"></i>Edit
+                                </a>
+                            @endcan
+                            @can('pemakaian delete')
+                                <form action="{{ route('pemakaian.destroy', $pemakaian) }}" method="POST" class="d-inline">
+                                    @csrf @method('DELETE')
+                                    <x-input.confirm-button text="Data pemakaian ini akan dihapus!" positive="Ya, hapus!"
+                                        icon="info" class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                        data-bs-title="Hapus" data-bs-placement="top">
+                                        <i class="bx bx-trash me-1"></i>Hapus
+                                    </x-input.confirm-button>
+                                </form>
+                            @endcan
+                        @endif
                     </div>
                 </div>
             </div>

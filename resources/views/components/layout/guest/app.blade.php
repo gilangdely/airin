@@ -151,6 +151,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border-radius: 10px;
+            overflow: visible;
         }
 
         .team-card:hover {
@@ -164,6 +166,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
         }
 
         .team-card .card-title {
@@ -198,13 +201,13 @@
         .gilang-card,
         .fauzan-card,
         .dodo-card,
+        .auliaHamdi-card,
         .ian-card {
             position: relative;
         }
 
         .footer {
             position: relative;
-            padding: 2rem 0;
         }
 
         @keyframes ping {
@@ -313,19 +316,23 @@
             }
 
             .gilang-card {
-                top: 30px;
+                top: 40px;
             }
 
             .fauzan-card {
-                top: 60px;
+                top: 80px;
             }
 
             .dodo-card {
-                top: 90px;
+                top: 120px;
+            }
+
+            .auliaHamdi-card {
+                top: 160px;
             }
 
             .ian-card {
-                top: 120px;
+                top: 200px;
             }
 
             .col {
@@ -359,8 +366,7 @@
             }
 
             .footer {
-                top: 2rem;
-                padding: 1.5rem 0;
+                padding-top: 7rem;
             }
 
             .footer p {
@@ -375,6 +381,12 @@
                 line-height: 2.5rem;
             }
 
+            .dodo-card,
+            .auliaHamdi-card,
+            .ian-card {
+                top: 40px;
+            }
+
             .col {
                 margin-top: 2rem;
             }
@@ -387,6 +399,10 @@
                 width: 110px;
                 height: 110px;
             }
+
+            .footer {
+                padding: 1.5rem 0;
+            }
         }
 
         /* Atur margin kolom untuk layar besar (desktop) */
@@ -394,6 +410,10 @@
             .title {
                 font-size: 2rem;
                 line-height: 2.5rem;
+            }
+
+            .ian-card {
+                top: 40px;
             }
 
             .col {
@@ -407,6 +427,10 @@
             .team-card .rounded-circle {
                 width: 120px;
                 height: 120px;
+            }
+
+            .footer {
+                padding-top: 1.5rem;
             }
         }
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\MeteranController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemakaianController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\RekapPembayaran;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TarifLayananController;
@@ -34,13 +35,11 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('layanan', LayananController::class);
+    Route::get('qrcode/generate/{info}', [QRCodeController::class, 'index'])->name('qrcode.generate');
 
     Route::get('pemakaian/cekmeteran', [PemakaianController::class, 'cekmeteran'])->name('pemakaian.cekmeteran');
     Route::post('pemakaian/storecekmeteran', [PemakaianController::class, 'storecekmeteran'])->name('pemakaian.storecekmeteran');
-    // Route::resource('pemakaian', PemakaianController::class);
-    // Route::resource('pembayaran', PembayaranController::class);
-    // Route::resource('kriteria-layanan', KriteriaLayananController::class);
-    // Route::resource('tarif-layanan', TarifLayananController::class);
+    Route::post('pemakaian/storecekchipkartu', [PemakaianController::class, 'storecekchipkartu'])->name('pemakaian.storecekchipkartu');
 
     Route::get('pemakaian', [PemakaianController::class, 'index'])->name('pemakaian.index');
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create'])->name('pemakaian.create');
@@ -77,7 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::put('tagihan/{tagihan}', [TagihanController::class, 'update'])->name('tagihan.update');
     Route::delete('tagihan/{tagihan}', [TagihanController::class, 'destroy'])->name('tagihan.destroy');
 
-    Route::get('meteran/cetakkartu/{meteran}',[MeteranController::class, 'cetakkartu'])->name('meteran.cetakkartu');
+    Route::get('meteran/cetakkartu/{meteran}', [MeteranController::class, 'cetakkartu'])->name('meteran.cetakkartu');
     Route::get('meteran', [MeteranController::class, 'index'])->name('meteran.index');
     Route::get('meteran/create', [MeteranController::class, 'create'])->name('meteran.create');
     Route::post('meteran', [MeteranController::class, 'store'])->name('meteran.store');

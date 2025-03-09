@@ -32,19 +32,26 @@
                                 </form>
                             @endcan
                         @else
-                        <form action="{{ route('pembayaran.pembatalan', $pembayaran) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <x-input.confirm-button text="Pembayaran dibatalkan?" positive="Ya, Batalkan!"
-                                icon="info" class="btn btn-outline-danger btn-sm"
-                                data-bs-toggle="tooltip" data-bs-title="Batalkan!" data-bs-placement="top">
-                                <span class="bx bx-x"></span>
-                                Pembatalan Pembayaran
-                            </x-input.confirm-button>
-                        </form>
-                        <a href="{{ route('pembayaran.cetakkuitansi', $pembayaran) }}" class="btn btn-sm btn-primary">
-                            <i class='bx bx-printer' ></i> Cetak Kuitansi
-                        </a>
+                            @can('pembayaran pembatalan')
+                                <form action="{{ route('pembayaran.pembatalan', $pembayaran) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-input.confirm-button text="Pembayaran dibatalkan?" positive="Ya, Batalkan!"
+                                        icon="info" class="btn btn-outline-danger btn-sm" data-bs-toggle="tooltip"
+                                        data-bs-title="Batalkan!" data-bs-placement="top">
+                                        <span class="bx bx-x"></span>
+                                        Pembatalan Pembayaran
+                                    </x-input.confirm-button>
+                                </form>
+                            @endcan
+
+                            @can('pembayaran cetakkuitansi')
+                                <a href="{{ route('pembayaran.cetakkuitansi', $pembayaran) }}"
+                                    class="btn btn-sm btn-primary">
+                                    <i class='bx bx-printer'></i> Cetak Kuitansi
+                                </a>
+                            @endcan
                         @endif
                     </div>
                 </div>
@@ -75,7 +82,8 @@
                     <div class="col-md-4">
                         <label for="first-name-horizontal">Total Nominal</label>
                     </div>
-                    <div class="col-md-8 form-group">: {{ 'Rp ' . number_format($pembayaran->total_nominal, 0, ',', '.') }}
+                    <div class="col-md-8 form-group">:
+                        {{ 'Rp ' . number_format($pembayaran->total_nominal, 0, ',', '.') }}
                     </div>
                     <div class="col-md-4">
                         <label for="first-name-horizontal">Waktu Pembayaran</label>
@@ -130,7 +138,8 @@
                                 <tr>
                                     <td colspan="3" style="text-align: right;">Total</td>
                                     <td>{{ $detailpembayaran->sum('pakai') . ' m3' }}</td>
-                                    <td>{{ 'Rp ' . number_format($detailpembayaran->sum('subtotal'), 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp ' . number_format($detailpembayaran->sum('subtotal'), 0, ',', '.') }}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

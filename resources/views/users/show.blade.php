@@ -23,19 +23,19 @@
                     </x-breadcrumb>
                 </div>
             </div>
-
+ 
             <section class="section">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-striped">
+                                    <table class="table table-hover">
                                         <tr>
                                             <td colspan="2" class="text-center">
                                                 <div class="avatar avatar-xl">
                                                     @if (!$user->avatar)
-                                                        <img src="https://via.placeholder.com/350?text=No+Image+Avaiable"
+                                                        <img src="https://ui-avatars.com/api/?background=random&name={{ $user->name }}"
                                                             alt="Avatar" class="rounded img-fluid">
                                                     @else
                                                         <img src="{{ asset('storage/uploads/avatars/' . $user->avatar) }}"
@@ -54,8 +54,7 @@
                                         </tr>
                                         <tr>
                                             <td class="fw-bold">{{ __('Role') }}</td>
-                                            <td>{{ $user->getRoleNames()->toArray() !== [] ? $user->getRoleNames()[0] : '-' }}
-                                            </td>
+                                            <td>{{ $user->getRoleNames()->toArray() !== [] ? $user->getRoleNames()[0] : '-' }}</td>
                                         </tr>
                                         <tr>
                                             <td class="fw-bold">{{ __('Unit Sekolah') }}</td>
