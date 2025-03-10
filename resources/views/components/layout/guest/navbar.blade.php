@@ -1,6 +1,6 @@
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     id="layout-navbar"
-    style="height: 5.5rem; border-color: rgba(255,255,255,.68); background: rgba(255,255,255,.38); position: fixed; width: 100%; z-index: 1000; top: 0; left: 50%; transform: translateX(-50%);">
+    style="height: 5.5rem; border-color: rgba(255,255,255,.68); background: rgba(255,255,255,.38); position: sticky; width: 100%; z-index: 100; top: 0; ">
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 

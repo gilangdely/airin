@@ -5,86 +5,93 @@
         <x-layout.guest.navbar />
 
         <!-- Content wrapper -->
-        <div class="content-wrapper" style="padding-top: 6rem;">
+        <div class="content-wrapper">
 
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
 
-                <!-- Hero -->
-                <section class="px-4 py-5 my-5 text-center">
-                    <div class="container">
-                        <h1 class="fw-extrabold title" style="color: #161b2c">
-                            Revolusi Baru <br>
-                            <span class="text-gradient">Pembayaran dan Pengelolaan Air</span>
-                        </h1>
-                        <div class="col-lg-6 mx-auto mt-7">
-                            <p class="lead mb-4">
-                                Nikmati pengalaman mudah, aman, dan instan dalam mengelola air. Pantau,
-                                bayar, dan kendalikan penggunaan air dengan efisiensi maksimal serta integrasi layanan
-                                pintar untuk kemudahan sehari-hari.
-                            </p>
+                <div class="height-hero-features">
+                    <!-- Hero -->
+                    <section class="px-4 py-5 my-5 text-center">
+                        <div class="container">
+                            <h1 class="fw-extrabold title" style="color: #161b2c">
+                                Revolusi Baru <br>
+                                <span class="text-gradient">Pembayaran dan Pengelolaan Air</span>
+                            </h1>
+                            <div class="col-lg-6 mx-auto mt-7">
+                                <p class="lead mb-4">
+                                    Nikmati pengalaman mudah, aman, dan instan dalam mengelola air. Pantau,
+                                    bayar, dan kendalikan penggunaan air dengan efisiensi maksimal serta integrasi
+                                    layanan
+                                    pintar untuk kemudahan sehari-hari.
+                                </p>
+                            </div>
+                            <div class="justify-content-center mt-11">
+                                <a href="{{ route('login') }}" class="btn-gradient btn-lg px-6">Mulai Sekarang</a>
+                            </div>
                         </div>
-                        <div class="justify-content-center mt-11">
-                            <a href="{{ route('login') }}" class="btn-gradient btn-lg px-6">Mulai Sekarang</a>
-                        </div>
-                    </div>
-                </section>
-                <!-- End Hero -->
+                    </section>
+                    <!-- End Hero -->
 
-                <!-- Features -->
-                <section style="margin-top: 4rem;">
-                    <div class="row align-items-center">
-                        <!-- Card 1 - Tagihan Transparan -->
-                        <div class="col-md-4 mb-4 feature-card">
-                            <div class="card h-100 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
-                                <div class="card-body">
-                                    <p class="text-start card-title mb-4">
-                                        <i class="bi bi-wallet2 rounded h4 text-white px-3 py-2 me-4"
-                                            style="background: linear-gradient(45deg, #28a745, #81c784);"></i>
-                                        <span class="h5 fw-bold">Tagihan Transparan</span>
-                                    </p>
-                                    <p class="card-text text-start">Sistem kami mencatat penggunaan air secara akurat,
-                                        sehingga Anda menerima tagihan yang transparan dan rinci sesuai pemakaian.</p>
+                    <!-- Features -->
+                    <section style="margin-top: 4rem;">
+                        <div class="row align-items-center">
+                            <!-- Card 1 - Tagihan Transparan -->
+                            <div class="col-md-4 mb-4 feature-card" data-aos="fade-up" data-aos-duration="2000">
+                                <div class="card h-70 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
+                                    <div class="card-body">
+                                        <p class="text-start card-title mb-4">
+                                            <i class="bi bi-wallet2 rounded h4 text-white px-3 py-2 me-4"
+                                                style="background: linear-gradient(45deg, #28a745, #81c784);"></i>
+                                            <span class="h5 fw-bold">Tagihan Transparan</span>
+                                        </p>
+                                        <p class="card-text text-start">Sistem kami mencatat penggunaan air secara
+                                            akurat,
+                                            sehingga Anda menerima tagihan yang transparan dan rinci sesuai pemakaian.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 - Monitoring Real-time -->
+                            <div class="col-md-4 mb-4 feature-card" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="card h-70 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
+                                    <div class="card-body">
+                                        <p class="text-start card-title mb-4">
+                                            <i class="bi bi-clock rounded h4 text-white px-3 py-2 me-4"
+                                                style="background: linear-gradient(45deg, #ff6f61, #f8d7da);"></i>
+                                            <span class="h5 fw-bold">Monitoring Real-time</span>
+                                        </p>
+                                        <p class="card-text text-start">Pantau penggunaan air secara real-time dan
+                                            terima
+                                            notifikasi instan untuk setiap perubahan, memberi Anda kendali penuh atas
+                                            konsumsi air.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 - Layanan Responsif -->
+                            <div class="col-md-4 mb-4 feature-card" data-aos="fade-up" data-aos-duration="2000">
+                                <div class="card h-70 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
+                                    <div class="card-body">
+                                        <p class="text-start card-title mb-4">
+                                            <i class="bi bi-lightning-charge rounded h4 text-white px-3 py-2 me-4"
+                                                style="background: linear-gradient(45deg, #ffc107, #ff9800);"></i>
+                                            <span class="h5 fw-bold">Layanan Responsif</span>
+                                        </p>
+                                        <p class="card-text text-start">Kami menyediakan layanan cepat dan responsif,
+                                            memastikan setiap kebutuhan pelanggan ditangani dengan segera dan efektif.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Card 2 - Monitoring Real-time -->
-                        <div class="col-md-4 mb-4 feature-card">
-                            <div class="card h-100 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
-                                <div class="card-body">
-                                    <p class="text-start card-title mb-4">
-                                        <i class="bi bi-clock rounded h4 text-white px-3 py-2 me-4"
-                                            style="background: linear-gradient(45deg, #ff6f61, #f8d7da);"></i>
-                                        <span class="h5 fw-bold">Monitoring Real-time</span>
-                                    </p>
-                                    <p class="card-text text-start">Pantau penggunaan air secara real-time dan terima
-                                        notifikasi instan untuk setiap perubahan, memberi Anda kendali penuh atas
-                                        konsumsi air.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 3 - Layanan Responsif -->
-                        <div class="col-md-4 mb-4 feature-card">
-                            <div class="card h-100 shadow-sm" style="background: rgba(255, 255, 255, 0.75);">
-                                <div class="card-body">
-                                    <p class="text-start card-title mb-4">
-                                        <i class="bi bi-lightning-charge rounded h4 text-white px-3 py-2 me-4"
-                                            style="background: linear-gradient(45deg, #ffc107, #ff9800);"></i>
-                                        <span class="h5 fw-bold">Layanan Responsif</span>
-                                    </p>
-                                    <p class="card-text text-start">Kami menyediakan layanan cepat dan responsif,
-                                        memastikan setiap kebutuhan pelanggan ditangani dengan segera dan efektif.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- End Features -->
+                    </section>
+                    <!-- End Features -->
+                </div>
 
                 <!-- Testimonials -->
-                <section class="mt-8">
+                <section class="height-testimonials">
                     <h3 class="testimonial-title text-center fw-bold my-5" data-aos="fade-up" data-aos-duration="1500">
                         Apa Kata Pelanggan Kami?
                     </h3>
@@ -247,12 +254,12 @@
                 <!-- End Testimonials -->
 
                 <!-- FAQ -->
-                <section id="FAQ" class="container mt-8" data-aos="fade-up" data-aos-duration="1000">
+                <section id="FAQ" class="container height-faq" data-aos="fade-up" data-aos-duration="1000">
                     <h3 class="testimonial-title text-center fw-bold my-5">Ingin tahu lebih?</h3>
                     <div class="row px-4 my-5">
                         <!-- Bagian Kiri -->
-                        <div class="col-md-6">
-                            <p class="mb-4">
+                        <div class="col-md-6 left-faq">
+                            <p class="mb-4 faq-text">
                                 Platform inovatif yang dirancang untuk membantu Anda memantau dan mengelola penggunaan
                                 air secara efisien. Dengan teknologi terkini, kami memberikan solusi cerdas untuk
                                 menghemat air, mengurangi pemborosan, dan meningkatkan kesadaran akan pentingnya
@@ -397,17 +404,18 @@
 
                 <!-- Our Team -->
                 <section id="our-team" class="container mt-8">
-                    <h3 class="testimonial-title text-center fw-bold my-5" data-aos="fade-up" data-aos-duration="1000">Tim Kami</h3>
+                    <h3 class="testimonial-title text-center fw-bold my-5" data-aos="fade-up"
+                        data-aos-duration="1000">Tim Kami</h3>
                     <div
-                        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center mt-12">
+                        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center mt-12">
                         <!-- Card 1 -->
                         <div class="col" data-aos="fade-up" data-aos-duration="500">
-                            <div class="card h-100 shadow-sm position-relative team-card">
+                            <div class="card h-70 w-80 shadow-sm position-relative team-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Firman.jpg"
                                         class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
                                         style="width: 120px; height: 120px; object-fit: cover; object-position: top">
-                                    <h5 class="card-title mt-5 pt-5">Firman Zamzami</h5>
+                                    <h5 class="card-title mt-6 pt-5">Firman Zamzami</h5>
                                     <p class="card-text text-muted">Team Leader</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
                                         <a href="https://github.com/GwFirman" target="_blank"
@@ -422,12 +430,12 @@
                         </div>
                         <!-- Card 2 -->
                         <div class="col" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="card h-100 shadow-sm position-relative team-card gilang-card">
+                            <div class="card h-70 w-80 shadow-sm position-relative team-card gilang-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Gilang.png"
                                         class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
                                         style="width: 120px; height: 120px; background-color: rgba(36,91,243,255); object-fit: cover;">
-                                    <h5 class="card-title mt-5 pt-5">Gilang Dely</h5>
+                                    <h5 class="card-title mt-6 pt-5">Gilang Dely</h5>
                                     <p class="card-text text-muted">Creative Director</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
                                         <a href="https://github.com/gilangdely" target="_blank"
@@ -442,12 +450,12 @@
                         </div>
                         <!-- Card 3 -->
                         <div class="col" data-aos="fade-up" data-aos-duration="1500">
-                            <div class="card h-100 shadow-sm position-relative team-card fauzan-card">
+                            <div class="card h-70 w-80 shadow-sm position-relative team-card fauzan-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Fauzan.jpg"
                                         class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
                                         style="width: 120px; height: 120px; object-fit: cover; object-position: 0px -20px;">
-                                    <h5 class="card-title mt-5 pt-5">Akhmad Fauzan</h5>
+                                    <h5 class="card-title mt-6 pt-5">Akhmad Fauzan</h5>
                                     <p class="card-text text-muted">Software Engineer</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
                                         <a href="https://github.com/ozan-fn" target="_blank"
@@ -462,12 +470,12 @@
                         </div>
                         <!-- Card 4 -->
                         <div class="col" data-aos="fade-up" data-aos-duration="2000">
-                            <div class="card h-100 shadow-sm position-relative team-card dodo-card">
+                            <div class="card h-70 w-80 shadow-sm position-relative team-card dodo-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Dodo.jpg"
                                         class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
-                                        style="width: 120px; height: 120px; object-fit: cover;"></img>
-                                    <h5 class="card-title mt-5 pt-5">Afridho Zaki</h5>
+                                        style="width: 120px; height: 120px; object-fit: cover;">
+                                    <h5 class="card-title mt-6 pt-5">Afridho Zaki</h5>
                                     <p class="card-text text-muted">Software Engineer</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
                                         <a href="https://github.com/dhodo999" target="_blank"
@@ -482,19 +490,19 @@
                         </div>
                         <!-- Card 5 -->
                         <div class="col" data-aos="fade-up" data-aos-duration="2500">
-                            <div class="card h-100 shadow-sm position-relative team-card auliaHamdi-card">
+                            <div class="card h-70 w-80 shadow-sm position-relative team-card auliaHamdi-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\AuliaHamdi.png"
                                         class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
-                                        style="width: 120px; height: 120px; background-color: rgb(177,181,184); object-fit: cover; object-position: 15px 10px"></img>
-                                    <h5 class="card-title mt-5 pt-5">Aulia Hamdi</h5>
+                                        style="width: 120px; height: 120px; background-color: rgb(177,181,184); object-fit: cover; object-position: 15px 10px;">
+                                    <h5 class="card-title mt-6 pt-5">Aulia Hamdi</h5>
                                     <p class="card-text text-muted">Visual Designer</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
-                                        <a href="https://dosen.amikompurwokerto.ac.id/main/profil_dosen?p=Aulia%20Hamdi" target="_blank"
-                                            class="text-decoration-none social-icon"><i
+                                        <a href="https://dosen.amikompurwokerto.ac.id/main/profil_dosen?p=Aulia%20Hamdi"
+                                            target="_blank" class="text-decoration-none social-icon"><i
                                                 class="bi bi-person-circle fs-5 text-person"></i></a>
-                                        <a href="https://sinta.kemdikbud.go.id/authors/profile/6112151" target="_blank"
-                                            class="text-decoration-none social-icon"><i
+                                        <a href="https://sinta.kemdikbud.go.id/authors/profile/6112151"
+                                            target="_blank" class="text-decoration-none social-icon"><i
                                                 class="bi bi-journals fs-5 text-journals"></i></a>
                                     </div>
                                 </div>
@@ -502,12 +510,12 @@
                         </div>
                         <!-- Card 6 -->
                         <div class="col" data-aos="fade-up" data-aos-duration="3000">
-                            <div class="card h-100 shadow-sm position-relative team-card ian-card">
+                            <div class="card h-70 w-80 shadow-sm position-relative team-card ian-card">
                                 <div class="card-body text-center">
                                     <img src="assets\img\profile\Iyan.jpg"
                                         class="rounded-circle mx-auto mb-4 position-absolute top-0 start-50 translate-middle"
                                         style="width: 120px; height: 120px; object-fit: cover; object-position: 0px 0px;">
-                                    <h5 class="card-title mt-5 pt-5">Muhammad Agus</h5>
+                                    <h5 class="card-title mt-6 pt-5">Muhammad Agus</h5>
                                     <p class="card-text text-muted">Designer Ui/Ux</p>
                                     <div class="d-flex justify-content-center gap-3 mt-3">
                                         <a href="https://github.com/Astha4Study" target="_blank"

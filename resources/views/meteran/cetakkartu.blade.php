@@ -6,131 +6,262 @@
 
             .front-card,
             .behind-card {
-                height: 89.6mm;
-                width: 56.6mm;
-                background-size: 100% 100%;
+                height: 53.98mm;
+                width: 85.60mm;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
                 border: 1px solid grey;
                 box-sizing: border-box;
                 position: relative;
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 15px;
+                padding: 10px;
                 margin: 10px auto;
+                background-color: #ffff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             .front-card {
-                background-image: url("{{ asset('assets/img/card/depanVer.png') }}");
-            }
-
-            .front-card .profile-card {
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
-                overflow: hidden;
-                margin-top: 10px;
-                margin-bottom: 4px;
-            }
-
-            .front-card .profile-card img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .front-card .card-info {
-                text-align: center;
-            }
-
-            .front-card .card-info h3 {
-                margin: 5px 0;
-                font-size: 16px;
-                text-transform: uppercase;
-            }
-
-            .front-card .card-info h3 {
-                margin-bottom: 4px;
-                font-family: 'Raleway', sans-serif;
-                font-size: 14px;
-                color: #ffff;
-            }
-
-            .front-card .card-info p {
-                margin: 2px 0;
-                font-size: 10px;
-                font-family: 'Roboto', sans-serif;
-                color: #ffff;
-            }
-
-            .behind-card {
-                background-image: url("{{ asset('assets/img/card/belakangVer.png') }}");
-                text-align: center;
-            }
-
-            .behind-card .airin-logo {
-                width: 30px;
-                height: 30px;
-                margin: 10px 0;
-                display: flex;
+                background-image: url("{{ asset('assets/img/card/depanHor.png') }}");
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 5px;
             }
 
-            .airin-logo p {
-                color: #ffff;
-                margin-bottom: 5px;
-                font-size: 25px;
-                font-family: 'Teko', sans-serif;
-                text-transform: uppercase;
+            .front-card .logo-section {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
             }
 
-            .behind-card .airin-logo img {
-                width: 100%;
-                height: 100%;
+            .front-card .logo-section img {
+                width: 20px;
+                height: 25px;
                 object-fit: contain;
+            }
+
+            .front-card .logo-section p {
+                font-family: 'Teko', sans-serif;
+                font-size: 18px;
+                color: #ffff;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+            .front-card .info-section {
+                text-align: center;
+                width: 100%;
+            }
+
+            .front-card .info-section h3 {
+                font-family: 'Raleway', sans-serif;
+                color: #ffff;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 15px;
+                margin-top: 1.5rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+
+            .front-card .info-section p {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                color: #ffff;
+                margin: 0 0 8px 0;
+            }
+
+            .front-card .info-section .meteran-id {
+                font-size: 13px;
+                margin-top: -15px;
+            }
+
+            .front-card .info-section .contact {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                text-align: left;
+                line-height: 1.2;
+            }
+
+            .front-card .info-section .contact p {
+                font-size: 12px;
+                margin: 0;
+            }
+
+            .behind-card {
+                background-image: url("{{ asset('assets/img/card/belakangHor.png') }}");
+                justify-content: center;
+                align-items: center;
+            }
+
+            .behind-card .qr-code {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+
+            .behind-card .qr-code .text-qr {
+                font-family: 'Roboto', sans-serif;
+                color: #ffff;
+                font-size: 16px;
+                margin-top: -5px;
             }
 
             .behind-card .qr-code img {
                 width: 90px;
                 height: 90px;
-                margin-top: 10px;
-            }
-
-            .behind-card .behind-card-info p {
-                margin-top: 10px;
-                font-size: 14px;
-                color: #ffff;
-            }
-
-            .behind-card .contact-us {
-                margin-top: 5px;
-                font-size: 10px;
-            }
-
-            .behind-card .contact-us p {
-                margin: 2px 0;
-                color: #ffff;
-                font-size: 12px;
-                font-family: 'Roboto', sans-serif;
+                max-width: 80%;
+                max-height: 80%;
+                object-fit: contain;
+                margin-top: 40px;
             }
 
             /* Responsive Styles */
-            @media (min-width: 768px) and (max-width: 1280px) {
-                .kartu-container {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    gap: 20px;
+            @media (max-width: 575.98px) {
+
+                .front-card,
+                .behind-card {
+                    height: 45mm;
+                    width: 70mm;
+                }
+
+                .front-card .logo-section img {
+                    width: 18px;
+                    height: 22px;
+                }
+
+                .front-card .logo-section p {
+                    font-size: 14px;
+                }
+
+                .front-card .info-section h3 {
+                    font-size: 12px;
+                    margin-top: 1rem;
+                }
+
+                .front-card .info-section .meteran-id {
+                    font-size: 10px;
+                    margin-top: -15px;
+                }
+
+                .front-card .info-section .contact p {
+                    font-size: 9px;
+                }
+
+                .behind-card .qr-code img {
+                    width: 60px;
+                    height: 60px;
+                }
+
+                .behind-card .qr-code .text-qr {
+                    margin-top: 5px;
                 }
             }
 
-            @media (max-width: 767px) {
-                .kartu-container {
-                    flex-direction: column;
-                    gap: 10px;
+            /* Mobile */
+            @media (min-width: 576px) and (max-width: 767.98px) {
+
+                .front-card,
+                .behind-card {
+                    height: 50mm;
+                    width: 80mm;
+                }
+
+                .front-card .logo-section img {
+                    width: 20px;
+                    height: 22px;
+                }
+
+                .front-card .info-section h3 {
+                    font-size: 14px;
+                }
+
+                .front-card .info-section .meteran-id {
+                    font-size: 12px;
+                }
+
+                .behind-card .qr-code img {
+                    width: 70px;
+                    height: 70px;
+                }
+
+                .behind-card .qr-code .text-qr {
+                    margin-top: 5px;
+                }
+            }
+
+            /* Tab */
+            @media (min-width: 768px) and (max-width: 991.98px) {
+                .front-card .logo-section img {
+                    width: 20px;
+                    height: 25px;
+                }
+
+                .front-card .info-section h3 {
+                    font-size: 14px;
+                }
+
+                .front-card .info-section .meteran-id {
+                    margin-top: -15px;
+                }
+
+                .behind-card .qr-code img {
+                    width: 80px;
+                    height: 80px;
+                }
+
+                .behind-card .qr-code .text-qr {
+                    margin-top: -5px;
+                }
+            }
+
+            /* Print Styles */
+            @media print {
+
+                .front-card,
+                .behind-card {
+                    height: 53.98mm;
+                    width: 85.60mm;
+                    margin: 0;
+                    box-shadow: none;
+                    page-break-inside: avoid;
+                }
+
+                .col-xl-4,
+                .col-md-6,
+                .col-sm-6 {
+                    width: 50%;
+                    flex: 0 0 50%;
+                    max-width: 50%;
+                }
+
+                .card {
+                    border: none;
+                    box-shadow: none;
+                }
+
+                .card-body {
+                    padding: 0;
+                }
+
+                .container {
+                    width: 100%;
+                    max-width: 100%;
+                    padding: 0;
+                }
+
+                x-breadcrumb {
+                    display: none;
                 }
             }
         </style>
@@ -144,44 +275,41 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="row">
-
+                <div class="row justify-content-center">
                     <!-- Front Card -->
-                    <div class="col-xl-3 col-md-5 col-sm-6 d-flex justify-content-center">
+                    <div class="col-xl-4 col-md-6 col-sm-6 d-flex justify-content-center">
                         <div class="front-card">
-                            <div class="profile-card">
-                                <img src="https://ui-avatars.com/api/?background=random&name={{ $meteran->pelanggan->nama_pelanggan }}"
-                                    alt="">
+                            <div class="logo-section">
+                                <img src="{{ asset('assets/img/logo/Airin-Logo.png') }}" alt="Logo Airin">
+                                <p>Airin</p>
                             </div>
-                            <div class="card-info">
+                            <div class="info-section">
                                 <h3>{{ $meteran->pelanggan->nama_pelanggan }}</h3>
-                                <p>{{ $meteran->nomor_meteran }}</p>
-                                <p>{{ date('d-M-Y', strtotime($meteran->tanggal_pemasangan)) }}</p>
+                                <p class="meteran-id">Nomor Meteran: {{ $meteran->nomor_meteran }}</p>
+                                <div class="contact">
+                                    <p>Phone: +62 123 4567 890</p>
+                                    <p>Email: info@airin.com</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Behind Card -->
-                    <div class="col-xl-3 col-md-5 col-sm-6 d-flex justify-content-center">
+                    <div class="col-xl-4 col-md-6 col-sm-6 d-flex justify-content-center">
                         <div class="behind-card">
-                            <div class="airin-logo">
-                                <img src="{{ asset('assets/img/logo/Airin-Logo.png') }}" alt="">
-                                <p>Airin</p>
-                            </div>
                             <div class="qr-code">
-                                <img src="{{ route('qrcode.generate', ['info' => $meteran->nomor_meteran]) }}"
-                                    alt="QRCode">
-                            </div>
-                            <div class="behind-card-info">
-                                <p>Scan Untuk Pembayaran</p>
-                            </div>
-                            <div class="contact-us">
-                                <p>Contact Us:</p>
-                                <p>Phone: +62 123 4567 890</p>
-                                <p>Email: info@airin.com</p>
-                                <p>Website: www.airin.com</p>
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=https://example.com&bgcolor=transparent"
+                                    alt="QR Code">
+                                <h5 class="text-qr">Scan Disini</h5>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Print Button -->
+                <div class="row mt-4">
+                    <div class="col-12 text-center">
+                        <button class="btn btn-primary" onclick="window.print()">Cetak Kartu</button>
                     </div>
                 </div>
             </div>
