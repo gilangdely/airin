@@ -26,6 +26,7 @@ class PelangganController extends Controller implements HasMiddleware
     public function index(Request $request): View
     {
         $query = Pelanggan::query();
+        $query->orderBy('id_pelanggan', 'DESC');
 
         // tambahkan kolom yang mau dikecualikan di pencarian
         $except = ['created_by', 'updated_by'];
