@@ -243,7 +243,7 @@
                     <div class="col-xl-4 col-md-6 col-sm-6 d-flex justify-content-center">
                         <div class="front-card">
                             <div class="logo-section">
-                                <img src="{{ asset('assets/img/logo/Airin-Logo.png') }}" alt="Logo Airin">
+                                <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo Airin">
                                 <p>Airin</p>
                             </div>
                             <div class="info-section">
