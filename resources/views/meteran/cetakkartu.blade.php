@@ -224,54 +224,17 @@
                     margin-top: -5px;
                 }
             }
-
-            /* Print Styles */
-            @media print {
-
-                .front-card,
-                .behind-card {
-                    height: 53.98mm;
-                    width: 85.60mm;
-                    margin: 0;
-                    box-shadow: none;
-                    page-break-inside: avoid;
-                }
-
-                .col-xl-4,
-                .col-md-6,
-                .col-sm-6 {
-                    width: 50%;
-                    flex: 0 0 50%;
-                    max-width: 50%;
-                }
-
-                .card {
-                    border: none;
-                    box-shadow: none;
-                }
-
-                .card-body {
-                    padding: 0;
-                }
-
-                .container {
-                    width: 100%;
-                    max-width: 100%;
-                    padding: 0;
-                }
-
-                x-breadcrumb {
-                    display: none;
-                }
-            }
         </style>
     @endpush
     <div class="container my-5">
-        <x-breadcrumb title="Cetak Kartu" :breadcrumbs="[
-            ['label' => 'Dashboard', 'url' => url('/')],
-            ['label' => 'Meteran', 'url' => route('meteran.index')],
-            ['label' => 'Cetak Kartu'],
-        ]" />
+        <div class="noprint">
+            <x-breadcrumb title="Cetak Kartu" :breadcrumbs="[
+                ['label' => 'Dashboard', 'url' => url('/')],
+                ['label' => 'Meteran', 'url' => route('meteran.index')],
+                ['label' => 'Cetak Kartu'],
+            ]" />
+
+        </div>
 
         <div class="card">
             <div class="card-body">
@@ -298,7 +261,7 @@
                     <div class="col-xl-4 col-md-6 col-sm-6 d-flex justify-content-center">
                         <div class="behind-card">
                             <div class="qr-code">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=https://example.com&bgcolor=transparent"
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data={{ $meteran->nomor_meteran }}&bgcolor=transparent"
                                     alt="QR Code">
                                 <h5 class="text-qr">Scan Disini</h5>
                             </div>
@@ -307,7 +270,7 @@
                 </div>
 
                 <!-- Print Button -->
-                <div class="row mt-4">
+                <div class="row mt-4 noprint">
                     <div class="col-12 text-center">
                         <button class="btn btn-primary" onclick="window.print()">Cetak Kartu</button>
                     </div>
