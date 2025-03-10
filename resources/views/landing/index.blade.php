@@ -109,7 +109,7 @@
                                                 <hr class="flex-grow-1"
                                                     style="border: 1px solid #8a2be2; margin: 0 10px;">
                                                 <p class="lh-sm mb-0 text-nowrap testimoni-text-gradient"
-                                                    style="font-weight: 600; font-size: 1.1rem;">Mas Salah</p>
+                                                    style="font-weight: 600; font-size: 1.1rem;">Ahmad Salim</p>
                                                 <hr class="flex-grow-1"
                                                     style="border: 1px solid #8a2be2; margin: 0 10px;">
                                             </div>
@@ -165,7 +165,61 @@
                                                 <hr class="flex-grow-1"
                                                     style="border: 1px solid #8a2be2; margin: 0 10px;">
                                                 <p class="lh-sm mb-0 text-nowrap testimoni-text-gradient"
-                                                    style="font-weight: 600; font-size: 1.1rem;">Chen Dok</p>
+                                                    style="font-weight: 600; font-size: 1.1rem;">Firman Rudiman</p>
+                                                <hr class="flex-grow-1"
+                                                    style="border: 1px solid #8a2be2; margin: 0 10px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimoni 4 -->
+                            <div class="carousel-item">
+                                <div class="card mx-10 shadow-sm rounded-3"
+                                    style="min-height: 220px; display: flex; flex-direction: column; justify-content: center; background: rgba(255, 255, 255, 0.85);">
+                                    <div
+                                        class="card-body d-flex flex-column justify-content-center align-items-center p-5">
+                                        <img src="{{ asset('assets/img/avatars/8.jpg') }}" alt="Avatar Pelanggan"
+                                            class="rounded-circle me-3 mb-4" width="70" height="70">
+                                        <p class="fs-5 fst-italic card-text text-center"
+                                            style="color: #333; font-weight: 500; line-height: 1.6;">
+                                            "Setelah menggunakan Airin, management penggunaan air di rumah menjadi lebih efisien."
+                                        </p>
+                                        <div class="mt-4 d-flex align-items-center justify-content-center w-100">
+                                            <div class="d-flex align-items-center w-100"
+                                                style="max-width: 350px; width: 100%; text-align: center;">
+                                                <hr class="flex-grow-1"
+                                                    style="border: 1px solid #8a2be2; margin: 0 10px;">
+                                                <p class="lh-sm mb-0 text-nowrap testimoni-text-gradient"
+                                                    style="font-weight: 600; font-size: 1.1rem;">Lisa Helena</p>
+                                                <hr class="flex-grow-1"
+                                                    style="border: 1px solid #8a2be2; margin: 0 10px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimoni 5 -->
+                            <div class="carousel-item">
+                                <div class="card mx-10 shadow-sm rounded-3"
+                                    style="min-height: 220px; display: flex; flex-direction: column; justify-content: center; background: rgba(255, 255, 255, 0.85);">
+                                    <div
+                                        class="card-body d-flex flex-column justify-content-center align-items-center p-5">
+                                        <img src="{{ asset('assets/img/avatars/9.jpg') }}" alt="Avatar Pelanggan"
+                                            class="rounded-circle me-3 mb-4" width="70" height="70">
+                                        <p class="fs-5 fst-italic card-text text-center"
+                                            style="color: #333; font-weight: 500; line-height: 1.6;">
+                                            "Dengan menggunakan website ini penggunaan air di rumah saya menjadi lebih terkontrol. Terima kasih Airin!"
+                                        </p>
+                                        <div class="mt-4 d-flex align-items-center justify-content-center w-100">
+                                            <div class="d-flex align-items-center w-100"
+                                                style="max-width: 350px; width: 100%; text-align: center;">
+                                                <hr class="flex-grow-1"
+                                                    style="border: 1px solid #8a2be2; margin: 0 10px;">
+                                                <p class="lh-sm mb-0 text-nowrap testimoni-text-gradient"
+                                                    style="font-weight: 600; font-size: 1.1rem;">Aira Laila</p>
                                                 <hr class="flex-grow-1"
                                                     style="border: 1px solid #8a2be2; margin: 0 10px;">
                                             </div>

@@ -20,7 +20,7 @@
         <!-- Navbar Menus -->
         <ul class="flex-row navbar-nav align-items-center ms-auto">
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
-                <a class="nav-link fw-medium collapsed" href="{{ url('/') }}">Branda</a>
+                <a class="nav-link fw-medium collapsed" href="{{ url('/') }}">Beranda</a>
             </li>
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
                 <a class="nav-link fw-medium collapsed" href="#FAQ">Tentang</a>
