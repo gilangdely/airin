@@ -7,7 +7,7 @@
         <!-- Logo -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="50px">
+                <img src="{{ asset('assets/img/logo/logo.png') }}" alt="" height="40px">
                 <span class="mb-0 border-0 shadow-none form-control ps-1 ps-sm-2 fw-medium">
                     <span style="font-size: 1.3rem;" class="fw-bold">{{ config('app.name') }}</span>
                     <br>
