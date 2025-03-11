@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use \Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Woo\GridView\DataProviders\EloquentDataProvider;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MeteranController extends Controller implements HasMiddleware
 {
@@ -156,6 +157,10 @@ class MeteranController extends Controller implements HasMiddleware
     public function cetakkartu(Meteran $meteran)
     {
         $meteran->load('pelanggan');
-        return view('meteran.cetakkartu', compact('meteran'));
+
+        $qrCodeSvg = QrCode::format('svg')->size(90)->generate($meteran->nomor_meteran);
+        $qrCode = 'data:image/svg+xml;base64,' . base64_encode($qrCodeSvg);
+
+        return view('meteran.cetakkartu', compact('meteran', 'qrCode'));
     }
 }

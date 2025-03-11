@@ -11,7 +11,6 @@ use App\Http\Controllers\MeteranController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemakaianController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\RekapPembayaran;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TarifLayananController;
@@ -35,7 +34,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('layanan', LayananController::class);
-    Route::get('qrcode/generate/{info}', [QRCodeController::class, 'index'])->name('qrcode.generate');
 
     Route::get('pemakaian/cekmeteran', [PemakaianController::class, 'cekmeteran'])->name('pemakaian.cekmeteran');
     Route::post('pemakaian/storecekmeteran', [PemakaianController::class, 'storecekmeteran'])->name('pemakaian.storecekmeteran');

@@ -120,10 +120,8 @@
             .behind-card .qr-code img {
                 width: 90px;
                 height: 90px;
-                max-width: 80%;
-                max-height: 80%;
                 object-fit: contain;
-                margin-top: 40px;
+                /* margin-top: 40px; */
             }
 
             /* Responsive Styles */
@@ -251,7 +249,7 @@
                                 <p class="meteran-id">Nomor Meteran: {{ $meteran->nomor_meteran }}</p>
                                 <div class="contact">
                                     <p>Phone: +62 123 4567 890</p>
-                                    <p>Email: info@airin.com</p>
+                                    <p>Email: info@airin.life</p>
                                 </div>
                             </div>
                         </div>
@@ -259,11 +257,17 @@
 
                     <!-- Behind Card -->
                     <div class="col-xl-4 col-md-6 col-sm-6 d-flex justify-content-center">
-                        <div class="behind-card">
+                        <div class="behind-card" >
                             <div class="qr-code">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data={{ $meteran->nomor_meteran }}&bgcolor=transparent"
-                                    alt="QR Code">
-                                <h5 class="text-qr">Scan Disini</h5>
+                                <div 
+                                    style="background-color: #ffff; padding: 4px; height: 64px; width: 64px; position: relative;">
+                                    
+                                    <img src="{{ $qrCode }}" alt="QR Code" style="height: 100%; width: 100%;">
+                                                
+                                    <h5 class="text-qr" 
+                                        style="position: absolute; white-space: nowrap; left: 50%; translate: -50% 0; bottom: -46px;"
+                                        >Scan Disini</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
