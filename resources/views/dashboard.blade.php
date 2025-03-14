@@ -11,16 +11,12 @@
                         </div>
                     @endif
 
-                    {{-- {{ __('You are logged in!') }} --}}
-
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 align-items-stretch"
-                        style="rgba(255, 255, 255, 0.5);">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                         <div class="col">
                             <div class="card h-100 shadow-sm">
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <p class="text-start card-title mb-4">
-                                        <i
-                                            class="text-white bi bi-people-fill rounded h5 bg-primary px-3 py-2  border border-primary border-opacity-50 me-4"></i>
+                                        <i class="text-white bi bi-people-fill rounded h5 bg-primary px-3 py-2 border border-primary border-opacity-50 me-4"></i>
                                         <span class="h5 fw-bold">{{ $pelanggan }}</span>
                                     </p>
                                     <p class="card-text text-start">Total pelanggan</p>
@@ -31,8 +27,7 @@
                             <div class="card h-100 shadow-sm">
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <p class="text-start card-title mb-4">
-                                        <i
-                                            class="text-white bi bi-speedometer rounded h5 bg-warning px-3 py-2 border border-warning border-opacity-50 me-4"></i>
+                                        <i class="text-white bi bi-speedometer rounded h5 bg-warning px-3 py-2 border border-warning border-opacity-50 me-4"></i>
                                         <span class="h5 fw-bold">{{ $meteran }}</span>
                                     </p>
                                     <p class="card-text text-start">Total meteran aktif</p>
@@ -43,8 +38,7 @@
                             <div class="card h-100 shadow-sm">
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <p class="text-start card-title mb-4">
-                                        <i
-                                            class="text-white bi bi-receipt rounded h5 bg-danger px-3 py-2 border border-danger border-opacity-50 me-4"></i>
+                                        <i class="text-white bi bi-receipt rounded h5 bg-danger px-3 py-2 border border-danger border-opacity-50 me-4"></i>
                                         <span class="h5 fw-bold">{{ $totaltagihan }}</span>
                                     </p>
                                     <p class="card-text text-start">Total tagihan aktif</p>
@@ -55,10 +49,8 @@
                             <div class="card h-100 shadow-sm">
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <p class="text-start card-title mb-4">
-                                        <i
-                                            class="text-white bi bi-cash-stack rounded h5 bg-success px-3 py-2 border border-success border-opacity-50 me-4"></i>
-                                        <span
-                                            class="h5 fw-bold">{{ 'Rp' . number_format($totalNominal, 0, ',', '.') }}</span>
+                                        <i class="text-white bi bi-cash-stack rounded h5 bg-success px-3 py-2 border border-success border-opacity-50 me-4"></i>
+                                        <span class="h5 fw-bold">{{ 'Rp' . number_format($totalNominal, 0, ',', '.') }}</span>
                                     </p>
                                     <p class="card-text text-start">Total pembayaran bulan ini</p>
                                 </div>
@@ -70,14 +62,12 @@
                     <section class="mt-5">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                                    type="button" role="tab" aria-controls="home" aria-selected="true">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
                                     Daftar tunggakan
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                    type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
                                     Pembayaran terakhir
                                 </button>
                             </li>
@@ -85,24 +75,22 @@
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane show  active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="table-responsive">
                                     <div class="row justify-content-between align-items-center g-2">
                                         <div class="col">
                                             <h5 class="card-header">Daftar tunggakan</h5>
                                         </div>
                                         <div class="col">
-                                            <a href="{{ route('pemakaian.index') }}"
-                                                class="btn btn-primary btn-sm float-end">
+                                            <a href="{{ route('pemakaian.index') }}" class="btn btn-primary btn-sm float-end">
                                                 Lihat pemakaian
                                             </a>
                                         </div>
                                     </div>
-                                    <table class="table table-striped" id="data-table" style="height: 100px;">
+                                    <table class="table table-striped" id="data-table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-
                                                 <th class="align-middle">Nama Pelanggan</th>
                                                 <th class="align-middle">Nomor Meteran</th>
                                                 <th class="align-middle">Total Bulan</th>
@@ -113,9 +101,7 @@
                                         <tbody>
                                             @forelse ($pemakaian as $row)
                                                 <tr>
-                                                    <td>{{ $loop->iteration + ($pemakaian->currentPage() - 1) * $pemakaian->perPage() }}
-                                                    </td>
-
+                                                    <td>{{ $loop->iteration + ($pemakaian->currentPage() - 1) * $pemakaian->perPage() }}</td>
                                                     <td>{{ $row->nama_pelanggan }}</td>
                                                     <td>{{ $row->nomor_meteran }}</td>
                                                     <td>{{ $row->jumlah_bulan }}</td>
@@ -124,10 +110,7 @@
                                                         <div class="btn-group" role="group">
                                                             @can('pemakaian view')
                                                                 <div class="me-1">
-                                                                    <a href="{{ route('tunggakan.show', $row->nomor_meteran) }}"
-                                                                        class="btn btn-icon btn-outline-info btn-sm"
-                                                                        data-bs-toggle="tooltip" data-bs-title="Detail"
-                                                                        data-bs-placement="top">
+                                                                    <a href="{{ route('tunggakan.show', $row->nomor_meteran) }}" class="btn btn-icon btn-outline-info btn-sm" data-bs-toggle="tooltip" data-bs-title="Detail" data-bs-placement="top">
                                                                         <span class="bx bx-show"></span>
                                                                     </a>
                                                                 </div>
@@ -137,7 +120,7 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="9" class="text-center">Tidak ada tunggakan</td>
+                                                    <td colspan="6" class="text-center">Tidak ada tunggakan</td>
                                                 </tr>
                                             @endforelse
                                         </tbody>
@@ -156,19 +139,15 @@
                                             <h5 class="card-header">Daftar pembayaran terakhir</h5>
                                         </div>
                                         <div class="col">
-                                            <a href="{{ route('pembayaran.index') }}"
-                                                class="btn btn-primary btn-sm float-end">
+                                            <a href="{{ route('pembayaran.index') }}" class="btn btn-primary btn-sm float-end">
                                                 Lihat semua
                                             </a>
                                         </div>
                                     </div>
-
-
-                                    <table class="table table-striped" id="data-table" style="height: 100px;">
+                                    <table class="table table-striped" id="data-table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-
                                                 <th class="align-middle">Nomor Meteran</th>
                                                 <th class="align-middle">Nama Pelanggan</th>
                                                 <th class="align-middle">Bulan</th>
@@ -182,9 +161,7 @@
                                         <tbody>
                                             @forelse ($pembayaran as $row)
                                                 <tr>
-                                                    <td>{{ $loop->iteration + ($pembayaran->currentPage() - 1) * $pembayaran->perPage() }}
-                                                    </td>
-
+                                                    <td>{{ $loop->iteration + ($pembayaran->currentPage() - 1) * $pembayaran->perPage() }}</td>
                                                     <td>{{ $row?->meteran->nomor_meteran }}</td>
                                                     <td>{{ $row?->meteran->pelanggan->nama_pelanggan }}</td>
                                                     <td>{{ $row?->bulan->nama_bulan . ' ' . $row?->tahun }}</td>
@@ -196,15 +173,11 @@
                                                         <div class="btn-group" role="group">
                                                             @can('pembayaran view')
                                                                 <div class="me-1">
-                                                                    <a href="{{ route('pembayaran.show', $row) }}"
-                                                                        class="btn btn-icon btn-outline-info btn-sm"
-                                                                        data-bs-toggle="tooltip" data-bs-title="Detail"
-                                                                        data-bs-placement="top">
+                                                                    <a href="{{ route('pembayaran.show', $row) }}" class="btn btn-icon btn-outline-info btn-sm" data-bs-toggle="tooltip" data-bs-title="Detail" data-bs-placement="top">
                                                                         <span class="bx bx-show"></span>
                                                                     </a>
                                                                 </div>
                                                             @endcan
-
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -223,15 +196,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </section>
-
-
                 </div>
             @else
                 <div class="card-body">
                     <p>
-                        Selamat datang <b>{{ auth()->user()->name; }}</b>.
+                        Selamat datang <b>{{ auth()->user()->name }}</b>.
                     </p>
                 </div>
             @endrole

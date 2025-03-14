@@ -100,7 +100,7 @@
                             <!-- Testimoni 1 -->
                             <div class="carousel-item active">
                                 <div class="card mx-10 shadow-sm rounded-3"
-                                    style="min-height: 220px; display: flex; flex-direction: column; justify-content: center; background: rgba(255, 255, 255, 0.85);">
+                                    style="testi-size min-height: 220px; display: flex; flex-direction: column; justify-content: center; background: rgba(255, 255, 255, 0.85);">
                                     <div
                                         class="card-body d-flex flex-column justify-content-center align-items-center p-5">
                                         <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar Pelanggan"
@@ -188,10 +188,11 @@
                                     <div
                                         class="card-body d-flex flex-column justify-content-center align-items-center p-5">
                                         <img src="{{ asset('assets/img/avatars/8.jpg') }}" alt="Avatar Pelanggan"
-                                            class="rounded-circle me-3 mb-4" width="70" height="70">
+                                            class="rounded-circle me-3 mb-4" width="70" height="70" style="object-fit: cover;">
                                         <p class="fs-5 fst-italic card-text text-center"
                                             style="color: #333; font-weight: 500; line-height: 1.6;">
-                                            "Setelah menggunakan Airin, management penggunaan air di rumah menjadi lebih efisien."
+                                            "Setelah menggunakan Airin, management penggunaan air di rumah menjadi lebih
+                                            efisien."
                                         </p>
                                         <div class="mt-4 d-flex align-items-center justify-content-center w-100">
                                             <div class="d-flex align-items-center w-100"
@@ -215,10 +216,11 @@
                                     <div
                                         class="card-body d-flex flex-column justify-content-center align-items-center p-5">
                                         <img src="{{ asset('assets/img/avatars/9.jpg') }}" alt="Avatar Pelanggan"
-                                            class="rounded-circle me-3 mb-4" width="70" height="70">
+                                            class="rounded-circle me-3 mb-4" width="70" height="70" style="object-fit: cover;">
                                         <p class="fs-5 fst-italic card-text text-center"
                                             style="color: #333; font-weight: 500; line-height: 1.6;">
-                                            "Dengan menggunakan website ini penggunaan air di rumah saya menjadi lebih terkontrol. Terima kasih Airin!"
+                                            "Dengan menggunakan website ini penggunaan air di rumah saya menjadi lebih
+                                            terkontrol. Terima kasih Airin!"
                                         </p>
                                         <div class="mt-4 d-flex align-items-center justify-content-center w-100">
                                             <div class="d-flex align-items-center w-100"
@@ -405,7 +407,8 @@
                 <!-- Our Team -->
                 <section id="our-team" class="container mt-8">
                     <h3 class="testimonial-title text-center fw-bold my-5" data-aos="fade-up"
-                        data-aos-duration="1000">Tim Kami</h3>
+                        data-aos-duration="1000">
+                        Tim Kami</h3>
                     <div
                         class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center mt-12">
                         <!-- Card 1 -->

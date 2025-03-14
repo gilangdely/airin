@@ -1,9 +1,9 @@
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     id="layout-navbar"
-    style="height: 5.5rem; border-color: rgba(255,255,255,.68); background: rgba(255,255,255,.38); position: sticky; width: 100%; z-index: 100; top: 0; ">
-
+    style="height: 5.5rem; border-color: rgba(255,255,255,.68); background: rgba(255,255,255,.38); position: sticky; width: 100%; z-index: 100; top: 0;">
+    
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
+        
         <!-- Logo -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <!-- End Logo -->
-
+        
         <!-- Navbar Menus -->
         <ul class="flex-row navbar-nav align-items-center ms-auto">
             <li class="nav-item me-4 d-none d-md-flex d-lg-flex">
@@ -36,5 +36,6 @@
             </li>
         </ul>
         <!-- End Navbar Menus -->
+        
     </div>
 </nav>

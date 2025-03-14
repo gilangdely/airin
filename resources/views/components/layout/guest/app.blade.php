@@ -15,15 +15,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicon/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('assets/img/favicon/site.webmanifest') }}">
 
+    <!-- Fonts and Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
 
     <!-- Core CSS -->
@@ -34,16 +31,14 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/aos/aos.css') }}">
 
     <!-- Page CSS -->
-    <!-- Page -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/aos/aos.css') }}" />
 
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
 
     <style media="print">
         .noprint {
@@ -70,7 +65,7 @@
         }
 
         h4.section-title {
-            font-size: 32px;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 20px;
             padding-bottom: 20px;
@@ -111,7 +106,7 @@
         }
 
         .title {
-            line-height: 3.8rem;
+            line-height: 2.5rem;
         }
 
         .btn-gradient {
@@ -331,16 +326,20 @@
             border-radius: 5px;
         }
 
-        /* mini Mobile */
+        /* Responsive Styles */
         @media (max-width: 575.98px) {
             .title {
-                font-size: 2rem;
-                line-height: 2.5rem;
+                font-size: 1.5rem;
+                line-height: 2rem;
             }
 
             .left-faq {
                 text-align: center;
                 margin-bottom: 1.2rem;
+            }
+
+            .carousel-item {
+                padding: 0 1.5rem;
             }
 
             .gilang-card {
@@ -390,11 +389,10 @@
             }
         }
 
-        /* Mobile */
         @media (min-width: 576px) and (max-width: 767.98px) {
             .title {
-                font-size: 2rem;
-                line-height: 2.5rem;
+                font-size: 1.75rem;
+                line-height: 2.25rem;
             }
 
             .left-faq {
@@ -423,6 +421,10 @@
 
             .ian-card {
                 top: 200px;
+            }
+
+            .testi-size {
+                height: 400px;
             }
 
             .col {
@@ -471,7 +473,6 @@
             }
         }
 
-        /* mini Tab */
         @media (min-width: 768px) and (max-width: 991.98px) {
             .title {
                 font-size: 2rem;
@@ -510,11 +511,10 @@
             }
         }
 
-        /* Desktop */
         @media (min-width: 992px) {
             .title {
-                font-size: 2rem;
-                line-height: 2.5rem;
+                font-size: 2.5rem;
+                line-height: 3rem;
             }
 
             .height-hero-features {
@@ -529,7 +529,8 @@
                 height: 90vh;
             }
 
-             .auliaHamdi-card, .ian-card {
+            .auliaHamdi-card,
+            .ian-card {
                 top: 30px;
             }
 
@@ -554,7 +555,6 @@
                 font-size: 0.9rem;
             }
 
-            /* 4 kartu di atas, 2 kartu di bawah */
             #our-team .row {
                 display: flex;
                 flex-wrap: wrap;
@@ -562,7 +562,6 @@
 
             #our-team .row .col {
                 flex: 0 0 25%;
-                /* 4 kartu per baris */
                 max-width: 25%;
             }
 
@@ -570,7 +569,6 @@
                 padding-top: 1.5rem;
             }
         }
-        
     </style>
 </head>
 
