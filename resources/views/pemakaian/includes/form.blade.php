@@ -1,3 +1,27 @@
+@push('style')
+    <script src="https://npmcdn.com/flatpickr@4.6.13/dist/l10n/id.js"></script>
+@endPush
+
+@push('script')
+    <script>
+        const maxDate = new Date();
+        maxDate.setMonth(maxDate.getMonth());
+
+        flatpickr("#bulan", {
+            plugins: [
+                new monthSelectPlugin({
+                    // shorthand: true,
+                    dateFormat: "Y-m",
+                })
+            ],
+            locale: "id",
+            altFormat: "F Y",
+            altInput: true,
+            maxDate: maxDate,
+        });
+    </script>
+@endPush
+
 <div class="row">
     <div class="col-md-12">
 
@@ -42,20 +66,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    const maxDate = new Date();
-    maxDate.setMonth(maxDate.getMonth());
-
-    flatpickr("#bulan", {
-        plugins: [
-            new monthSelectPlugin({
-                shorthand: true,
-                dateFormat: "Y-m",
-                altFormat: "F Y",
-            })
-        ],
-        allowInput: true,
-        maxDate: maxDate
-    });
-</script>

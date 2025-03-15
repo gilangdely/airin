@@ -1,3 +1,18 @@
+@push('style')
+    <script src="https://npmcdn.com/flatpickr@4.6.13/dist/l10n/id.js"></script>
+@endPush
+
+@push('script')
+    <script>
+        flatpickr("#tanggal_pemasangan", {
+            altInput: true,
+            altFormat: "j F Y",
+            dateFormat: "Y-m-d",
+            locale: "id",
+        });
+    </script>
+@endPush
+
 <div class="row">
     <div class="col-md-12">
 
@@ -54,7 +69,8 @@
             <label for="tanggal_pemasangan" class="form-label">Tanggal Pemasangan</label>
             <input type="date" name="tanggal_pemasangan"
                 class="form-control {{ $errors->has('tanggal_pemasangan') ? 'is-invalid' : '' }}"
-                id="tanggal_pemasangan" value="{{ old('tanggal_pemasangan', isset($meteran->tanggal_pemasangan) ? $meteran->tanggal_pemasangan : date('Y-m-d')) }}"
+                id="tanggal_pemasangan"
+                value="{{ old('tanggal_pemasangan', isset($meteran->tanggal_pemasangan) ? $meteran->tanggal_pemasangan : date('Y-m-d')) }}"
                 placeholder="Masukkan Tanggal Pemasangan" />
             @error('tanggal_pemasangan')
                 <small class="invalid-feedback">{{ $message }}</small>

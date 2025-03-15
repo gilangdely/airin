@@ -1,25 +1,48 @@
+@push('style')
+    <script src="https://npmcdn.com/flatpickr@4.6.13/dist/l10n/id.js"></script>
+@endPush
+
+@push('script')
+    <script>
+        flatpickr("#akhir", {
+            altInput: true,
+            altFormat: "j F Y",
+            dateFormat: "Y-m-d",
+            locale: "id",
+        });
+        flatpickr("#awal", {
+            altInput: true,
+            altFormat: "j F Y",
+            dateFormat: "Y-m-d",
+            locale: "id",
+        });
+    </script>
+@endPush
+
 <x-layout.app title="Rekap Pembayaran" :withError="true">
     <div class="my-5 container-fluid">
         <x-breadcrumb title="Rekap Pembayaran" :breadcrumbs="[
-                ['label' => 'Dashboard', 'url' => url('/')],
-                ['label' => 'Rekap Pembayaran'],
-            ]" />
+            ['label' => 'Dashboard', 'url' => url('/')], //
+            ['label' => 'Rekap Pembayaran'],
+        ]" />
 
         <div class="card">
             <div class="card-header">
-                <div class="row g-3 justify-content-between align-items-center">                
+                <div class="row g-3 justify-content-between align-items-center">
                     <form action="{{ route('rekap.index') }}" method="GET" class="mb-3">
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <input type="date" name="awal" class="form-control mb-2" id="awal" 
-                                       placeholder="Masukkan Tanggal Awal" value="{{ $tanggalAwal ?? now()->toDateString() }}">
+                                <input type="date" name="awal" class="form-control mb-2" id="awal"
+                                    placeholder="Masukkan Tanggal Awal"
+                                    value="{{ $tanggalAwal ?? now()->toDateString() }}">
                             </div>
                             <div class="col-auto">
                                 <label>s.d</label>
                             </div>
                             <div class="col-auto">
-                                <input type="date" name="akhir" class="form-control mb-2" id="akhir" 
-                                       placeholder="Masukkan Tanggal Akhir" value="{{ $tanggalAkhir ?? now()->toDateString() }}">
+                                <input type="date" name="akhir" class="form-control mb-2" id="akhir"
+                                    placeholder="Masukkan Tanggal Akhir"
+                                    value="{{ $tanggalAkhir ?? now()->toDateString() }}">
                             </div>
                             <div class="col-auto">
                                 <select name="nama_layanan" id="nama_layanan" class="form-select mb-2 ">
@@ -37,7 +60,7 @@
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
             <div class="card-body table-container">
@@ -85,3 +108,4 @@
         </div>
     </div>
 </x-layout.app>
+
