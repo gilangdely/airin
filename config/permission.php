@@ -285,7 +285,7 @@ return [
                 'meteran edit',
                 'meteran delete',
                 'meteran buatkartu',
-                'meteran mapping    '
+                'meteran mapping'
             ]
         ],
         [
