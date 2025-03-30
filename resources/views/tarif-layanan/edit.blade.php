@@ -10,7 +10,8 @@
             <div class="card-body">
                 <x-error-list />
 
-                <form action="{{ route('tarif-layanan.update', $tarifLayanan) }}" method="POST" role="form" enctype="multipart/form-data">
+                <form action="{{ route('tarif-layanan.update', $tarifLayanan) }}" method="POST" role="form"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -18,7 +19,8 @@
 
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary me-2">Perbarui</button>
-                        <a href="{{ route('tarif-layanan.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('layanan.show', ['id_layanan' => $tarifLayanan->id_layanan]) }}"
+                            class="btn btn-secondary">Kembali</a>
                     </div>
                 </form>
             </div>
