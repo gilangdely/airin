@@ -73,7 +73,9 @@ class DashboardController extends Controller
                 FacadesDB::raw('SUM(pemakaian.pakai) AS total_pakai')
             )
             ->where('meteran.nomor_meteran', $id)
+            ->groupBy('pelanggan.nama_pelanggan')
             ->groupBy('pemakaian.nomor_meteran')
+            ->groupBy('meteran.id_pelanggan')
             ->first();
 
         $detailTunggakan = Pemakaian::where('nomor_meteran', $id)
