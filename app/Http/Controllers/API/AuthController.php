@@ -19,12 +19,21 @@ class AuthController extends BaseController
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+            $user->tokens()->delete();
+
+            $success['token'] =  $user->createToken('flutter-app')->plainTextToken;
             $success['name'] =  $user->name;
 
             return $this->sendResponse($success, 'User login successfully.');
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->sendResponse([], 'User logout successfully.');
     }
 }
