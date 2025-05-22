@@ -21,14 +21,23 @@ class AuthController extends BaseController
             $user = Auth::user();
             $user->tokens()->delete();
 
-            $success['token'] =  $user->createToken('flutter-app')->plainTextToken;
-            $success['name'] =  $user->name;
+            $token = $user->createToken('flutter-app')->plainTextToken;
+
+            $roles = $user->getRoleNames();
+
+            $success = [
+                'token' => $token,
+                'name' => $user->name,
+                'user' => $user,
+                'roles' => $roles,
+            ];
 
             return $this->sendResponse($success, 'User login successfully.');
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }
     }
+
 
     public function logout(Request $request)
     {
