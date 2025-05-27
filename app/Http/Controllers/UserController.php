@@ -166,4 +166,49 @@ class UserController extends Controller implements HasMiddleware
                 ->with('error', __("The user can't be deleted because it's related to another table."));
         }
     }
+
+    // Tampilkan halaman profile user yang sedang login
+    public function profile()
+    {
+        return view('auth.profile', [
+            'user' => auth()->user()
+        ]);
+    }
+
+    // Update profile user yang sedang login
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|unique:users,username,' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'users_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:10240'
+        ]);
+
+        if ($request->hasFile('users_picture')) {
+            // Hapus foto lama jika ada
+            if ($user->users_picture) {
+                \Storage::delete('public/profile-pictures/' . $user->users_picture);
+            }
+
+            // Simpan file baru
+            $file = $request->file('users_picture');
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            // Simpan ke storage yang benar
+            $path = $file->storeAs('public/profile-pictures', $filename);
+
+            // Simpan nama file ke database
+            $validated['users_picture'] = $filename;
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+    }
 }
+;
+
+?>
