@@ -72,7 +72,7 @@
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar avatar-online">
                                             <img src="{{ auth()->user()->users_picture ? asset('storage/profile-pictures/' . auth()->user()->users_picture) : 'https://ui-avatars.com/api/?background=random&name=' . urlencode(auth()->user()->name) }}"
-                                                alt="Profile Picture" class="h-auto w-px-40 rounded-circle">
+                                                alt="Profile Picture" class="w-px-40 rounded-circle" style="object-fit: cover; height: 40px;">
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">

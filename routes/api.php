@@ -12,9 +12,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', fn(Request $request) => $request->user());
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::get('/user', [UsersController::class, 'index']);
-    Route::post('/user', [UsersController::class, 'store']);
-    Route::put('/user}', [UsersController::class, 'update']);
+    Route::post('/me', [UsersController::class, 'updateProfile']);
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']);
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
