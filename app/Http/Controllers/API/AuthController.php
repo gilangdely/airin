@@ -25,6 +25,12 @@ class AuthController extends BaseController
 
             $roles = $user->getRoleNames();
 
+            $userData = $user->toArray();
+            $userData['role'] = $roles[0] ?? null;
+            $userData['users_picture'] = $user->users_picture
+                ? asset('storage/profile-pictures/' . $user->users_picture)
+                : null;
+
             $success = [
                 'token' => $token,
                 'name' => $user->name,

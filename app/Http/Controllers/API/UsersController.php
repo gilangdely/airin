@@ -170,35 +170,95 @@ class UsersController extends BaseController implements HasMiddleware
      */
     public function updateProfile(Request $request): JsonResponse
     {
-        $user = auth()->user();
-        $validated = $this->validateProfileUpdate($request, $user);
+        try {
+            $user = auth()->user();
 
-        if ($request->hasFile('users_picture')) {
-            $validated['users_picture'] = $this->handleProfilePicture($request->file('users_picture'), $user);
+            // Log untuk debugging
+            Log::info('Update profile request', [
+                'user_id' => $user->id,
+                'fields' => $request->except(['users_picture']),
+                'has_file' => $request->hasFile('users_picture')
+            ]);
+
+            $validated = $this->validateProfileUpdate($request, $user);
+
+            // Handle image file upload
+            if ($request->hasFile('users_picture')) {
+                $validated['users_picture'] = $this->handleProfilePicture($request->file('users_picture'), $user);
+            }
+
+            // Only update fields that are provided and not empty
+            $updateData = [];
+            foreach ($validated as $key => $value) {
+                if ($value !== null && $value !== '') {
+                    $updateData[$key] = $value;
+                }
+            }
+
+            if (!empty($updateData)) {
+                $user->update($updateData);
+            }
+
+            // Reload user dengan data terbaru
+            $user = $user->fresh();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Profile updated successfully',
+                'data' => $user
+            ]);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            Log::error('Profile update failed', [
+                'user_id' => auth()->id(),
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update profile',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $user->update($validated);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Profile updated successfully',
-            'data' => $user
-        ]);
     }
 
     private function validateProfileUpdate(Request $request, $user): array
     {
         return $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|unique:users,username,' . $user->id,
-            'users_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            'name' => 'sometimes|nullable|string|max:255',
+            'username' => 'sometimes|nullable|string|unique:users,username,' . $user->id,
+            'users_picture' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
     }
 
     private function handleProfilePicture($file, $user): string
     {
-        $filename = "profile_{$user->id}." . $file->getClientOriginalExtension();
-        $file->storeAs('profile-pictures', $filename, 'public');
-        return $filename;
+        try {
+            // Hapus foto profile lama jika ada
+            if ($user->users_picture && Storage::disk('public')->exists('profile-pictures/' . $user->users_picture)) {
+                Storage::disk('public')->delete('profile-pictures/' . $user->users_picture);
+            }
+
+            // Generate nama file unik
+            $filename = "profile_{$user->id}_" . time() . "." . $file->getClientOriginalExtension();
+
+            // Simpan file baru
+            $file->storeAs('profile-pictures', $filename, 'public');
+
+            return $filename;
+        } catch (\Exception $e) {
+            Log::error('Profile picture upload failed', [
+                'user_id' => $user->id,
+                'error' => $e->getMessage()
+            ]);
+            throw $e;
+        }
     }
 }
