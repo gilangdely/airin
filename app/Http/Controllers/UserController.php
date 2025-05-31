@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 class UserController extends Controller implements HasMiddleware
@@ -166,4 +167,48 @@ class UserController extends Controller implements HasMiddleware
                 ->with('error', __("The user can't be deleted because it's related to another table."));
         }
     }
-}
+
+    // Tampilkan halaman profile user yang sedang login
+    public function profile()
+    {
+        return view('auth.profile', [
+            'user' => auth()->user()
+        ]);
+    }
+
+    // Update profile user yang sedang login
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        $validated = $this->validateProfileUpdate($request, $user);
+
+        if ($request->hasFile('users_picture')) {
+            $validated['users_picture'] = $this->handleProfilePicture($request->file('users_picture'), $user);
+        }
+
+        $user->update($validated);
+
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+    }
+
+    private function validateProfileUpdate(Request $request, $user)
+    {
+        return $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|unique:users,username,' . $user->id,
+            // 'email' => 'required|email|unique:users,email,' . $user->id,
+            'users_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+        ]);
+    }
+
+    private function handleProfilePicture($file, $user)
+    {
+        // Gunakan nama file tetap berdasarkan ID pengguna
+        $filename = "profile_{$user->id}." . $file->getClientOriginalExtension();
+
+        // Simpan dan timpa file yang ada
+        $file->storeAs('profile-pictures', $filename, 'public');
+
+        return $filename;
+    }
+};

@@ -14,17 +14,18 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RekapPembayaran;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TarifLayananController;
+use App\Http\Controllers\UserController;
 
 require('auth.php');
 
-/* 
+/*
  * Tidak bisa diakses jika sudah login.
  */
 Route::middleware('guest')->group(function () {
     Route::get('/', [LandingController::class, 'index'])->name('landing');
 });
 
-/* 
+/*
  * Perlu login untuk mengakses
  */
 Route::middleware('auth')->group(function () {
@@ -102,4 +103,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/rekap', [RekapPembayaran::class, 'index'])->name('rekap.index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/tunggakan/{id}', [DashboardController::class, 'showTunggakan'])->name('tunggakan.show');
+
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+    Route::delete('/profile/remove-photo', [UserController::class, 'removeProfilePhoto'])->name('profile.remove-photo');
 });
