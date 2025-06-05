@@ -10,6 +10,7 @@ use App\Models\Pemakaian;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\DetailTagihan;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -101,7 +102,7 @@ class PemakaianController extends Controller implements HasMiddleware
         }
     }
 
-    public function create(Meteran $meteran): View
+    public function create(Meteran $meteran): View|JsonResponse
     {
         //ambil informasi bulan kemarin
         // $tanggalBulanKemarin = new DateTime();
@@ -112,6 +113,10 @@ class PemakaianController extends Controller implements HasMiddleware
         $pemakaian = Pemakaian::where('nomor_meteran', $meteran->nomor_meteran)
             ->orderBy('bulan', 'desc') // Urutkan berdasarkan bulan terbaru
             ->first();
+
+        if (request()->wantsJson()) {
+            return response()->json(compact('meteran', 'pemakaian'));
+        }
 
         //uncomment coding di atas ketika sudah production
 
