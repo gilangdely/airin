@@ -32,7 +32,7 @@ class PemakaianController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         $query = Pemakaian::query()->with(['meteran', 'tblbulan'])->orderBy('bulan', 'desc');
 
@@ -62,6 +62,10 @@ class PemakaianController extends Controller implements HasMiddleware
         }
 
         $pemakaian = $query->paginate(10);
+
+        if (request()->wantsJson()) {
+            return response()->json($pemakaian);
+        }
 
         if ($request->header('HX-Request')) {
             return view('pemakaian.includes.index-table', compact('pemakaian'));

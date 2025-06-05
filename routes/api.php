@@ -17,7 +17,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/change-password', [UpdateUserController::class, 'changePassword']);
 
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']);
-    // Route::get('/pemakaian', [PemakaianController::class, 'index']);
+
+    // di hapus controllernya man yang ada di folder API pindah ke COntroller default
+    Route::get('/pemakaian', [App\Http\Controllers\API\PemakaianController::class, 'index']);
     // Route::post('/pemakaian', [PemakaianController::class, 'store']);
     // Route::put('/pemakaian', [PemakaianController::class, 'update']);
 });
