@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\TagihanController;
 use App\Http\Controllers\API\PemakaianController;
 use App\Http\Controllers\API\UpdateUserController;
 use Illuminate\Http\Request;
@@ -18,5 +19,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pemakaian', [PemakaianController::class, 'index']);
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
-});
 
+    Route::get('/tagihan', [TagihanController::class, 'index']);
+});
