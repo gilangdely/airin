@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\PemakaianController;
 use App\Http\Controllers\API\UsersController;
+use App\Http\Controllers\API\PemakaianController;   
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +17,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pemakaian', [PemakaianController::class, 'index']);
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
+    Route::put('/pemakaian', [PemakaianController::class, 'update']);
+    Route::get('/pembayaran/meteran/{id}', [PemakaianController::class, 'PembayaranByid']);
+
 });
 

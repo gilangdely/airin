@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controllers\Middleware;
 use \Illuminate\Routing\Controllers\HasMiddleware;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 use function Laravel\Prompts\error;
@@ -31,7 +32,7 @@ class PemakaianController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         $query = Pemakaian::query()->with(['meteran', 'tblbulan'])->orderBy('bulan', 'desc');
 
@@ -61,6 +62,14 @@ class PemakaianController extends Controller implements HasMiddleware
         }
 
         $pemakaian = $query->paginate(10);
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'pemakaian' => $pemakaian,
+                'columns' => $columns,
+                'selectedColumns' => $selectedColumns,
+            ]);
+        }
 
         if ($request->header('HX-Request')) {
             return view('pemakaian.includes.index-table', compact('pemakaian'));
