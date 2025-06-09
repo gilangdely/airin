@@ -63,8 +63,12 @@ class PemakaianController extends Controller implements HasMiddleware
 
         $pemakaian = $query->paginate(10);
 
-        if (request()->wantsJson()) {
-            return response()->json($pemakaian);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'pemakaian' => $pemakaian,
+                'columns' => $columns,
+                'selectedColumns' => $selectedColumns,
+            ]);
         }
 
         if ($request->header('HX-Request')) {

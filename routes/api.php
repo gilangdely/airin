@@ -14,18 +14,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', fn(Request $request) => $request->user());
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::post('/me', [UpdateUserController::class, 'updateProfile']);
+    // Route::post('/me', [UpdateUserController::class, 'updateProfile']);
     Route::post('/change-password', [UpdateUserController::class, 'changePassword']);
 
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']);
 
     // di hapus controllernya man yang ada di folder API pindah ke COntroller default
-    Route::get('/pemakaian', [App\Http\Controllers\API\PemakaianController::class, 'index']);
     // Route::post('/pemakaian', [PemakaianController::class, 'store']);
     // Route::put('/pemakaian', [PemakaianController::class, 'update']);
     Route::get('/pemakaian', [PemakaianController::class, 'index']);
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
+    Route::put('/pemakaian', [PemakaianController::class, 'update']);
+    Route::get('/pembayaran/meteran/{id}', [PemakaianController::class, 'PembayaranByid']);
+
 
     Route::get('/tagihan', [TagihanController::class, 'index']);
 });
