@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\API\PemakaianController;
+use App\Http\Controllers\PemakaianController;
+use App\Http\Controllers\API\UpdateUserController;
+use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\MeteranController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,11 +30,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user', [UserController::class, 'updateProfile']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::get('/pemakaian', [App\Http\Controllers\PemakaianController::class, 'index']);
+    // Route::post('/me', [UpdateUserController::class, 'updateProfile']);
+    Route::post('/change-password', [UpdateUserController::class, 'changePassword']);
 
+    Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']);
+
+    // di hapus controllernya man yang ada di folder API pindah ke COntroller default
+    // Route::post('/pemakaian', [PemakaianController::class, 'store']);
+    // Route::put('/pemakaian', [PemakaianController::class, 'update']);
     // Route::get('/pemakaian', [PemakaianController::class, 'index']);
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
     Route::get('/pembayaran/meteran/{id}', [PemakaianController::class, 'PembayaranByid']);
+
+
+    Route::get('/tagihan', [TagihanController::class, 'index']);
 });
