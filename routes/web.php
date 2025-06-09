@@ -18,6 +18,8 @@ use App\Http\Controllers\UserController;
 
 require('auth.php');
 
+
+
 /*
  * Tidak bisa diakses jika sudah login.
  */

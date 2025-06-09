@@ -15,8 +15,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 class UserController extends Controller implements HasMiddleware
@@ -95,7 +97,7 @@ class UserController extends Controller implements HasMiddleware
             $user->assignRole($role->name);
 
             return redirect()->route('users.index')
-                ->with('success', __('The user was created successfully.'));
+                ->with('success', 'The user was created successfully.');
         });
     }
 
@@ -146,7 +148,7 @@ class UserController extends Controller implements HasMiddleware
             $user->syncRoles($role->name);
 
             return redirect()->route('users.index')
-                ->with('success', __('The user was updated successfully.'));
+                ->with('success', 'The user was updated successfully.');
         });
     }
 
@@ -160,11 +162,11 @@ class UserController extends Controller implements HasMiddleware
                 $user->delete();
 
                 return redirect()->route('users.index')
-                    ->with('success', __('The user was deleted successfully.'));
+                    ->with('success', 'The user was deleted successfully.');
             });
         } catch (\Exception $e) {
             return redirect()->route('users.index')
-                ->with('error', __("The user can't be deleted because it's related to another table."));
+                ->with('error', "The user can't be deleted because it's related to another table.");
         }
     }
 
@@ -172,43 +174,34 @@ class UserController extends Controller implements HasMiddleware
     public function profile()
     {
         return view('auth.profile', [
-            'user' => auth()->user()
+            'user' => Auth::user()
         ]);
     }
 
-    // Update profile user yang sedang login
     public function updateProfile(Request $request)
     {
-        $user = auth()->user();
-        $validated = $this->validateProfileUpdate($request, $user);
+        $user = User::find(Auth::id());
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'users_picture' => 'nullable|image|mimes:jpeg,png,jpg',
+        ]);
 
         if ($request->hasFile('users_picture')) {
-            $validated['users_picture'] = $this->handleProfilePicture($request->file('users_picture'), $user);
+            if ($user->users_picture && Storage::disk('public')->exists('profile-pictures/' . $user->users_picture)) {
+                Storage::disk('public')->delete('profile-pictures/' . $user->users_picture);
+            }
+            $file = $request->file('users_picture');
+            $filename = "profile_{$user->id}." . $file->getClientOriginalExtension();
+            $file->storeAs('profile-pictures', $filename, 'public');
+
+            $path = 'profile-pictures/' . $filename;
+            $validatedData['users_picture'] = $path;
         }
 
-        $user->update($validated);
+        $user->update($validatedData);
 
         return redirect()->route('profile')->with('success', 'Profile updated successfully!');
-    }
-
-    private function validateProfileUpdate(Request $request, $user)
-    {
-        return $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|unique:users,username,' . $user->id,
-            // 'email' => 'required|email|unique:users,email,' . $user->id,
-            'users_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
-        ]);
-    }
-
-    private function handleProfilePicture($file, $user)
-    {
-        // Gunakan nama file tetap berdasarkan ID pengguna
-        $filename = "profile_{$user->id}." . $file->getClientOriginalExtension();
-
-        // Simpan dan timpa file yang ada
-        $file->storeAs('profile-pictures', $filename, 'public');
-
-        return $filename;
     }
 };
