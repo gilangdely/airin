@@ -20,7 +20,7 @@ class AuthController extends BaseController
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $user = Auth::user();
-            $user->tokens()->delete();
+            // $user->tokens()->delete();
 
             $token = $user->createToken('flutter-app')->plainTextToken;
 
