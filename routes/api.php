@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user', [UserController::class, 'updateProfile']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
+    // Ini contoh apinya pakai wantsjson 
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']);
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']);

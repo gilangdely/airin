@@ -11,6 +11,7 @@ use App\Models\Pemakaian;
 use Illuminate\View\View;
 use App\Models\TarifLayanan;
 use DateTime;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class TagihanController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         $query = Tagihan::query();
 
@@ -53,6 +54,10 @@ class TagihanController extends Controller implements HasMiddleware
         }
 
         $tagihan = $query->paginate(10);
+
+        if (request()->wantsJson()) {
+            return response()->json($tagihan);
+        }
 
         if ($request->header('HX-Request')) {
             return view('tagihan.includes.index-table', compact('tagihan'));
@@ -93,9 +98,9 @@ class TagihanController extends Controller implements HasMiddleware
             ->orderBy('min_pemakaian', 'asc')
             ->get()
             ->groupBy('id_layanan');
-        
 
-        if($tarifLayanan->isEmpty()){
+
+        if ($tarifLayanan->isEmpty()) {
             return redirect()->back()
                 ->with('error', "Tidak ada tarif yang tersedia untuk layanan tersebut.");
         }
@@ -118,7 +123,7 @@ class TagihanController extends Controller implements HasMiddleware
 
             if (!$tarif) {
                 return redirect()->back()
-                ->with('error', "Tidak ada tarif yang cocok untuk pemakaian $totalPakai m³.");
+                    ->with('error', "Tidak ada tarif yang cocok untuk pemakaian $totalPakai m³.");
             }
 
             // Hitung tagihan bulan ini
@@ -228,7 +233,7 @@ class TagihanController extends Controller implements HasMiddleware
             if (!$tarif) {
                 // throw new \Exception("Tarif tidak ditemukan untuk pemakaian $totalPakai m³.");
                 return redirect()->back()
-                ->with('error', "Tarif tidak ditemukan untuk pemakaian $totalPakai m³.");
+                    ->with('error', "Tarif tidak ditemukan untuk pemakaian $totalPakai m³.");
             }
 
             // Hitung tagihan bulan ini
@@ -432,22 +437,23 @@ class TagihanController extends Controller implements HasMiddleware
         ];
     }
 
-    public function cekkartumeteran(){
+    public function cekkartumeteran()
+    {
         return view('tagihan.cekkartumeteran');
     }
 
-    public function proseskartumeteran(Request $request){
+    public function proseskartumeteran(Request $request)
+    {
         $nokartu = $request->chip_kartu;
-        $meteran = Meteran::where('chip_kartu',$nokartu)->first(); //ambil data meteran berdasarkan chip_kartu
+        $meteran = Meteran::where('chip_kartu', $nokartu)->first(); //ambil data meteran berdasarkan chip_kartu
 
         $tanggalSekarang = date('Y-m-d');
 
-        $tagihan = Tagihan::where('nomor_meteran',$meteran->nomor_meteran)
-        ->where('waktu_awal', '<=' , $tanggalSekarang)
-        ->where('waktu_akhir', '>=', $tanggalSekarang)
-        ->first();
+        $tagihan = Tagihan::where('nomor_meteran', $meteran->nomor_meteran)
+            ->where('waktu_awal', '<=', $tanggalSekarang)
+            ->where('waktu_akhir', '>=', $tanggalSekarang)
+            ->first();
 
-        return redirect()->route('tagihan.show',$tagihan->id_tagihan);
-        
+        return redirect()->route('tagihan.show', $tagihan->id_tagihan);
     }
 }
