@@ -42,7 +42,7 @@ class AuthController extends BaseController
 
 
             // return $this->sendResponse($success, 'User login successfully.');
-            return ApiResponse::success($success, "Berhasil Login", "0000", 200);
+            // return ApiResponse::success($success, "Berhasil Login", "0000", 200);
             if ($success && $user->users_picture) {
                 $success['user']['users_picture'] = Storage::url($user->users_picture);
             } else if ($success) {
