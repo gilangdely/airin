@@ -9,6 +9,7 @@
                     <th class="align-middle">No Ktp</th>
                     <th class="align-middle">Alamat</th>
                     <th class="align-middle">No Hp</th>
+                    <th class="align-middle">Jumlah Meteran</th>
                     <th class="align-middle">Status</th>
                 <th class="text-center">Aksi</th>
             </tr>
@@ -23,6 +24,7 @@
                     <td>{{ $row?->no_ktp }}</td>
                     <td>{{ $row?->alamat }}</td>
                     <td>{{ $row?->no_hp }}</td>
+                    <td>{{ $row?->jml_meteran }}</td>
                     <td>
                         @if ($row?->status == 1)
                             <span class="badge bg-label-success">Aktif</span>

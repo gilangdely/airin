@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
@@ -32,7 +33,8 @@ class AuthController extends BaseController
                 'roles' => $roles,
             ];
 
-            return $this->sendResponse($success, 'User login successfully.');
+            // return $this->sendResponse($success, 'User login successfully.');
+            return ApiResponse::success($success, "Berhasil Login", "0000", 200);
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }

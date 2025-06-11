@@ -27,6 +27,7 @@ class PelangganController extends Controller implements HasMiddleware
     {
         $query = Pelanggan::query();
         $query->orderBy('id_pelanggan', 'DESC');
+        $query->withCount('meterans as jml_meteran');
 
         // tambahkan kolom yang mau dikecualikan di pencarian
         $except = ['created_by', 'updated_by'];
@@ -46,6 +47,9 @@ class PelangganController extends Controller implements HasMiddleware
         }
 
         $pelanggan = $query->paginate(10);
+
+        // dd($pelanggan);
+
 
         if ($request->header('HX-Request')) {
             return view('pelanggan.includes.index-table', compact('pelanggan'));
