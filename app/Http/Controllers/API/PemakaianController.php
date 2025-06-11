@@ -10,6 +10,7 @@ use App\Models\Pemakaian;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\DetailTagihan;
+use App\Models\Pembayaran;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class PemakaianController extends BaseController implements HasMiddleware
 
     public function index(Request $request): JsonResponse
     {
-        $query = Pemakaian::query()->with(['meteran', 'tblbulan']);
+        $query = Pemakaian::query()->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
 
         // tambahkan kolom yang mau dikecualikan di pencarian
         $except = ['created_by', 'updated_by'];

@@ -15,7 +15,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Woo\GridView\DataProviders\EloquentDataProvider;
 
 class UserController extends Controller implements HasMiddleware
@@ -94,7 +97,7 @@ class UserController extends Controller implements HasMiddleware
             $user->assignRole($role->name);
 
             return redirect()->route('users.index')
-                ->with('success', __('The user was created successfully.'));
+                ->with('success', 'The user was created successfully.');
         });
     }
 
@@ -145,7 +148,7 @@ class UserController extends Controller implements HasMiddleware
             $user->syncRoles($role->name);
 
             return redirect()->route('users.index')
-                ->with('success', __('The user was updated successfully.'));
+                ->with('success', 'The user was updated successfully.');
         });
     }
 
@@ -159,11 +162,119 @@ class UserController extends Controller implements HasMiddleware
                 $user->delete();
 
                 return redirect()->route('users.index')
-                    ->with('success', __('The user was deleted successfully.'));
+                    ->with('success', 'The user was deleted successfully.');
             });
         } catch (\Exception $e) {
             return redirect()->route('users.index')
-                ->with('error', __("The user can't be deleted because it's related to another table."));
+                ->with('error', "The user can't be deleted because it's related to another table.");
         }
     }
+
+    // Tampilkan halaman profile user yang sedang login
+    public function profile()
+    {
+        return view('auth.profile', [
+            'user' => Auth::user()
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $validatedData = $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'username' => ['sometimes', 'required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'users_picture' => 'sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'email' => ['sometimes', 'nullable', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+        ]);
+
+        if ($request->hasFile('users_picture')) {
+            if ($user->users_picture && Storage::disk('public')->exists('profile-pictures/' . $user->users_picture)) {
+                Storage::disk('public')->delete('profile-pictures/' . $user->users_picture);
+            }
+
+            $file = $request->file('users_picture');
+            $filename = "profile_{$user->id}.jpg"; // Semua disimpan sebagai JPG
+            $destinationPath = storage_path('app/public/profile-pictures/');
+            $filePath = $destinationPath . $filename;
+
+            $file->storeAs('profile-pictures', $filename, 'public');
+
+            // **Crop hanya jika request JSON**
+            if ($request->wantsJson()) {
+                $imageType = exif_imagetype($file->getRealPath());
+                if ($imageType == IMAGETYPE_JPEG) {
+                    $image = imagecreatefromjpeg($file->getRealPath());
+                } elseif ($imageType == IMAGETYPE_PNG) {
+                    $image = imagecreatefrompng($file->getRealPath());
+                } elseif ($imageType == IMAGETYPE_GIF) {
+                    $image = imagecreatefromgif($file->getRealPath());
+                } else {
+                    $image = null;
+                }
+
+                if ($image) {
+                    $origWidth = imagesx($image);
+                    $origHeight = imagesy($image);
+                    $cropSize = min($origWidth, $origHeight);
+                    $croppedImage = imagecreatetruecolor(512, 512);
+                    $imageCropped = imagecrop($image, ['x' => 0, 'y' => 0, 'width' => $cropSize, 'height' => $cropSize]);
+
+                    if ($imageCropped) {
+                        imagecopyresampled($croppedImage, $imageCropped, 0, 0, 0, 0, 512, 512, $cropSize, $cropSize);
+                        imagejpeg($croppedImage, $filePath, 90); // Simpan sebagai JPEG
+                        imagedestroy($imageCropped);
+                    }
+
+                    imagedestroy($image);
+                    imagedestroy($croppedImage);
+                }
+            }
+
+            $validatedData['users_picture'] = 'profile-pictures/' . $filename;
+        }
+
+        $user->update($validatedData);
+
+        if ($request->wantsJson()) {
+            $success = [
+                'message' => 'Profile updated successfully!',
+                'user' => $user->toArray()
+            ];
+
+            if ($user->users_picture) {
+                $success['user']['users_picture'] = Storage::url($user->users_picture);
+            } else {
+                $success['user']['users_picture'] = 'https://ui-avatars.com/api/?background=random&name=' . urlencode($user->name);
+            }
+
+            return response()->json($success, 200);
+        }
+
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+
+
+    }
+    public function changePassword(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'min:6', 'confirmed'],
+        ]);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['message' => 'Password saat ini salah.'], 422);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return response()->json(['message' => 'Password berhasil diubah.']);
+    }
+
 }
+;

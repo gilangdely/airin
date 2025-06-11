@@ -11,10 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string|null $email
@@ -44,10 +45,17 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
-        'username',
         'email',
-        'email_verified_at',
         'password',
-        'remember_token'
+        'username',
+        'users_picture'
     ];
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->users_picture) {
+            return Storage::url('public/profile-pictures/' . $this->users_picture);
+        }
+        return "https://ui-avatars.com/api/?background=random&name=" . urlencode($this->name);
+    }
 }
