@@ -40,10 +40,9 @@ class AuthController extends BaseController
                 'roles' => $roles,
             ];
 
-<<<<<<< HEAD
+
             // return $this->sendResponse($success, 'User login successfully.');
             return ApiResponse::success($success, "Berhasil Login", "0000", 200);
-=======
             if ($success && $user->users_picture) {
                 $success['user']['users_picture'] = Storage::url($user->users_picture);
             } else if ($success) {
@@ -51,7 +50,7 @@ class AuthController extends BaseController
             }
 
             return $this->sendResponse($success, 'User login successfully.');
->>>>>>> 82537f59bf5e2d27fda70884935bf73f8181694c
+
         } else {
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }

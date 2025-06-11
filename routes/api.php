@@ -1,15 +1,14 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\API\HomeController;
-use App\Http\Controllers\API\PemakaianController;
 use Illuminate\Http\Request;
-=======
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PemakaianController;
 use App\Http\Controllers\TagihanController;
->>>>>>> 82537f59bf5e2d27fda70884935bf73f8181694c
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', function ($path) {
@@ -40,14 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pemakaian', [PemakaianController::class, 'index']);
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
-<<<<<<< HEAD
-
-    Route::get('/getunpaidinvoice', [HomeController::class, 'getunpaidinvoice']);
-    Route::post('/getmeteranbypelanggan', [HomeController::class, 'getmeteranbypelanggan']);
-    Route::get('/gettagihanbymeteranaktif', [HomeController::class, 'gettagihanbymeteranaktif']);
-=======
     Route::get('/pembayaran/meteran/{id}', [PemakaianController::class, 'PembayaranByid']);
 
     Route::get('/tagihan', [TagihanController::class, 'index']);
->>>>>>> 82537f59bf5e2d27fda70884935bf73f8181694c
 });
