@@ -25,9 +25,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'userProfile']);
     Route::post('/user', [UserController::class, 'updateProfile']);
+    Route::post('/user/change-password', [UserController::class, 'changePassword']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Ini contoh apinya pakai wantsjson 
+    // Ini contoh apinya pakai wantsjson
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']);
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']);

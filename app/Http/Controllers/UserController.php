@@ -253,5 +253,28 @@ class UserController extends Controller implements HasMiddleware
         }
 
         return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+
+
     }
-};
+    public function changePassword(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'min:6', 'confirmed'],
+        ]);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['message' => 'Password saat ini salah.'], 422);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return response()->json(['message' => 'Password berhasil diubah.']);
+    }
+
+}
+;
