@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\API\HomeController;
 use App\Http\Controllers\API\PemakaianController;
 use Illuminate\Http\Request;
-=======
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PemakaianController;
 use App\Http\Controllers\TagihanController;
->>>>>>> 82537f59bf5e2d27fda70884935bf73f8181694c
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', function ($path) {
