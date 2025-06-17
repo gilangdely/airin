@@ -60,7 +60,7 @@ class HomeController extends Controller
 
         if (!$tagihan) {
             // Jika tidak ada tagihan aktif, langsung kembalikan error
-            return ApiResponse::error("2001", "Tagihan aktif tidak ditemukan", 404);
+            return ApiResponse::error("Tagihan aktif tidak ditemukan", "2001", 404);
         }
         $idTagihan = $tagihan->id_tagihan;
 
@@ -79,7 +79,7 @@ class HomeController extends Controller
         if (!empty($dataGabungan)) {
             return ApiResponse::success($dataGabungan, "Tagihan ditemukan", "0000", 200);
         } else {
-            return ApiResponse::error("2001", "Tagihan tidak ditemukan", 404);
+            return ApiResponse::error("Tagihan tidak ditemukan", "2001", 404);
         }
     }
 }

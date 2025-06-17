@@ -5,9 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Validator;
 use Illuminate\Support\Facades\Storage;
 
 class AuthController extends BaseController
@@ -17,64 +16,63 @@ class AuthController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        try {
+            $validatedData = $request->validate([
+                'username' => 'required|string',
+                'password' => 'required|string',
+            ]);
+
+            if (!Auth::attempt(['username' => $validatedData['username'], 'password' => $validatedData['password']])) {
+                return ApiResponse::error("Username atau password salah.", "1001", 401);
+            }
+
             $user = Auth::user();
-            // $user->tokens()->delete();
+
+            if (!$user) {
+                return ApiResponse::error("User tidak ditemukan.", "2001", 404);
+            }
 
             $token = $user->createToken('flutter-app')->plainTextToken;
 
-            $roles = $user->getRoleNames();
-
-            $userData = $user->toArray();
-            $userData['role'] = $roles[0] ?? null;
-            $userData['users_picture'] = $user->users_picture
-                ? asset('storage/profile-pictures/' . $user->users_picture)
-                : null;
-
             $success = [
-                'token' => $token,
-                'name' => $user->name,
-                'user' => $user,
-                'roles' => $roles,
+                'user' => [
+                    'id' => $user->id,
+                    'username' => $user->username,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'email_verified_at' => $user->email_verified_at,
+                    'users_picture' => $user->users_picture ? (url('/api') . Storage::url($user->users_picture)) : null,
+                    'role' => $user->roles[0]['name'],
+                ],
+                'access_token' => $token,
             ];
 
-
-            // return $this->sendResponse($success, 'User login successfully.');
-            // return ApiResponse::success($success, "Berhasil Login", "0000", 200);
-            if ($success && $user->users_picture) {
-                $success['user']['users_picture'] = Storage::url($user->users_picture);
-            } else if ($success) {
-                $success['user']['users_picture'] = 'https://ui-avatars.com/api/?background=random&' . $user->name;
-            }
-
-            return $this->sendResponse($success, 'User login successfully.');
-
-        } else {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return ApiResponse::success($success, "Berhasil Login.", "0000", 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return ApiResponse::error("Validasi gagal: " . implode(', ', $e->validator->errors()->all()), "9001", 422);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
         }
     }
 
 
-    public function logout(Request $request)
-    {
-        $request->user()->tokens()->delete();
 
-        return $this->sendResponse([], 'User logout successfully.');
-    }
-
-    public function userProfile(Request $request)
+    public function logout(Request $request): JsonResponse
     {
-        $user = $request->user();
-        if ($user && $user->users_picture) {
-            // Pastikan users_picture tidak kosong dan bukan path absolut
-            if (!filter_var($user->users_picture, FILTER_VALIDATE_URL)) {
-                $user->users_picture = Storage::url($user->users_picture);
-            } else {
-                $user->users_picture = 'https://ui-avatars.com/api/?background=random&' . $user->name; // Jika sudah URL, gunakan apa adanya
+        try {
+            $user = $request->user();
+
+            if (!$user) {
+                return ApiResponse::error("User tidak ditemukan.", "1004", 404);
             }
+
+            $user->tokens()->delete();
+
+            return ApiResponse::success([], "User logout successfully.", "0000", 200);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
         }
-        return $this->sendResponse($user, 'User profile retrieved successfully.');
     }
 }

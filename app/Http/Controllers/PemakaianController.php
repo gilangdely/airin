@@ -32,13 +32,9 @@ class PemakaianController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index(Request $request): View|JsonResponse
+    public function index(Request $request): View
     {
-        if ($request->wantsJson()) {
-            $query = Pemakaian::query()->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
-        } else {
-            $query = Pemakaian::query()->with(['meteran', 'tblbulan'])->orderBy('bulan', 'desc');
-        }
+        $query = Pemakaian::query()->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
 
         // tambahkan kolom yang mau dikecualikan di pencarian
         $except = ['created_by', 'updated_by'];
@@ -66,10 +62,6 @@ class PemakaianController extends Controller implements HasMiddleware
         }
 
         $pemakaian = $query->paginate(10);
-
-        if ($request->wantsJson()) {
-            return response()->json($pemakaian);
-        }
 
         if ($request->header('HX-Request')) {
             return view('pemakaian.includes.index-table', compact('pemakaian'));
@@ -121,10 +113,6 @@ class PemakaianController extends Controller implements HasMiddleware
         $pemakaian = Pemakaian::where('nomor_meteran', $meteran->nomor_meteran)
             ->orderBy('bulan', 'desc') // Urutkan berdasarkan bulan terbaru
             ->first();
-
-        if (request()->wantsJson()) {
-            return response()->json(compact('meteran', 'pemakaian'));
-        }
 
         //uncomment coding di atas ketika sudah production
 

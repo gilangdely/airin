@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\API\BaseController;
 use Carbon\Carbon;
 use App\Models\Meteran;
 use App\Models\Tagihan;
 use App\Models\Pemakaian;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\DetailTagihan;
-use App\Models\Pembayaran;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controllers\Middleware;
 use \Illuminate\Routing\Controllers\HasMiddleware;
-use Woo\GridView\DataProviders\EloquentDataProvider;
 
 class PemakaianController extends BaseController implements HasMiddleware
 {
@@ -31,39 +28,62 @@ class PemakaianController extends BaseController implements HasMiddleware
         ];
     }
 
+
     public function index(Request $request): JsonResponse
     {
-        $query = Pemakaian::query()->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
+        try {
+            $query = Pemakaian::query()->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
 
-        // tambahkan kolom yang mau dikecualikan di pencarian
-        $except = ['created_by', 'updated_by'];
+            $except = ['created_by', 'updated_by'];
 
-        $columns = collect($query->getModel()->getFillable())->filter(function ($item) use ($except) {
-            return !in_array($item, $except);
-        })->toArray();
+            $columns = collect($query->getModel()->getFillable())->filter(fn($item) => !in_array($item, $except))->toArray();
 
-        $selectedColumns = $request->get('col', $columns);
+            $selectedColumns = $request->get('col', $columns);
 
-        if ($search = $request->get('search')) {
-            $query->where(function ($query) use ($search, $selectedColumns) {
-                foreach ($selectedColumns as $column) {
-                    $query->orWhere($column, 'like', '%' . $search . '%');
-                }
+            if ($search = $request->get('search')) {
+                $query->where(function ($query) use ($search, $selectedColumns) {
+                    foreach ($selectedColumns as $column) {
+                        $query->orWhere($column, 'like', '%' . $search . '%');
+                    }
 
-                $query->orWhereHas('meteran', function ($q) use ($search) {
-                    $q->where('nomor_meteran', 'like', '%' . $search . '%');
+                    $query->orWhereHas('meteran', fn($q) => $q->where('nomor_meteran', 'like', '%' . $search . '%'));
+                    $query->orWhereHas('tblbulan', fn($q) => $q->where('nama_bulan', 'like', '%' . $search . '%'));
                 });
+            }
 
-                $query->orWhereHas('tblbulan', function ($q) use ($search) {
-                    $q->where('nama_bulan', 'like', '%' . $search . '%');
-                });
-            });
+            $pemakaian = $query->paginate(10);
+
+            return ApiResponse::success($pemakaian, "Data berhasil diambil.", "0000", 200);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return ApiResponse::error("Kesalahan database.", "9999", 500);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
         }
-
-        $pemakaian = $query->paginate(10);
-
-        return response()->json($pemakaian);
     }
+
+    public function create(Meteran $meteran): JsonResponse
+    {
+        try {
+            if (!$meteran) {
+                return ApiResponse::error("Data meteran tidak ditemukan.", "2001", 404);
+            }
+
+            $pemakaian = Pemakaian::where('nomor_meteran', $meteran->nomor_meteran)
+                ->orderBy('bulan', 'desc')
+                ->first();
+
+            if (!$pemakaian) {
+                return ApiResponse::error("Data pemakaian tidak ditemukan.", "2001", 404);
+            }
+
+            return ApiResponse::success(compact('meteran', 'pemakaian'), "Data berhasil diambil.", "0000", 200);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return ApiResponse::error("Kesalahan database.", "9999", 500);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
+        }
+    }
+
 
     public function store(Request $request)
     {

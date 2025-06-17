@@ -13,7 +13,7 @@ class ApiResponse
         ], $httpCode);
     }
 
-    public static function error($rc, $message = 'Error', $errors = null, $httpCode = 400)
+    public static function error($message = 'Error', $rc, $httpCode = 400, $errors = null)
     {
         $response = [
             'rc' => $rc,
