@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\DetailTagihan;
 use Carbon\Carbon;
 use App\Models\Meteran;
 use App\Models\Tagihan;
-use App\Helpers\ApiResponse;
 use App\Models\Pelanggan;
 use App\Models\Pemakaian;
 use App\Models\TarifLayanan;
@@ -609,6 +609,35 @@ class TagihanController extends Controller
                 'message' => 'Terjadi kesalahan saat memproses kartu',
                 'error' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    /**
+     * Get tagihan by Nomer Meteran
+     */
+    public function cekTagihanByMeteran($nomor_meteran): JsonResponse
+    {
+        try {
+            $tagihan = Tagihan::where('nomor_meteran', $nomor_meteran)
+                ->where('status_pembayaran', 0)
+                ->where('status_tagihan', 1)
+                ->first();
+
+            if (!$tagihan) {
+                return ApiResponse::error("Tagihan tidak ditemukan untuk nomor meteran ini.", "2001", 404);
+            }
+
+            $detailtagihan = DetailTagihan::where('id_tagihan', $tagihan->id_tagihan)->get();
+
+            return ApiResponse::success([
+                'tagihan' => $tagihan,
+                'detail_tagihan' => $detailtagihan
+            ], "Tagihan ditemukan.", "0000", 200);
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return ApiResponse::error("Kesalahan database saat mengambil tagihan.", "9999", 500);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui saat mengambil tagihan.", "9999", 500);
         }
     }
 
