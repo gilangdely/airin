@@ -310,4 +310,26 @@ class PemakaianController extends BaseController implements HasMiddleware
         ], 200); // 200 OK untuk operasi yang berhasil
 
     }
+
+    public function pemakaianByMeteran ($nomor_meteran): JsonResponse 
+    {
+        try {
+            $pemakaian = Pemakaian::whereHas('meteran', function ($query) use ($nomor_meteran) {
+                $query->where('nomor_meteran', $nomor_meteran);
+            })->with(['meteran', 'tblbulan'])
+            ->orderBy('tahun', 'desc')
+            ->orderBy('bulan', 'desc')
+            ->get();
+
+            if ($pemakaian->isEmpty()) {
+                return ApiResponse::error("Tidak ada data pemakaian untuk nomor meteran ini.", "2001", 404);
+            }
+
+            return ApiResponse::success($pemakaian, "Data pemakaian berhasil diambil.", "0000", 200);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return ApiResponse::error("Kesalahan database.", "9999", 500);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
+        }
+    }
 }
