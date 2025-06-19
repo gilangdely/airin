@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PemakaianController;
 use App\Http\Controllers\API\PembayaranController;
-use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\API\TagihanController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -36,9 +36,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']); // ok
+    Route::get('/pemakaian/meteran/{nomer_meteran}', [PemakaianController::class, 'pemakaianByMeteran']); // testing
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
+
     Route::get('/pembayaran/meteran/{id}', [PembayaranController::class, 'PembayaranByid']);
 
-    Route::get('/tagihan', [TagihanController::class, 'index']);
+    Route::get('/tagihan/meteran/{nomer_meteran}', [TagihanController::class, 'cekTagihanByMeteran']); // testing
 });
