@@ -32,7 +32,21 @@ class PemakaianController extends BaseController implements HasMiddleware
     public function index(Request $request): JsonResponse
     {
         try {
-            $query = Pemakaian::query()->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
+
+            $status = $request->get('status');
+            $tahun = $request->get('tahun', Carbon::now()->year);
+            $bulan = $request->get('bulan');
+            $query = Pemakaian::query()
+                ->when($status !== null, function ($q) use ($status) {
+                    $q->where('status_pembayaran', $status);
+                })
+                ->when($bulan, function ($q) use ($bulan) {
+                    $q->where('bulan', $bulan);
+                })
+                ->when($tahun, function ($q) use ($tahun) {
+                    $q->where('tahun', $tahun);
+                })
+                ->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
 
             $except = ['created_by', 'updated_by'];
 
@@ -235,11 +249,15 @@ class PemakaianController extends BaseController implements HasMiddleware
 
     }
 
-    public function pemakaianByMeteran($nomor_meteran): JsonResponse
+    public function pemakaianByMeteran(Request $request): JsonResponse
     {
+        if (!$request->has('nomor_meteran') || empty($request->input('nomor_meteran'))) {
+            return ApiResponse::error("Nomor meteran tidak boleh kosong.", "9002", 400);
+        }
+
         try {
-            $pemakaian = Pemakaian::whereHas('meteran', function ($query) use ($nomor_meteran) {
-                $query->where('nomor_meteran', $nomor_meteran);
+            $pemakaian = Pemakaian::whereHas('meteran', function ($query) use ($request) {
+                $query->where('nomor_meteran', $request->input('nomor_meteran'));
             })->with(['meteran', 'tblbulan'])
                 ->orderBy('tahun', 'desc')
                 ->orderBy('bulan', 'desc')
