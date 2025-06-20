@@ -33,7 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/change-password', [UserController::class, 'changePassword']); // ok
     Route::post('/logout', [AuthController::class, 'logout']); // ok
 
-    Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
+    Route::get('/pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
+    Route::post('/pemakaian/create', [PemakaianController::class, 'store']); // ok
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']); // ok
     Route::get('/pemakaian/meteran/{nomer_meteran}', [PemakaianController::class, 'pemakaianByMeteran']); // testing

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
@@ -55,7 +55,6 @@ class TagihanController extends Controller
                 'columns' => $columns,
                 'selected_columns' => $selectedColumns
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -155,7 +154,6 @@ class TagihanController extends Controller
                     'meteran' => $meteran
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -298,7 +296,6 @@ class TagihanController extends Controller
                     'rincian_tagihan' => $rincianTagihan
                 ]
             ], 201);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -326,7 +323,6 @@ class TagihanController extends Controller
                     'detail_tagihan' => $detailtagihan
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -369,7 +365,6 @@ class TagihanController extends Controller
                 'message' => 'Tagihan berhasil diperbarui',
                 'data' => $tagihan
             ]);
-
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() == '23000') {
                 return response()->json([
@@ -408,7 +403,6 @@ class TagihanController extends Controller
                 'success' => true,
                 'message' => 'Tagihan berhasil dihapus'
             ]);
-
         } catch (\Illuminate\Database\QueryException $e) {
             DB::rollBack();
             if ($e->getCode() == '23000') {
@@ -546,7 +540,6 @@ class TagihanController extends Controller
                     'tagihan' => $tagihan
                 ]
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -610,7 +603,6 @@ class TagihanController extends Controller
                     'meteran' => $meteran
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -641,7 +633,6 @@ class TagihanController extends Controller
                 'tagihan' => $tagihan,
                 'detail_tagihan' => $detailtagihan
             ], "Tagihan ditemukan.", "0000", 200);
-
         } catch (\Illuminate\Database\QueryException $e) {
             return ApiResponse::error("Kesalahan database saat mengambil tagihan.", "9999", 500);
         } catch (\Exception $e) {
