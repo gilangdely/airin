@@ -311,11 +311,15 @@ class PemakaianController extends BaseController implements HasMiddleware
 
     }
 
-    public function pemakaianByMeteran ($nomor_meteran): JsonResponse 
+    public function pemakaianByMeteran (Request $request): JsonResponse 
     {
+        if (!$request->has('nomor_meteran') || empty($request->input('nomor_meteran'))) {
+            return ApiResponse::error("Nomor meteran tidak boleh kosong.", "9002", 400);
+        }
+
         try {
-            $pemakaian = Pemakaian::whereHas('meteran', function ($query) use ($nomor_meteran) {
-                $query->where('nomor_meteran', $nomor_meteran);
+            $pemakaian = Pemakaian::whereHas('meteran', function ($query) use ($request) {
+                $query->where('nomor_meteran', $request->input('nomor_meteran'));
             })->with(['meteran', 'tblbulan'])
             ->orderBy('tahun', 'desc')
             ->orderBy('bulan', 'desc')

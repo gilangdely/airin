@@ -36,11 +36,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']); // ok
-    Route::get('/pemakaian/meteran/{nomer_meteran}', [PemakaianController::class, 'pemakaianByMeteran']); // testing
+    Route::post('/pemakaian/meteran', [PemakaianController::class, 'pemakaianByMeteran']); // ok
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
 
     Route::get('/pembayaran/meteran/{id}', [PembayaranController::class, 'PembayaranByid']);
 
-    Route::get('/tagihan/meteran/{nomer_meteran}', [TagihanController::class, 'cekTagihanByMeteran']); // testing
+    Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
 });

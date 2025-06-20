@@ -623,10 +623,14 @@ class TagihanController extends Controller
     /**
      * Get tagihan by Nomer Meteran
      */
-    public function cekTagihanByMeteran($nomor_meteran): JsonResponse
+    public function cekTagihanByMeteran(Request $request): JsonResponse
     {
+        if (!$request->has('nomor_meteran') || empty($request->input('nomor_meteran'))) {
+            return ApiResponse::error("Nomor meteran tidak boleh kosong.", "9002", 400);
+        }
+
         try {
-            $tagihan = Tagihan::where('nomor_meteran', $nomor_meteran)
+            $tagihan = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
                 ->where('status_pembayaran', 0)
                 ->where('status_tagihan', 1)
                 ->first();
