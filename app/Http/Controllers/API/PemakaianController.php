@@ -32,7 +32,21 @@ class PemakaianController extends BaseController implements HasMiddleware
     public function index(Request $request): JsonResponse
     {
         try {
-            $query = Pemakaian::query()->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
+
+            $status = $request->get('status');
+            $tahun = $request->get('tahun', Carbon::now()->year);
+            $bulan = $request->get('bulan');
+            $query = Pemakaian::query()
+                ->when($status !== null, function ($q) use ($status) {
+                    $q->where('status_pembayaran', $status);
+                })
+                ->when($bulan, function ($q) use ($bulan) {
+                    $q->where('bulan', $bulan);
+                })
+                ->when($tahun, function ($q) use ($tahun) {
+                    $q->where('tahun', $tahun);
+                })
+                ->with(['meteran', 'tblbulan', 'meteran.pelanggan']);
 
             $except = ['created_by', 'updated_by'];
 
