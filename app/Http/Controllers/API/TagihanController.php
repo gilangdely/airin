@@ -615,10 +615,14 @@ class TagihanController extends Controller
     /**
      * Get tagihan by Nomer Meteran
      */
-    public function cekTagihanByMeteran($nomor_meteran): JsonResponse
+    public function cekTagihanByMeteran(Request $request): JsonResponse
     {
+        if (!$request->has('nomor_meteran') || empty($request->input('nomor_meteran'))) {
+            return ApiResponse::error("Nomor meteran tidak boleh kosong.", "9002", 400);
+        }
+
         try {
-            $tagihan = Tagihan::where('nomor_meteran', $nomor_meteran)
+            $tagihan = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
                 ->where('status_pembayaran', 0)
                 ->where('status_tagihan', 1)
                 ->first();
@@ -633,7 +637,6 @@ class TagihanController extends Controller
                 'tagihan' => $tagihan,
                 'detail_tagihan' => $detailtagihan
             ], "Tagihan ditemukan.", "0000", 200);
-
         } catch (\Illuminate\Database\QueryException $e) {
             return ApiResponse::error("Kesalahan database saat mengambil tagihan.", "9999", 500);
         } catch (\Exception $e) {
@@ -646,28 +649,64 @@ class TagihanController extends Controller
      */
     public function getPakaiByMeteranAktif(Request $request)
     {
-        $query = "SELECT
-        tagihan.id_pelanggan,
-        pelanggan.nama_pelanggan,
-        tagihan.nomor_meteran,
-        tagihan.nominal,
-        tagihan.tahun,
-        tagihan.waktu_awal,
-        tagihan.waktu_akhir,
-        tagihan.status_tagihan,
-        tagihan.status_pembayaran,
-        SUM(detail_tagihan.pakai) AS total_pakai
-    FROM tagihan
-    INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
-    LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
-    GROUP BY tagihan.id_tagihan";
+        try {
+            $status = $request->get('status');
+            $tahun = $request->get('tahun');
+            $bulan = $request->get('bulan');
 
-        $pakaiList = DB::select($query);
+            // Buat WHERE dinamis
+            $whereClauses = [];
+            $bindings = [];
 
-        if (empty($pakaiList)) {
-            return ApiResponse::error("Data tagihan tidak ditemukan", "2002", 404);
+            if (!empty($status)) {
+                $whereClauses[] = 'tagihan.status_pembayaran = ?';
+                $bindings[] = $status;
+            }
+
+            if (!empty($tahun)) {
+                $whereClauses[] = 'tagihan.tahun = ?';
+                $bindings[] = $tahun;
+            }
+
+            if (!empty($bulan)) {
+                $whereClauses[] = 'MONTH(tagihan.waktu_awal) = ?'; // diasumsikan `bulan` dalam bentuk angka (1–12)
+                $bindings[] = $bulan;
+            }
+
+            // Gabungkan semua WHERE jadi satu string
+            $whereSQL = '';
+            if (!empty($whereClauses)) {
+                $whereSQL = 'WHERE ' . implode(' AND ', $whereClauses);
+            }
+
+            $query = "
+            SELECT
+                tagihan.id_pelanggan,
+                pelanggan.nama_pelanggan,
+                tagihan.nomor_meteran,
+                tagihan.nominal,
+                tagihan.tahun,
+                tagihan.waktu_awal,
+                tagihan.waktu_akhir,
+                tagihan.status_tagihan,
+                tagihan.status_pembayaran,
+                SUM(detail_tagihan.pakai) AS total_pakai
+            FROM tagihan
+            INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
+            LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
+            $whereSQL
+            GROUP BY tagihan.id_tagihan
+        ";
+
+            $pakaiList = DB::select($query, $bindings);
+
+            if (empty($pakaiList)) {
+                return ApiResponse::error("Data tagihan tidak ditemukan", "2002", 404);
+            }
+
+            return ApiResponse::success($pakaiList, "Data tagihan ditemukan", "0000", 200);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan server: " . $e->getMessage(), "5000", 500);
         }
-
-        return ApiResponse::success($pakaiList, "Data tagihan ditemukan", "0000", 200);
     }
 }
