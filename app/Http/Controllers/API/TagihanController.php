@@ -55,7 +55,6 @@ class TagihanController extends Controller
                 'columns' => $columns,
                 'selected_columns' => $selectedColumns
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -155,7 +154,6 @@ class TagihanController extends Controller
                     'meteran' => $meteran
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -298,7 +296,6 @@ class TagihanController extends Controller
                     'rincian_tagihan' => $rincianTagihan
                 ]
             ], 201);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -326,7 +323,6 @@ class TagihanController extends Controller
                     'detail_tagihan' => $detailtagihan
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -369,7 +365,6 @@ class TagihanController extends Controller
                 'message' => 'Tagihan berhasil diperbarui',
                 'data' => $tagihan
             ]);
-
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() == '23000') {
                 return response()->json([
@@ -408,7 +403,6 @@ class TagihanController extends Controller
                 'success' => true,
                 'message' => 'Tagihan berhasil dihapus'
             ]);
-
         } catch (\Illuminate\Database\QueryException $e) {
             DB::rollBack();
             if ($e->getCode() == '23000') {
@@ -546,7 +540,6 @@ class TagihanController extends Controller
                     'tagihan' => $tagihan
                 ]
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -610,7 +603,6 @@ class TagihanController extends Controller
                     'meteran' => $meteran
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -651,5 +643,35 @@ class TagihanController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::error("Terjadi kesalahan yang tidak diketahui saat mengambil tagihan.", "9999", 500);
         }
+    }
+
+    /**
+     * Get total detail tagihan
+     */
+    public function getPakaiByMeteranAktif(Request $request)
+    {
+        $query = "SELECT
+        tagihan.id_pelanggan,
+        pelanggan.nama_pelanggan,
+        tagihan.nomor_meteran,
+        tagihan.nominal,
+        tagihan.tahun,
+        tagihan.waktu_awal,
+        tagihan.waktu_akhir,
+        tagihan.status_tagihan,
+        tagihan.status_pembayaran,
+        SUM(detail_tagihan.pakai) AS total_pakai
+    FROM tagihan
+    INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
+    LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
+    GROUP BY tagihan.id_tagihan";
+
+        $pakaiList = DB::select($query);
+
+        if (empty($pakaiList)) {
+            return ApiResponse::error("Data tagihan tidak ditemukan", "2002", 404);
+        }
+
+        return ApiResponse::success($pakaiList, "Data tagihan ditemukan", "0000", 200);
     }
 }
