@@ -32,10 +32,10 @@ class PemakaianController extends BaseController implements HasMiddleware
     public function index(Request $request): JsonResponse
     {
         try {
-
             $status = $request->get('status');
             $tahun = $request->get('tahun', Carbon::now()->year);
             $bulan = $request->get('bulan');
+
             $query = Pemakaian::query()
                 ->when($status !== null, function ($q) use ($status) {
                     $q->where('status_pembayaran', $status);
@@ -50,7 +50,9 @@ class PemakaianController extends BaseController implements HasMiddleware
 
             $except = ['created_by', 'updated_by'];
 
-            $columns = collect($query->getModel()->getFillable())->filter(fn($item) => !in_array($item, $except))->toArray();
+            $columns = collect($query->getModel()->getFillable())->filter(
+                fn($item) => !in_array($item, $except)
+            )->toArray();
 
             $selectedColumns = $request->get('col', $columns);
 
@@ -67,6 +69,11 @@ class PemakaianController extends BaseController implements HasMiddleware
 
             $pemakaian = $query->paginate(10);
 
+            // ✅ Tambahkan pengecekan apakah data kosong
+            if ($pemakaian->isEmpty()) {
+                return ApiResponse::error("Data yang diminta tidak ditemukan.", "2001", 404);
+            }
+
             return ApiResponse::success($pemakaian, "Data berhasil diambil.", "0000", 200);
         } catch (\Illuminate\Database\QueryException $e) {
             return ApiResponse::error("Kesalahan database.", "9999", 500);
@@ -74,6 +81,7 @@ class PemakaianController extends BaseController implements HasMiddleware
             return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
         }
     }
+
 
     public function create(Meteran $meteran): JsonResponse
     {
