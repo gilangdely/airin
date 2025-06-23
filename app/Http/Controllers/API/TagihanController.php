@@ -622,7 +622,7 @@ class TagihanController extends Controller
         }
 
         try {
-            $tagihan = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
+            $query = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
                 ->where('status_pembayaran', 0)
                 ->where('status_tagihan', 1)
                 ->first();
@@ -638,9 +638,9 @@ class TagihanController extends Controller
                 'detail_tagihan' => $detailtagihan
             ], "Tagihan ditemukan.", "0000", 200);
         } catch (\Illuminate\Database\QueryException $e) {
-            return ApiResponse::error("Kesalahan database saat mengambil tagihan.", "9999", 500);
+            return ApiResponse::error("Kesalahan database: " . $e->getMessage(), "9999", 500);
         } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui saat mengambil tagihan.", "9999", 500);
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui: " . $e->getMessage(), "9999", 500);
         }
     }
 
