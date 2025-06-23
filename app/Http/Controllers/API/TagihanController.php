@@ -622,26 +622,32 @@ class TagihanController extends Controller
         }
 
         try {
-            $tagihan = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
+            $query = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
                 ->where('status_pembayaran', 0)
                 ->where('status_tagihan', 1)
-                ->first();
+                ->with(['detailtagihan', 'bulan', 'meteran', 'meteran.pelanggan'])
+                ->withSum('detailtagihan as total_pakai', 'pakai')
 
-            if (!$tagihan) {
-                return ApiResponse::error("Tagihan tidak ditemukan untuk nomor meteran ini.", "2001", 404);
+                ->when($request->has('start_date') && $request->has('end_date'), function ($query) use ($request) {
+                    $startDate = Carbon::parse($request->input('start_date'))->startOfDay();
+                    $endDate = Carbon::parse($request->input('end_date'))->endOfDay();
+
+                    return $query->whereBetween('waktu_akhir', [$startDate, $endDate]);
+                });
+
+            // Tambahkan pengurutan agar yang terbaru muncul lebih dulu, lalu paginasi
+            $tagihan = $query->orderBy('waktu_akhir', 'desc')->paginate(10);
+
+            if ($tagihan->isEmpty()) {
+                return ApiResponse::error("Data tagihan tidak ditemukan.", "2001", 404);
             }
 
-            $detailtagihan = DetailTagihan::where('id_tagihan', $tagihan->id_tagihan)->get();
-
-            return ApiResponse::success([
-                'tagihan' => $tagihan,
-                'detail_tagihan' => $detailtagihan
-            ], "Tagihan ditemukan.", "0000", 200);
+            return ApiResponse::success($tagihan, "Data tagihan ditemukan.", "0000", 200);
 
         } catch (\Illuminate\Database\QueryException $e) {
-            return ApiResponse::error("Kesalahan database saat mengambil tagihan.", "9999", 500);
+            return ApiResponse::error("Kesalahan database: " . $e->getMessage(), "9999", 500);
         } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui saat mengambil tagihan.", "9999", 500);
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui: " . $e->getMessage(), "9999", 500);
         }
     }
 
