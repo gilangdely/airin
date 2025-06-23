@@ -58,21 +58,30 @@ class PemakaianController extends BaseController implements HasMiddleware
 
             if ($search = $request->get('search')) {
                 $query->where(function ($query) use ($search, $selectedColumns) {
+                    // Search kolom dari tabel utama (pemakaian)
                     foreach ($selectedColumns as $column) {
                         $query->orWhere($column, 'like', '%' . $search . '%');
                     }
 
-                    $query->orWhereHas('meteran', fn($q) => $q->where('nomor_meteran', 'like', '%' . $search . '%'));
-                    $query->orWhereHas('tblbulan', fn($q) => $q->where('nama_bulan', 'like', '%' . $search . '%'));
+                    // Search berdasarkan nomor meteran
+                    $query->orWhereHas('meteran', function ($q) use ($search) {
+                        $q->where('nomor_meteran', 'like', '%' . $search . '%');
+
+                        // Search berdasarkan nama pelanggan
+                        $q->orWhereHas('pelanggan', function ($qp) use ($search) {
+                            $qp->where('nama_pelanggan', 'like', '%' . $search . '%');
+                        });
+                    });
                 });
             }
+
 
             $pemakaian = $query->paginate(10);
 
             // ✅ Tambahkan pengecekan apakah data kosong
-            if ($pemakaian->isEmpty()) {
-                return ApiResponse::error("Data yang diminta tidak ditemukan.", "2001", 404);
-            }
+            // if ($pemakaian->isEmpty()) {
+            //     return ApiResponse::error("Data yang diminta tidak ditemukan.", "2001", 404);
+            // }
 
             return ApiResponse::success($pemakaian, "Data berhasil diambil.", "0000", 200);
         } catch (\Illuminate\Database\QueryException $e) {
