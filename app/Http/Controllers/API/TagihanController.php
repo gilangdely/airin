@@ -674,14 +674,14 @@ class TagihanController extends Controller
             }
 
             if (!empty($search)) {
-                $whereClauses[] = "(pelanggan.nama_pelanggan LIKE ? OR tagihan.nomor_meteran LIKE ?)";
+                $whereClauses[] = '(pelanggan.nama_pelanggan LIKE ? OR tagihan.nomor_meteran LIKE ?)';
                 $bindings[] = "%$search%";
                 $bindings[] = "%$search%";
             }
 
             $whereSQL = '';
             if (!empty($whereClauses)) {
-                $whereSQL = ' AND ' . implode(' AND ', $whereClauses);
+                $whereSQL = 'AND ' . implode(' AND ', $whereClauses);
             }
 
             $query = "
