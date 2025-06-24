@@ -6,9 +6,9 @@
 
                 <th class="align-middle">Nama Pelanggan</th>
                 <th class="align-middle">Nomor Meteran</th>
-                <th class="align-middle">Id Layanan</th>
-                <th class="align-middle">Lokasi Pemasangan</th>
+                <th class="align-middle">Layanan</th>
                 <th class="align-middle">Tanggal Pemasangan</th>
+                <th class="align-middle">Area</th>
                 <th class="align-middle">Status</th>
                 <th class="text-center">Aksi</th>
             </tr>
@@ -21,8 +21,8 @@
                     <td>{{ $row->pelanggan?->nama_pelanggan }}</td>
                     <td>{{ $row?->nomor_meteran }}</td>
                     <td>{{ $row->layanan?->nama_layanan }}</td>
-                    <td>{{ $row?->lokasi_pemasangan }}</td>
                     <td>{{ date('d-M-Y', strtotime($row?->tanggal_pemasangan)) }}</td>
+                    <td>{{ $row?->areapetugas->nama_area }}</td>
                     <td>
                         @if ($row?->status == 1)
                             <span class="badge bg-label-success">Aktif</span>

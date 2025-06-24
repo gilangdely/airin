@@ -277,6 +277,28 @@ return [
             ]
         ],
         [
+            'group' => 'area-petugas',
+            'pengguna' => ['peserta', 'admin'],
+            'access' => [
+                'area-petugas view',
+                'area-petugas create',
+                'area-petugas edit',
+                'area-petugas delete',
+
+            ]
+        ],
+        [
+            'group' => 'petugas',
+            'pengguna' => ['admin'],
+            'access' => [
+                'petugas view',
+                'petugas create',
+                'petugas edit',
+                'petugas delete',
+
+            ]
+        ],
+        [
             'group' => 'meteran',
             'pengguna' => ['peserta', 'admin'],
             'access' => [

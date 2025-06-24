@@ -82,4 +82,57 @@ class HomeController extends Controller
             return ApiResponse::error("Tagihan tidak ditemukan", "2001", 404);
         }
     }
+
+    public function riwayattagihanbymeteran(Request $request)
+    {
+        if (!$request->has('nomor_meteran') || empty($request->nomor_meteran)) {
+            return ApiResponse::error("Parameter `nomor_meteran` tidak boleh kosong", "9002", 400);
+        }
+
+        $nomorMeteranAktif = $request->nomor_meteran;
+
+        try {
+            // --- BLOK TRY: Kode utama yang berisiko dieksekusi di sini ---
+
+            $query_gettagihan = "
+            SELECT 
+                tagihan.id_tagihan,tagihan.nomor_meteran, tagihan.id_bulan, bulan.nama_bulan, 
+                tagihan.nominal, tagihan.waktu_awal, tagihan.waktu_akhir, 
+                tagihan.status_tagihan, tagihan.status_pembayaran, 
+                SUM(detail_tagihan.pakai) as total_pakai 
+            FROM tagihan
+            INNER JOIN detail_tagihan ON detail_tagihan.id_tagihan = tagihan.id_tagihan
+            INNER JOIN bulan ON bulan.id_bulan = tagihan.id_bulan
+            WHERE tagihan.nomor_meteran = :nomormeteran
+            GROUP BY tagihan.id_tagihan
+            ORDER BY tagihan.id_bulan DESC
+        ";
+
+            $tagihan = DB::select($query_gettagihan, [
+                'nomormeteran'=>$nomorMeteranAktif
+            ]);
+
+            // Cek jika hasil query adalah array kosong (data tidak ditemukan)
+            // Ini adalah "business logic", bukan error, jadi tetap di dalam try block.
+            if (empty($tagihan)) {
+                // Jika tidak ada tagihan, kembalikan respons "not found"
+                return ApiResponse::error("Riwayat tagihan tidak ditemukan", "2001", 404);
+            }
+
+            // Jika berhasil dan data ada, kembalikan respons sukses
+            return ApiResponse::success($tagihan, "Riwayat ditemukan", "0000", 200);
+        } catch (Exception $e) {
+            // --- BLOK CATCH: Kode ini HANYA akan berjalan JIKA terjadi error di dalam blok TRY ---
+
+            // 1. Catat error ke dalam log untuk dianalisis oleh developer
+            Log::error('Gagal mengambil riwayat tagihan: ' . $e->getMessage());
+
+            // 2. Kembalikan respons error yang rapi ke pengguna/frontend
+            return ApiResponse::error(
+                "Terjadi kesalahan pada server.", // Pesan untuk pengguna
+                "5001",                           // Kode error internal Anda
+                500                               // HTTP Status Code 500 (Internal Server Error)
+            );
+        }
+    }
 }

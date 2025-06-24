@@ -66,4 +66,8 @@ class Meteran extends Model
     {
         return $this->hasMany(Tagihan::class, 'nomor_meteran');
     }
+
+    public function areapetugas(){
+        return $this->belongsTo(AreaPetugas::class, 'id_area', 'id');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AreaPetugasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaLayananController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ use App\Http\Controllers\MeteranController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PemakaianController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\RekapPembayaran;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TarifLayananController;
@@ -109,4 +111,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::put('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
     Route::delete('/profile/remove-photo', [UserController::class, 'removeProfilePhoto'])->name('profile.remove-photo');
+
+    // Route::resource('petugas',PetugasController::class);
+
+    Route::get('area-petugas', [AreaPetugasController::class, 'index'])->name('area-petugas.index');
+    Route::get('area-petugas/create', [AreaPetugasController::class, 'create'])->name('area-petugas.create');
+    Route::post('area-petugas', [AreaPetugasController::class, 'store'])->name('area-petugas.store');
+    Route::get('area-petugas/{id}', [AreaPetugasController::class, 'show'])->name('area-petugas.show');
+    Route::get('area-petugas/{id}/edit', [AreaPetugasController::class, 'edit'])->name('area-petugas.edit');
+    Route::put('area-petugas/{id}', [AreaPetugasController::class, 'update'])->name('area-petugas.update');
+    Route::delete('area-petugas/{id}', [AreaPetugasController::class, 'destroy'])->name('area-petugas.destroy');
+
+    Route::get('petugas', [PetugasController::class, 'index'])->name('petugas.index');
+    Route::get('petugas/create', [PetugasController::class, 'create'])->name('petugas.create');
+    Route::post('petugas', [PetugasController::class, 'store'])->name('petugas.store');
+    Route::get('petugas/{petugas}', [PetugasController::class, 'show'])->name('petugas.show');
+    Route::get('petugas/{petugas}/edit', [PetugasController::class, 'edit'])->name('petugas.edit');
+    Route::put('petugas/{petugas}', [PetugasController::class, 'update'])->name('petugas.update');
+    Route::delete('petugas/{petugas}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
 });

@@ -11,7 +11,7 @@ use App\Http\Controllers\API\PembayaranController;
 use App\Http\Controllers\TagihanController;
 
 use Illuminate\Support\Facades\Route;
-
+ 
 Route::get('storage/{path}', function ($path) {
     $fullPath = storage_path('app/public/' . $path);
 
@@ -32,6 +32,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user', [UserController::class, 'updateProfile']); // ok
     Route::post('/user/change-password', [UserController::class, 'changePassword']); // ok
     Route::post('/logout', [AuthController::class, 'logout']); // ok
+
+    Route::get('/getunpaidinvoice', [HomeController::class, 'getunpaidinvoice']);
+    Route::post('/getmeteranbypelanggan', [HomeController::class, 'getmeteranbypelanggan']);
+    Route::post('/gettagihanbymeteranaktif', [HomeController::class, 'gettagihanbymeteranaktif']);
+    Route::post('/riwayattagihanbymeteran', [HomeController::class, 'riwayattagihanbymeteran']);
 
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
 

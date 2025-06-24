@@ -60,6 +60,7 @@ class PemakaianController extends Controller implements HasMiddleware
                 });
             });
         }
+        $query->orderBy('created_at', 'DESC');
 
         $pemakaian = $query->paginate(10);
 
