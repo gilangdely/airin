@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Helpers\ApiResponse;
-use App\Models\Pelanggan;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,6 +26,31 @@ class UserController extends BaseController implements HasMiddleware
             new Middleware('permission:user edit', only: ['edit', 'update']),
             new Middleware('permission:user delete', only: ['destroy']),
         ];
+    }
+
+    public function me(): JsonResponse
+    {
+        try {
+            $user = User::with('roles')->find(Auth::id());
+
+            if (!$user) {
+                return ApiResponse::error("User tidak ditemukan.", "2001", 404);
+            }
+
+            $data = [
+                'id' => $user->id,
+                'username' => $user->username,
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified_at' => $user->email_verified_at,
+                'users_picture' => $user->users_picture ? (url('/api') . Storage::url($user->users_picture)) : null,
+                'role' => $user->roles[0]['name'] ?? null,
+            ];
+
+            return ApiResponse::success($data, "Data profil berhasil diambil.", "0000", 200);
+        } catch (\Exception $e) {
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
+        }
     }
 
     public function updateProfile(Request $request): JsonResponse
@@ -109,19 +133,5 @@ class UserController extends BaseController implements HasMiddleware
         } catch (\Exception $e) {
             return ApiResponse::error("Terjadi kesalahan server.", "9999", 500);
         }
-    }
-
-    public function getById(Request $request)
-    {
-        $request->validate([
-            'id' => 'required|exists:pelanggan,id_pelanggan'
-        ]);
-
-        $data = Pelanggan::where('id_pelanggan', $request->id)->first();
-
-        return response()->json([
-            'status' => true,
-            'data' => $data,
-        ]);
     }
 }
