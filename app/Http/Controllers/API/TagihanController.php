@@ -687,65 +687,65 @@ class TagihanController extends Controller
             $whereSQL = ""; // Tambahkan filter kondisi WHERE secara dinamis di sini
 
             $query = "
-    SELECT
-        tagihan.id_tagihan,
-        tagihan.id_pelanggan,
-        pemakaian.id_pakai,
-        pemakaian.id_layanan,
-        pelanggan.nama_pelanggan,
-        tagihan.nomor_meteran,
-        tagihan.nominal,
-        tagihan.tahun,
-        pemakaian.awal,
-        pemakaian.akhir,
-        pemakaian.pakai,
-        tagihan.waktu_awal,
-        tagihan.waktu_akhir,
-        tagihan.status_tagihan,
-        tagihan.status_pembayaran,
-        tarif_layanan.id_tarif_layanan,
-        tarif_layanan.id_layanan AS tarif_id_layanan,
-        tarif_layanan.tier,
-        tarif_layanan.min_pemakaian,
-        tarif_layanan.max_pemakaian,
-        tarif_layanan.tarif,
-        SUM(detail_tagihan.pakai) AS total_pakai
-    FROM tagihan
-    INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
-    LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
-    LEFT JOIN pemakaian ON pemakaian.nomor_meteran = tagihan.nomor_meteran
-    LEFT JOIN tarif_layanan 
-        ON tarif_layanan.id_layanan = pemakaian.id_layanan
-        AND (
-            (tarif_layanan.min_pemakaian = 0 AND tarif_layanan.max_pemakaian = 0)
-            OR (pemakaian.pakai BETWEEN tarif_layanan.min_pemakaian AND tarif_layanan.max_pemakaian)
-            OR (tarif_layanan.max_pemakaian = 0 AND pemakaian.pakai >= tarif_layanan.min_pemakaian)
-        )
-    WHERE 1=1
-    $whereSQL
-    GROUP BY
-        tagihan.id_tagihan,
-        tagihan.id_pelanggan,
-        pemakaian.id_pakai,
-        pemakaian.id_layanan,
-        pelanggan.nama_pelanggan,
-        tagihan.nomor_meteran,
-        tagihan.nominal,
-        tagihan.tahun,
-        pemakaian.awal,
-        pemakaian.akhir,
-        pemakaian.pakai,
-        tagihan.waktu_awal,
-        tagihan.waktu_akhir,
-        tagihan.status_tagihan,
-        tagihan.status_pembayaran,
-        tarif_layanan.id_tarif_layanan,
-        tarif_layanan.id_layanan,
-        tarif_layanan.tier,
-        tarif_layanan.min_pemakaian,
-        tarif_layanan.max_pemakaian,
-        tarif_layanan.tarif
-";
+                SELECT
+                    tagihan.id_tagihan,
+                    tagihan.id_pelanggan,
+                    pemakaian.id_pakai,
+                    pemakaian.id_layanan,
+                    pelanggan.nama_pelanggan,
+                    tagihan.nomor_meteran,
+                    tagihan.nominal,
+                    tagihan.tahun,
+                    pemakaian.awal,
+                    pemakaian.akhir,
+                    pemakaian.pakai,
+                    tagihan.waktu_awal,
+                    tagihan.waktu_akhir,
+                    tagihan.status_tagihan,
+                    tagihan.status_pembayaran,
+                    tarif_layanan.id_tarif_layanan,
+                    tarif_layanan.id_layanan AS tarif_id_layanan,
+                    tarif_layanan.tier,
+                    tarif_layanan.min_pemakaian,
+                    tarif_layanan.max_pemakaian,
+                    tarif_layanan.tarif,
+                    SUM(detail_tagihan.pakai) AS total_pakai
+                FROM tagihan
+                INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
+                LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
+                LEFT JOIN pemakaian ON pemakaian.nomor_meteran = tagihan.nomor_meteran
+                LEFT JOIN tarif_layanan 
+                    ON tarif_layanan.id_layanan = pemakaian.id_layanan
+                    AND (
+                        (tarif_layanan.min_pemakaian = 0 AND tarif_layanan.max_pemakaian = 0)
+                        OR (pemakaian.pakai BETWEEN tarif_layanan.min_pemakaian AND tarif_layanan.max_pemakaian)
+                        OR (tarif_layanan.max_pemakaian = 0 AND pemakaian.pakai >= tarif_layanan.min_pemakaian)
+                    )
+                WHERE 1=1
+                $whereSQL
+                GROUP BY
+                    tagihan.id_tagihan,
+                    tagihan.id_pelanggan,
+                    pemakaian.id_pakai,
+                    pemakaian.id_layanan,
+                    pelanggan.nama_pelanggan,
+                    tagihan.nomor_meteran,
+                    tagihan.nominal,
+                    tagihan.tahun,
+                    pemakaian.awal,
+                    pemakaian.akhir,
+                    pemakaian.pakai,
+                    tagihan.waktu_awal,
+                    tagihan.waktu_akhir,
+                    tagihan.status_tagihan,
+                    tagihan.status_pembayaran,
+                    tarif_layanan.id_tarif_layanan,
+                    tarif_layanan.id_layanan,
+                    tarif_layanan.tier,
+                    tarif_layanan.min_pemakaian,
+                    tarif_layanan.max_pemakaian,
+                    tarif_layanan.tarif
+            ";
 
             $pakaiList = DB::select($query, $bindings);
 
