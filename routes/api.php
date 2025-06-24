@@ -45,5 +45,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
   
-    Route::get('/pakai-by-tagihan', [TagihanController::class, 'getPakaiByMeteranAktif']);
+    Route::get('/pakai-by-tagihan', [TagihanController::class, 'getTotalTagihanPetugas']);
 });
