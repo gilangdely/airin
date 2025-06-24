@@ -647,109 +647,117 @@ class TagihanController extends Controller
     /**
      * Get total detail tagihan
      */
-    public function getTotalTagihanPetugas(Request $request)
+    public function getTotalTagihanPetugas(Request $request): JsonResponse
     {
         try {
-            $status = $request->get('status');
-            $tahun = $request->get('tahun');
-            $bulan = $request->get('bulan');
-            $search = $request->get('search');
+            // Filter opsional dari query string
+            $status = $request->query('status');
+            $tahun = $request->query('tahun');
+            $bulan = $request->query('bulan');
+            $search = $request->query('search');
 
             $whereClauses = [];
             $bindings = [];
 
-            if (!empty($status)) {
+            if (!is_null($status)) {
                 $whereClauses[] = 'tagihan.status_pembayaran = ?';
                 $bindings[] = $status;
             }
 
-            if (!empty($tahun)) {
+            if (!is_null($tahun)) {
                 $whereClauses[] = 'tagihan.tahun = ?';
                 $bindings[] = $tahun;
             }
 
-            if (!empty($bulan)) {
+            if (!is_null($bulan)) {
                 $whereClauses[] = 'MONTH(tagihan.waktu_awal) = ?';
                 $bindings[] = $bulan;
             }
 
-            if (!empty($search)) {
-                $whereClauses[] = "(pelanggan.nama_pelanggan LIKE ? OR tagihan.nomor_meteran LIKE ?)";
+            if (!is_null($search)) {
+                $whereClauses[] = '(pelanggan.nama_pelanggan LIKE ? OR tagihan.nomor_meteran LIKE ?)';
                 $bindings[] = "%$search%";
                 $bindings[] = "%$search%";
             }
 
             $whereSQL = '';
             if (!empty($whereClauses)) {
-                $whereSQL = ' AND ' . implode(' AND ', $whereClauses);
+                $whereSQL = 'AND ' . implode(' AND ', $whereClauses);
             }
 
-            $query = "
-        SELECT
-            tagihan.id_tagihan,
-            tagihan.id_pelanggan,
-            pemakaian.id_pakai,
-            pemakaian.id_layanan,
-            pelanggan.nama_pelanggan,
-            tagihan.nomor_meteran,
-            tagihan.nominal,
-            tagihan.tahun,
-            pemakaian.awal,
-            pemakaian.akhir,
-            pemakaian.pakai,
-            tagihan.waktu_awal,
-            tagihan.waktu_akhir,
-            tagihan.status_tagihan,
-            tagihan.status_pembayaran,
-            tarif_layanan.id_tarif_layanan,
-            tarif_layanan.id_layanan AS tarif_id_layanan,
-            tarif_layanan.tier,
-            tarif_layanan.min_pemakaian,
-            tarif_layanan.max_pemakaian,
-            tarif_layanan.tarif,
-            SUM(detail_tagihan.pakai) AS total_pakai
-        FROM tagihan
-        INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
-        LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
-        LEFT JOIN pemakaian ON pemakaian.nomor_meteran = tagihan.nomor_meteran
-        LEFT JOIN tarif_layanan 
-            ON tarif_layanan.id_layanan = pemakaian.id_layanan
-            AND (
-                (tarif_layanan.min_pemakaian = 0 AND tarif_layanan.max_pemakaian = 0)
-                OR (pemakaian.pakai BETWEEN tarif_layanan.min_pemakaian AND tarif_layanan.max_pemakaian)
-                OR (tarif_layanan.max_pemakaian = 0 AND pemakaian.pakai >= tarif_layanan.min_pemakaian)
-            )
-        WHERE 1=1
-        $whereSQL
-        GROUP BY
-            tagihan.id_tagihan,
-            tagihan.id_pelanggan,
-            pemakaian.id_pakai,
-            pemakaian.id_layanan,
-            pelanggan.nama_pelanggan,
-            tagihan.nomor_meteran,
-            tagihan.nominal,
-            tagihan.tahun,
-            pemakaian.awal,
-            pemakaian.akhir,
-            pemakaian.pakai,
-            tagihan.waktu_awal,
-            tagihan.waktu_akhir,
-            tagihan.status_tagihan,
-            tagihan.status_pembayaran,
-            tarif_layanan.id_tarif_layanan,
-            tarif_layanan.id_layanan,
-            tarif_layanan.tier,
-            tarif_layanan.min_pemakaian,
-            tarif_layanan.max_pemakaian,
-            tarif_layanan.tarif
+            $sql = "
+            SELECT
+                tagihan.id_tagihan,
+                tagihan.id_pelanggan,
+                pemakaian.id_pakai,
+                pemakaian.id_layanan,
+                pelanggan.nama_pelanggan,
+                tagihan.nomor_meteran,
+                tagihan.nominal,
+                tagihan.tahun,
+                pemakaian.awal,
+                pemakaian.akhir,
+                pemakaian.pakai,
+                tagihan.waktu_awal,
+                tagihan.waktu_akhir,
+                tagihan.status_tagihan,
+                tagihan.status_pembayaran,
+                tarif_layanan.id_tarif_layanan,
+                tarif_layanan.id_layanan AS tarif_id_layanan,
+                tarif_layanan.tier,
+                tarif_layanan.min_pemakaian,
+                tarif_layanan.max_pemakaian,
+                tarif_layanan.tarif,
+                SUM(detail_tagihan.pakai) AS total_pakai
+            FROM tagihan
+            INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
+            LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
+            LEFT JOIN pemakaian ON pemakaian.nomor_meteran = tagihan.nomor_meteran
+            LEFT JOIN tarif_layanan 
+                ON tarif_layanan.id_layanan = pemakaian.id_layanan
+                AND (
+                    (tarif_layanan.min_pemakaian = 0 AND tarif_layanan.max_pemakaian = 0)
+                    OR (pemakaian.pakai BETWEEN tarif_layanan.min_pemakaian AND tarif_layanan.max_pemakaian)
+                    OR (tarif_layanan.max_pemakaian = 0 AND pemakaian.pakai >= tarif_layanan.min_pemakaian)
+                )
+            WHERE 1=1
+            $whereSQL
+            GROUP BY
+                tagihan.id_tagihan,
+                tagihan.id_pelanggan,
+                pemakaian.id_pakai,
+                pemakaian.id_layanan,
+                pelanggan.nama_pelanggan,
+                tagihan.nomor_meteran,
+                tagihan.nominal,
+                tagihan.tahun,
+                pemakaian.awal,
+                pemakaian.akhir,
+                pemakaian.pakai,
+                tagihan.waktu_awal,
+                tagihan.waktu_akhir,
+                tagihan.status_tagihan,
+                tagihan.status_pembayaran,
+                tarif_layanan.id_tarif_layanan,
+                tarif_layanan.id_layanan,
+                tarif_layanan.tier,
+                tarif_layanan.min_pemakaian,
+                tarif_layanan.max_pemakaian,
+                tarif_layanan.tarif
         ";
 
-            $pakaiList = DB::select($query, $bindings);
+            $data = DB::select($sql, $bindings);
 
-            return ApiResponse::success($pakaiList, "Data tagihan ditemukan", "0000", 200);
+            return response()->json([
+                'success' => true,
+                'data' => $data
+            ], 200);
         } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan server: " . $e->getMessage(), "5000", 500);
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil data',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

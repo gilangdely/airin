@@ -30,6 +30,7 @@ Route::post('/login', [AuthController::class, 'login']);  // ok
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user', [UserController::class, 'updateProfile']); // ok
+    Route::post('/loginpetugas', [UserController::class, 'loginPetugas']);
     Route::post('/user/change-password', [UserController::class, 'changePassword']); // ok
     Route::post('/logout', [AuthController::class, 'logout']); // ok
 
