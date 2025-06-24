@@ -273,23 +273,42 @@ class PemakaianController extends BaseController implements HasMiddleware
         }
 
         try {
-            $pemakaian = Pemakaian::whereHas('meteran', function ($query) use ($request) {
-                $query->where('nomor_meteran', $request->input('nomor_meteran'));
-            })->with(['meteran', 'tblbulan'])
-            ->orderBy('tahun', 'desc')
-            ->orderBy('bulan', 'desc')
-            ->get()
-            ->toArray();
+            $pemakaianQuery = Pemakaian::where('nomor_meteran', $request->input('nomor_meteran'))
+                // --- Kondisional untuk Tahun ---
+                ->when($request->tahun, function ($query, $tahun) {
+                    return $query->where('tahun', $tahun);
+                })
+                // --- Kondisional untuk Bulan ---
+                ->when($request->bulan, function ($query, $bulan) {
+                    return $query->where('bulan', $bulan);
+                })
+                ->with(['meteran', 'tblbulan'])
+                ->orderBy('tahun', 'desc')
+                ->orderBy('bulan', 'desc');
 
-            if (empty($pemakaian)) {
-                return ApiResponse::error("Tidak ada data pemakaian untuk nomor meteran ini.", "2001", 404);
+            if ($request->has('start_date')) {
+                $startDate = Carbon::parse($request->input('start_date'))->startOfDay();
+                $endDate = $request->has('end_date')
+                    ? Carbon::parse($request->input('end_date'))->endOfDay()
+                    : Carbon::now()->endOfDay();
+
+                // Menggunakan whereBetween pada created_at, atau sesuaikan dengan kolom tanggal
+                $pemakaianQuery->whereBetween('created_at', [$startDate, $endDate]);
+            }
+
+            // Eksekusi query setelah semua kondisi diterapkan
+            $pemakaian = $pemakaianQuery->paginate(10);
+
+            if ($pemakaian->isEmpty()) {
+                return ApiResponse::error("Tidak ada data pemakaian untuk kriteria ini.", "2001", 404);
             }
 
             return ApiResponse::success(['pemakaian' => $pemakaian], "Data pemakaian berhasil diambil.", "0000", 200);
+
         } catch (\Illuminate\Database\QueryException $e) {
-            return ApiResponse::error("Kesalahan database.", "9999", 500);
+            return ApiResponse::error("Kesalahan database: " . $e->getMessage(), "9999", 500);
         } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui: " . $e->getMessage(), "9999", 500);
         }
     }
 }
