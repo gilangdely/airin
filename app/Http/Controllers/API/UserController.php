@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Helpers\ApiResponse;
+use App\Models\Pelanggan;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -108,5 +109,19 @@ class UserController extends BaseController implements HasMiddleware
         } catch (\Exception $e) {
             return ApiResponse::error("Terjadi kesalahan server.", "9999", 500);
         }
+    }
+
+    public function getById(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:pelanggan,id_pelanggan'
+        ]);
+
+        $data = Pelanggan::where('id_pelanggan', $request->id)->first();
+
+        return response()->json([
+            'status' => true,
+            'data' => $data,
+        ]);
     }
 }

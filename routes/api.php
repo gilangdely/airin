@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PemakaianController;
 use App\Http\Controllers\API\PembayaranController;
-use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\API\TagihanController;
 
 use Illuminate\Support\Facades\Route;
  
@@ -41,9 +41,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']); // ok
+    Route::post('/pemakaian/meteran', [PemakaianController::class, 'pemakaianByMeteran']); // ok
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
-    Route::get('/pembayaran/meteran/{id}', [PembayaranController::class, 'PembayaranByid']);
 
-    Route::get('/tagihan', [TagihanController::class, 'index']);
+    Route::get('/pembayaran/meteran/{nomor_meteran}', [PembayaranController::class, 'PembayaranByMeteran']);
+
+    Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
+
+    Route::get('/pakai-by-tagihan', [TagihanController::class, 'getPakaiByMeteranAktif']);
+
+    Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
 });

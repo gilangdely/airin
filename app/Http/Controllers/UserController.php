@@ -178,4 +178,70 @@ class UserController extends Controller implements HasMiddleware
             'user' => Auth::user()
         ]);
     }
-};
+
+    public function updateProfile(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $validatedData = $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'username' => ['sometimes', 'required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'users_picture' => 'sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'email' => ['sometimes', 'nullable', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+        ]);
+
+        if ($request->hasFile('users_picture')) {
+            if ($user->users_picture && Storage::disk('public')->exists('profile-pictures/' . $user->users_picture)) {
+                Storage::disk('public')->delete('profile-pictures/' . $user->users_picture);
+            }
+
+            $file = $request->file('users_picture');
+            $filename = "profile_{$user->id}.jpg"; // Semua disimpan sebagai JPG
+            $destinationPath = storage_path('app/public/profile-pictures/');
+            $filePath = $destinationPath . $filename;
+
+            $file->storeAs('profile-pictures', $filename, 'public');
+
+            $validatedData['users_picture'] = 'profile-pictures/' . $filename;
+        }
+
+        $user->update($validatedData);
+
+        if ($request->wantsJson()) {
+            $success = [
+                'message' => 'Profile updated successfully!',
+                'user' => $user->toArray()
+            ];
+
+            if ($user->users_picture) {
+                $success['user']['users_picture'] = Storage::url($user->users_picture);
+            } else {
+                $success['user']['users_picture'] = 'https://ui-avatars.com/api/?background=random&name=' . urlencode($user->name);
+            }
+
+            return response()->json($success, 200);
+        }
+
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+    }
+    
+    public function changePassword(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'min:6', 'confirmed'],
+        ]);
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['message' => 'Password saat ini salah.'], 422);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return response()->json(['message' => 'Password berhasil diubah.']);
+    }
+}
