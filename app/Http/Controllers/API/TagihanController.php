@@ -674,7 +674,7 @@ class TagihanController extends Controller
                 $bindings[] = $bulan;
             }
 
-            if (!is_null($search)) {
+            if (!empty($search)) {
                 $whereClauses[] = '(pelanggan.nama_pelanggan LIKE ? OR tagihan.nomor_meteran LIKE ?)';
                 $bindings[] = "%$search%";
                 $bindings[] = "%$search%";

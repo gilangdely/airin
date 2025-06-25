@@ -29,6 +29,7 @@ Route::get('storage/{path}', function ($path) {
 Route::post('/login', [AuthController::class, 'login']);  // ok
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'me']); // ok
     Route::post('/user', [UserController::class, 'updateProfile']); // ok
     Route::post('/loginpetugas', [UserController::class, 'loginPetugas']);
     Route::post('/user/change-password', [UserController::class, 'changePassword']); // ok
