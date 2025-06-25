@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 
 use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\PelangganController;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\API\UserController;
@@ -49,5 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pakai-by-tagihan', [TagihanController::class, 'getPakaiByMeteranAktif']);
 
     Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
+    
+    Route::post('/pelanggan/update', [PelangganController::class, 'UpdateData']);
 
 });
