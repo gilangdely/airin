@@ -46,7 +46,7 @@ class UserController extends BaseController implements HasMiddleware
                 'email_verified_at' => $user->email_verified_at,
                 'users_picture' => $user->users_picture ? (url('/api') . Storage::url($user->users_picture)) : null,
                 'role' => $user->roles[0]['name'] ?? null,
-            ];
+                    ];
 
             return ApiResponse::success($data, "Data profil berhasil diambil.", "0000", 200);
         } catch (\Exception $e) {
@@ -68,8 +68,11 @@ class UserController extends BaseController implements HasMiddleware
                 'username' => ['sometimes', 'required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
                 'users_picture' => 'sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048',
                 'email' => ['sometimes', 'nullable', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'nomor_telepon' => 'sometimes|nullable|string|max:20',
+                'alamat' => 'sometimes|nullable|string|max:255',
             ]);
 
+            // Update gambar profil jika dikirim
             if ($request->hasFile('users_picture')) {
                 try {
                     if ($user->users_picture && Storage::disk('public')->exists('profile-pictures/' . $user->users_picture)) {
@@ -86,7 +89,26 @@ class UserController extends BaseController implements HasMiddleware
                 }
             }
 
+            // Update data user
             $user->update($validatedData);
+
+            // Update tabel petugas jika ada perubahan
+            if ($request->filled('nomor_telepon') || $request->filled('alamat')) {
+                $updatePetugasData = [];
+                if ($request->filled('nomor_telepon')) {
+                    $updatePetugasData['nomor_telepon'] = $request->input('nomor_telepon');
+                }
+                if ($request->filled('alamat')) {
+                    $updatePetugasData['alamat'] = $request->input('alamat');
+                }
+
+                DB::table('petugas')
+                    ->where('nomor_induk_petugas', $user->username)
+                    ->update($updatePetugasData);
+            }
+
+            // Siapkan response
+            $role = $user->roles()->first()?->name ?? null;
 
             $response = [
                 'id' => $user->id,
@@ -95,23 +117,21 @@ class UserController extends BaseController implements HasMiddleware
                 'email' => $user->email,
                 'email_verified_at' => $user->email_verified_at,
                 'users_picture' => $user->users_picture ? (url('/api') . Storage::url($user->users_picture)) : null,
-                'role' => $user->roles()->first()?->name ?? null,
+                'role' => $role,
             ];
 
-            // Tambahkan data petugas jika role-nya adalah Petugas
-            if (strtolower($response['role']) === 'petugas') {
-                $petugas = DB::table('petugas')
-                    ->where('nomor_induk_petugas', $user->username)
-                    ->first();
+            // Ambil ulang data petugas jika ada
+            $petugas = DB::table('petugas')
+                ->where('nomor_induk_petugas', $user->username)
+                ->first();
 
-                if ($petugas) {
-                    $response['petugas_detail'] = [
-                        'nama_lengkap' => $petugas->nama_lengkap,
-                        'nomor_induk_petugas' => $petugas->nomor_induk_petugas,
-                        'nomor_telepon' => $petugas->nomor_telepon,
-                        'alamat' => $petugas->alamat,
-                    ];
-                }
+            if ($petugas) {
+                $response['petugas_detail'] = [
+                    'nama_lengkap' => $petugas->nama_lengkap,
+                    'nomor_induk_petugas' => $petugas->nomor_induk_petugas,
+                    'nomor_telepon' => $petugas->nomor_telepon,
+                    'alamat' => $petugas->alamat,
+                ];
             }
 
             return ApiResponse::success($response, "Profil berhasil diperbarui.", "0000", 200);
@@ -121,7 +141,6 @@ class UserController extends BaseController implements HasMiddleware
             return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
         }
     }
-
 
     public function changePassword(Request $request): JsonResponse
     {
@@ -150,64 +169,6 @@ class UserController extends BaseController implements HasMiddleware
             return ApiResponse::error("Validasi gagal: " . implode(', ', $e->validator->errors()->all()), "9001", 422);
         } catch (\Exception $e) {
             return ApiResponse::error("Terjadi kesalahan server.", "9999", 500);
-        }
-    }
-
-    public function loginPetugas(Request $request): JsonResponse
-    {
-        try {
-            $request->validate([
-                'username' => 'required|string',
-                'password' => 'required|string',
-            ]);
-
-            $username = $request->username;
-            $password = $request->password;
-
-            // Cek apakah username ini ada di tabel users
-            $user = User::where('username', $username)->first();
-
-            if (!$user || !Hash::check($password, $user->password)) {
-                return ApiResponse::error('Username atau password salah.', '401', 401);
-            }
-
-            // Ambil data petugas berdasarkan username = nomor_induk_petugas
-            $petugas = DB::table('petugas')
-                ->where('nomor_induk_petugas', $username)
-                ->first();
-
-            // Buat token
-            $token = $user->createToken('auth_token')->plainTextToken;
-
-            // Siapkan response
-            $response = [
-                'user' => [
-                    'id' => $user->id,
-                    'username' => $user->username,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'email_verified_at' => $user->email_verified_at,
-                    'users_picture' => $user->users_picture ? (url('/api') . Storage::url($user->users_picture)) : null,
-                    'role' => $user->roles()->first()?->name ?? null,
-                ],
-                'access_token' => $token,
-            ];
-
-            // Tambahkan detail petugas jika ada
-            if ($petugas) {
-                $response['user']['petugas_detail'] = [
-                    'nama_lengkap' => $petugas->nama_lengkap,
-                    'nomor_induk_petugas' => $petugas->nomor_induk_petugas,
-                    'nomor_telepon' => $petugas->nomor_telepon,
-                    'alamat' => $petugas->alamat,
-                ];
-            }
-
-            return ApiResponse::success($response, 'Berhasil Login.', '0000', 200);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return ApiResponse::error("Validasi gagal: " . implode(', ', $e->validator->errors()->all()), "9001", 422);
-        } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan pada server.", "9999", 500);
         }
     }
 }
