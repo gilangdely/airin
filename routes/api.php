@@ -34,7 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/change-password', [UserController::class, 'changePassword']); // ok
     Route::post('/logout', [AuthController::class, 'logout']); // ok
 
-    Route::get('pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
+    Route::get('/pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
+    Route::post('/pemakaian/create', [PemakaianController::class, 'store']); // ok
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']); // ok
     Route::post('/pemakaian/meteran', [PemakaianController::class, 'pemakaianByMeteran']); // ok
@@ -44,8 +45,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pembayaran/meteran/{nomor_meteran}', [PembayaranController::class, 'PembayaranByMeteran']);
 
     Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
-  
-    Route::get('/pakai-by-tagihan', [TagihanController::class, 'getPakaiByMeteranAktif']);
 
     Route::get('/pakai-by-tagihan', [TagihanController::class, 'getPakaiByMeteranAktif']);
 
