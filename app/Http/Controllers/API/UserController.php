@@ -61,6 +61,7 @@ class UserController extends BaseController implements HasMiddleware
                     'nama_lengkap' => $petugas->nama_lengkap,
                     'nomor_induk_petugas' => $petugas->nomor_induk_petugas,
                     'nomor_telepon' => $petugas->nomor_telepon,
+                    'nomor_telepon_2' => $petugas->nomor_telepon_2,
                     'alamat' => $petugas->alamat,
                 ];
             }

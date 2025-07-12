@@ -655,6 +655,7 @@ class TagihanController extends Controller
     public function getTotalTagihanPetugas(Request $request): JsonResponse
     {
         try {
+
             // Filter opsional dari query string
             $status = $request->query('status');
             $tahun = $request->query('tahun');
@@ -675,7 +676,7 @@ class TagihanController extends Controller
             }
 
             if (!is_null($bulan)) {
-                $whereClauses[] = 'MONTH(tagihan.waktu_awal) = ?';
+                $whereClauses[] = 'MONTH(tagihan.waktu_awal, unique) = ?';
                 $bindings[] = $bulan;
             }
 
