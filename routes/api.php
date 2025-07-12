@@ -29,12 +29,15 @@ Route::get('storage/{path}', function ($path) {
 Route::post('/login', [AuthController::class, 'login']);  // ok
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'me']); // ok
     Route::post('/user', [UserController::class, 'updateProfile']); // ok
     Route::post('/user/change-password', [UserController::class, 'changePassword']); // ok
     Route::post('/logout', [AuthController::class, 'logout']); // ok
 
     Route::get('/pemakaian/create/{meteran}', [PemakaianController::class, 'create']); // ok
     Route::post('/pemakaian/create', [PemakaianController::class, 'store']); // ok
+    Route::get('/tagihan/create/{meteran}', [TagihanController::class, 'create']); // ok
+    Route::post('/tagihan', [TagihanController::class, 'store']); // ok
 
     Route::get('/pemakaian', [PemakaianController::class, 'index']); // ok
     Route::post('/pemakaian/meteran', [PemakaianController::class, 'pemakaianByMeteran']); // ok
@@ -45,7 +48,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
 
-    Route::get('/pakai-by-tagihan', [TagihanController::class, 'getPakaiByMeteranAktif']);
-
-    Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
+    Route::get('/pakai-by-tagihan', [TagihanController::class, 'getTotalTagihanPetugas']);
 });

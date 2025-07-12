@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class TagihanController extends Controller
 {
@@ -70,70 +71,81 @@ class TagihanController extends Controller
     public function create($meteran_id): JsonResponse
     {
         try {
+            // Mengambil data meteran atau gagal jika tidak ditemukan
+            // ModelNotFoundException akan ditangkap oleh blok catch.
             $meteran = Meteran::findOrFail($meteran_id);
             $now = new DateTime();
 
-            // Initialize tagihan data
+            // Inisialisasi data tagihan utama
             $tagihan = [
                 'bulan' => $now->format('M'),
                 'tahun' => $now->format('Y'),
                 'pelanggan' => $meteran->pelanggan->nama_pelanggan
             ];
 
+            // Mengambil semua data pemakaian yang belum dibayar
             $pemakaianList = Pemakaian::where('nomor_meteran', $meteran->nomor_meteran)
                 ->where('status_pembayaran', 0)
                 ->orderBy('tahun', 'asc')
                 ->orderBy('bulan', 'asc')
                 ->get();
 
+            // Jika tidak ada pemakaian yang perlu dibayar, kembalikan respons sukses dengan data kosong
             if ($pemakaianList->isEmpty()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Tidak ada tagihan yang perlu dibayar.'
-                ], 404);
+                $responseData = [
+                    'tagihan' => $tagihan,
+                    'rincian_tagihan' => [],
+                    'total_tagihan' => 0,
+                    'meteran' => $meteran
+                ];
+                // Menggunakan RC 0000 untuk sukses, dengan pesan yang sesuai
+                return ApiResponse::success($responseData, 'Tidak ada tagihan yang perlu dibayar.', '0000');
             }
 
-            // Get all service IDs
+            // Kumpulkan semua id_layanan yang unik dari daftar pemakaian
             $idLayananList = $pemakaianList->pluck('id_layanan')->unique();
 
-            // Get all tariffs for used services
+            // Ambil semua tarif yang relevan untuk layanan yang digunakan
             $tarifLayanan = DB::table('tarif_layanan')
                 ->whereIn('id_layanan', $idLayananList)
                 ->orderBy('min_pemakaian', 'asc')
                 ->get()
                 ->groupBy('id_layanan');
 
+            // Jika tidak ada tarif yang ditemukan untuk layanan tersebut, kembalikan error
             if ($tarifLayanan->isEmpty()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Tidak ada tarif yang tersedia untuk layanan tersebut.'
-                ], 404);
+                // RC 2001: Data Not Found
+                return ApiResponse::error('Tidak ada tarif yang tersedia untuk layanan tersebut.', '2001', 404);
             }
 
             $totalTagihan = 0;
             $rincianTagihan = [];
 
+            // Iterasi melalui setiap data pemakaian untuk menghitung tagihan
             foreach ($pemakaianList as $pemakaian) {
                 $totalPakai = $pemakaian->pakai;
                 $idLayanan = $pemakaian->id_layanan;
 
                 $tarifList = $tarifLayanan[$idLayanan] ?? collect();
 
+                // Cari tarif yang cocok berdasarkan jumlah pemakaian
                 $tarif = $tarifList->firstWhere(function ($t) use ($totalPakai) {
                     return $totalPakai >= $t->min_pemakaian &&
                         ($t->max_pemakaian === null || $t->max_pemakaian == 0 || $totalPakai <= $t->max_pemakaian);
                 });
 
+                // Jika tidak ada tarif yang cocok, kembalikan error
                 if (!$tarif) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => "Tidak ada tarif yang cocok untuk pemakaian $totalPakai m³."
-                    ], 404);
+                    // RC 2001: Data Not Found
+                    $message = "Tidak ada tarif yang cocok untuk pemakaian $totalPakai m³.";
+                    return ApiResponse::error($message, '2001', 404);
                 }
 
+                // Hitung tagihan untuk bulan ini dan tambahkan ke total
                 $tagihanBulanIni = $totalPakai * $tarif->tarif;
                 $totalTagihan += $tagihanBulanIni;
 
+                // Tambahkan rincian tagihan per bulan
                 $rincianTagihan[] = [
                     'bulan' => $pemakaian->tblbulan->nama_bulan,
                     'tahun' => $pemakaian->tahun,
@@ -144,22 +156,24 @@ class TagihanController extends Controller
                 ];
             }
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Data tagihan berhasil disiapkan',
-                'data' => [
-                    'tagihan' => $tagihan,
-                    'rincian_tagihan' => $rincianTagihan,
-                    'total_tagihan' => $totalTagihan,
-                    'meteran' => $meteran
-                ]
-            ]);
+            // Siapkan data final untuk respon sukses
+            $responseData = [
+                'tagihan' => $tagihan,
+                'rincian_tagihan' => $rincianTagihan,
+                'total_tagihan' => $totalTagihan,
+                'meteran' => $meteran
+            ];
+
+            // RC 0000: Success Response
+            return ApiResponse::success($responseData, 'Data tagihan berhasil disiapkan', '0000');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // Menangkap error jika Meteran::findOrFail gagal
+            // RC 2001: Data Not Found
+            return ApiResponse::error('Data meteran tidak ditemukan.', '2001', 404);
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal menyiapkan data tagihan',
-                'error' => $e->getMessage()
-            ], 500);
+            // Menangkap semua error lain yang tidak terduga
+            // RC 9999: Unknown Error
+            return ApiResponse::error('Gagal menyiapkan data tagihan', '9999', 500, $e->getMessage());
         }
     }
 
@@ -168,141 +182,132 @@ class TagihanController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
+        // Validasi input
         $validator = Validator::make($request->all(), [
             'id_bulan' => 'required|string',
             'id_pelanggan' => 'required|string|max:50',
             'nomor_meteran' => 'required|max:10',
-            'nominal' => 'required|numeric',
+            // 'nominal' tidak divalidasi karena akan dihitung ulang
             'waktu_awal' => 'required|date',
             'waktu_akhir' => 'required|date'
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors()
-            ], 422);
+            // RC 9001: Validation Failed
+            return ApiResponse::error('Validasi data gagal.', '9001', 422, $validator->errors());
         }
 
-        try {
-            $bulan = date('n', strtotime($request->id_bulan));
-            $tahun = date('Y', strtotime($request->id_bulan));
-            $nomor_meteran = $request->nomor_meteran;
-            $id_pelanggan = $request->id_pelanggan;
-            $waktu_awal = $request->waktu_awal;
-            $waktu_akhir = $request->waktu_akhir;
+        // Persiapan data
+        $bulan = date('n', strtotime($request->id_bulan));
+        $tahun = date('Y', strtotime($request->id_bulan));
+        $nomor_meteran = $request->nomor_meteran;
+        $id_pelanggan = $request->id_pelanggan;
+        $waktu_awal = $request->waktu_awal;
+        $waktu_akhir = $request->waktu_akhir;
 
-            // Check existing tagihan
-            $existingTagihan = Tagihan::where('nomor_meteran', $nomor_meteran)
-                ->where('id_bulan', $bulan)
-                ->where('tahun', $tahun)
-                ->where('id_pelanggan', $id_pelanggan)
-                ->where('status_pembayaran', 0)
-                ->where('status_tagihan', 1)
-                ->exists();
+        // Cek jika sudah ada tagihan aktif untuk periode yang sama
+        $tagihanExists = Tagihan::where('nomor_meteran', $nomor_meteran)
+            ->where('id_bulan', $bulan)
+            ->where('tahun', $tahun)
+            ->where('id_pelanggan', $id_pelanggan)
+            ->where('status_tagihan', 1) // 1 = aktif
+            ->exists();
 
-            if ($existingTagihan) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Terdapat tagihan aktif di bulan ini!'
-                ], 409);
+        if ($tagihanExists) {
+            // RC 2002: Data Duplicated
+            return ApiResponse::error('Terdapat tagihan aktif di bulan ini!', '2002', 409);
+        }
+
+        // Ambil pemakaian yang belum ditagih
+        $pemakaianList = Pemakaian::where('nomor_meteran', $nomor_meteran)
+            ->where('status_pembayaran', 0) // 0 = belum dibayar
+            ->orderBy('tahun', 'asc')
+            ->orderBy('bulan', 'asc')
+            ->get();
+
+        if ($pemakaianList->isEmpty()) {
+            // RC 2001: Data Not Found
+            return ApiResponse::error('Tidak ada tagihan yang perlu dibayar.', '2001', 404);
+        }
+
+        // Ambil tarif berdasarkan layanan yang digunakan
+        $idLayananList = $pemakaianList->pluck('id_layanan')->unique();
+        $tarifLayanan = DB::table('tarif_layanan')
+            ->whereIn('id_layanan', $idLayananList)
+            ->orderBy('min_pemakaian', 'asc')
+            ->get()
+            ->groupBy('id_layanan');
+
+        // Hitung total dan rincian tagihan
+        $totalTagihan = 0;
+        $rincianTagihan = [];
+        $id_tagihan = $tahun . str_pad($bulan, 2, '0', STR_PAD_LEFT) . $nomor_meteran . rand(100, 999);
+
+        foreach ($pemakaianList as $pemakaian) {
+            $totalPakai = $pemakaian->pakai;
+            $idLayanan = $pemakaian->id_layanan;
+            $tarifList = $tarifLayanan[$idLayanan] ?? collect();
+            $tarif = $tarifList->firstWhere(
+                fn($t) =>
+                $totalPakai >= $t->min_pemakaian &&
+                    (is_null($t->max_pemakaian) || $t->max_pemakaian == 0 || $totalPakai <= $t->max_pemakaian)
+            );
+
+            if (!$tarif) {
+                // RC 2001: Data Not Found
+                return ApiResponse::error("Tarif tidak ditemukan untuk pemakaian $totalPakai m³.", '2001', 404);
             }
 
-            $id_tagihan = $tahun . $bulan . $nomor_meteran . rand(100, 999);
+            $tagihanBulanIni = $totalPakai * $tarif->tarif;
+            $totalTagihan += $tagihanBulanIni;
 
-            $datatagihan = [
+            $rincianTagihan[] = [
                 'id_tagihan' => $id_tagihan,
-                'id_bulan' => $bulan,
-                'tahun' => $tahun,
-                'id_pelanggan' => $id_pelanggan,
-                'nomor_meteran' => $nomor_meteran,
-                'waktu_awal' => $waktu_awal,
-                'waktu_akhir' => $waktu_akhir,
-                'status_tagihan' => 1,
-                'status_pembayaran' => 0,
-                'created_by' => Auth::id() ?? 1,
-                'updated_by' => Auth::id() ?? 1
+                'id_pakai' => $pemakaian->id_pakai,
+                'pakai' => $totalPakai,
+                'tarif' => $tarif->tarif,
+                'subtotal' => $tagihanBulanIni
             ];
+        }
 
-            $pemakaianList = Pemakaian::where('nomor_meteran', $nomor_meteran)
-                ->where('status_pembayaran', 0)
-                ->orderBy('tahun', 'asc')
-                ->orderBy('bulan', 'asc')
-                ->get();
+        // Persiapan data untuk disimpan
+        $datatagihan = [
+            'id_tagihan' => $id_tagihan,
+            'id_bulan' => $bulan,
+            'tahun' => $tahun,
+            'id_pelanggan' => $id_pelanggan,
+            'nomor_meteran' => $nomor_meteran,
+            'nominal' => $totalTagihan,
+            'waktu_awal' => $waktu_awal,
+            'waktu_akhir' => $waktu_akhir,
+            'status_tagihan' => 1,
+            'status_pembayaran' => 0,
+            'created_by' => Auth::id(),
+            'updated_by' => Auth::id(),
+        ];
 
-            if ($pemakaianList->isEmpty()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Tidak ada tagihan yang perlu dibayar.'
-                ], 404);
-            }
-
-            // Calculate tariff
-            $idLayananList = $pemakaianList->pluck('id_layanan')->unique();
-            $tarifLayanan = DB::table('tarif_layanan')
-                ->whereIn('id_layanan', $idLayananList)
-                ->orderBy('min_pemakaian', 'asc')
-                ->get()
-                ->groupBy('id_layanan');
-
-            $totalTagihan = 0;
-            $rincianTagihan = [];
-
-            foreach ($pemakaianList as $pemakaian) {
-                $totalPakai = $pemakaian->pakai;
-                $idLayanan = $pemakaian->id_layanan;
-
-                $tarifList = $tarifLayanan[$idLayanan] ?? collect();
-
-                $tarif = $tarifList->firstWhere(function ($t) use ($totalPakai) {
-                    return $totalPakai >= $t->min_pemakaian &&
-                        ($t->max_pemakaian === null || $t->max_pemakaian == 0 || $totalPakai <= $t->max_pemakaian);
-                });
-
-                if (!$tarif) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => "Tarif tidak ditemukan untuk pemakaian $totalPakai m³."
-                    ], 404);
-                }
-
-                $tagihanBulanIni = $totalPakai * $tarif->tarif;
-                $totalTagihan += $tagihanBulanIni;
-
-                $rincianTagihan[] = [
-                    'id_tagihan' => $id_tagihan,
-                    'id_pakai' => $pemakaian->id_pakai,
-                    'pakai' => $totalPakai,
-                    'tarif' => $tarif->tarif,
-                    'subtotal' => $tagihanBulanIni
-                ];
-            }
-
-            $datatagihan['nominal'] = $totalTagihan;
-
-            // Save data
+        // Simpan ke database menggunakan transaksi
+        try {
             DB::beginTransaction();
-            $tagihan = Tagihan::create($datatagihan);
+            $newTagihan = Tagihan::create($datatagihan);
             DetailTagihan::insert($rincianTagihan);
+
+            // Update status pemakaian yang sudah ditagihkan
+            $pemakaianIds = $pemakaianList->pluck('id_pakai');
+            Pemakaian::whereIn('id_pakai', $pemakaianIds)->update([
+                'status_pembayaran' => 1, // 1 = Sudah Ditagih/Diproses
+                'id_tagihan' => $id_tagihan,
+            ]);
+
             DB::commit();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Tagihan berhasil dibuat',
-                'data' => [
-                    'tagihan' => $tagihan,
-                    'total_tagihan' => $totalTagihan,
-                    'rincian_tagihan' => $rincianTagihan
-                ]
-            ], 201);
-        } catch (\Exception $e) {
+            // RC 0000: Success Response
+            return ApiResponse::success($newTagihan, 'Tagihan berhasil dibuat', '0000', 201);
+        } catch (Throwable $e) {
             DB::rollBack();
-            return response()->json([
-                'success' => false,
-                'message' => 'Terjadi kesalahan saat membuat tagihan',
-                'error' => $e->getMessage()
-            ], 500);
+            report($e);
+            // RC 9999: Unknown Error
+            return ApiResponse::error('Terjadi kesalahan saat membuat data.', '9999', 500, ['error' => $e->getMessage()]);
         }
     }
 
@@ -622,62 +627,143 @@ class TagihanController extends Controller
         }
 
         try {
-            $query = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
+            $tagihan = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
                 ->where('status_pembayaran', 0)
                 ->where('status_tagihan', 1)
-                ->with(['detailtagihan', 'bulan', 'meteran', 'meteran.pelanggan'])
-                ->withSum('detailtagihan as total_pakai', 'pakai')
+                ->first();
 
-                ->when($request->has('start_date') && $request->has('end_date'), function ($query) use ($request) {
-                    $startDate = Carbon::parse($request->input('start_date'))->startOfDay();
-                    $endDate = Carbon::parse($request->input('end_date'))->endOfDay();
-
-                    return $query->whereBetween('waktu_akhir', [$startDate, $endDate]);
-                });
-
-            // Tambahkan pengurutan agar yang terbaru muncul lebih dulu, lalu paginasi
-            $tagihan = $query->orderBy('waktu_akhir', 'desc')->paginate(10);
-
-            if ($tagihan->isEmpty()) {
-                return ApiResponse::error("Data tagihan tidak ditemukan.", "2001", 404);
+            if (!$tagihan) {
+                return ApiResponse::error("Tagihan tidak ditemukan untuk nomor meteran ini.", "2001", 404);
             }
 
-            return ApiResponse::success($tagihan, "Data tagihan ditemukan.", "0000", 200);
+            $detailtagihan = DetailTagihan::where('id_tagihan', $tagihan->id_tagihan)->get();
 
+            return ApiResponse::success([
+                'tagihan' => $tagihan,
+                'detail_tagihan' => $detailtagihan
+            ], "Tagihan ditemukan.", "0000", 200);
         } catch (\Illuminate\Database\QueryException $e) {
-            return ApiResponse::error("Kesalahan database: " . $e->getMessage(), "9999", 500);
+            return ApiResponse::error("Kesalahan database saat mengambil tagihan.", "9999", 500);
         } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui: " . $e->getMessage(), "9999", 500);
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui saat mengambil tagihan.", "9999", 500);
         }
     }
 
     /**
      * Get total detail tagihan
      */
-    public function getPakaiByMeteranAktif(Request $request)
+    public function getTotalTagihanPetugas(Request $request): JsonResponse
     {
-        $query = "SELECT
-        tagihan.id_pelanggan,
-        pelanggan.nama_pelanggan,
-        tagihan.nomor_meteran,
-        tagihan.nominal,
-        tagihan.tahun,
-        tagihan.waktu_awal,
-        tagihan.waktu_akhir,
-        tagihan.status_tagihan,
-        tagihan.status_pembayaran,
-        SUM(detail_tagihan.pakai) AS total_pakai
-    FROM tagihan
-    INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
-    LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
-    GROUP BY tagihan.id_tagihan";
+        try {
 
-        $pakaiList = DB::select($query);
+            // Filter opsional dari query string
+            $status = $request->query('status');
+            $tahun = $request->query('tahun');
+            $bulan = $request->query('bulan');
+            $search = $request->query('search');
 
-        if (empty($pakaiList)) {
-            return ApiResponse::error("Data tagihan tidak ditemukan", "2002", 404);
+            $whereClauses = [];
+            $bindings = [];
+
+            if (!is_null($status)) {
+                $whereClauses[] = 'tagihan.status_pembayaran = ?';
+                $bindings[] = $status;
+            }
+
+            if (!is_null($tahun)) {
+                $whereClauses[] = 'tagihan.tahun = ?';
+                $bindings[] = $tahun;
+            }
+
+            if (!is_null($bulan)) {
+                $whereClauses[] = 'MONTH(tagihan.waktu_awal, unique) = ?';
+                $bindings[] = $bulan;
+            }
+
+            if (!is_null($search)) {
+                $whereClauses[] = '(pelanggan.nama_pelanggan LIKE ? OR tagihan.nomor_meteran LIKE ?)';
+                $bindings[] = "%$search%";
+                $bindings[] = "%$search%";
+            }
+
+            $whereSQL = '';
+            if (!empty($whereClauses)) {
+                $whereSQL = 'AND ' . implode(' AND ', $whereClauses);
+            }
+
+            $sql = "
+SELECT
+                tagihan.id_tagihan,
+                tagihan.id_pelanggan,
+                pemakaian.id_pakai,
+                pemakaian.id_layanan,
+                pelanggan.nama_pelanggan,
+                tagihan.nomor_meteran,
+                tagihan.nominal,
+                tagihan.tahun,
+                pemakaian.awal,
+                pemakaian.akhir,
+                pemakaian.pakai,
+                tagihan.waktu_awal,
+                tagihan.waktu_akhir,
+                tagihan.status_tagihan,
+                tagihan.status_pembayaran,
+                tarif_layanan.id_tarif_layanan,
+                tarif_layanan.id_layanan AS tarif_id_layanan,
+                tarif_layanan.tier,
+                tarif_layanan.min_pemakaian,
+                tarif_layanan.max_pemakaian,
+                tarif_layanan.tarif,
+                SUM(detail_tagihan.pakai) AS total_pakai
+            FROM tagihan
+            INNER JOIN pelanggan ON pelanggan.id_pelanggan = tagihan.id_pelanggan
+            LEFT JOIN detail_tagihan ON tagihan.id_tagihan = detail_tagihan.id_tagihan
+            LEFT JOIN pemakaian ON pemakaian.nomor_meteran = tagihan.nomor_meteran
+            LEFT JOIN tarif_layanan 
+                ON tarif_layanan.id_layanan = pemakaian.id_layanan
+                AND (
+                    (tarif_layanan.min_pemakaian = 0 AND tarif_layanan.max_pemakaian = 0)
+                    OR (pemakaian.pakai BETWEEN tarif_layanan.min_pemakaian AND tarif_layanan.max_pemakaian)
+                    OR (tarif_layanan.max_pemakaian = 0 AND pemakaian.pakai >= tarif_layanan.min_pemakaian)
+                )
+            WHERE 1=1
+            $whereSQL
+            GROUP BY
+                tagihan.id_tagihan,
+                tagihan.id_pelanggan,
+                pemakaian.id_pakai,
+                pemakaian.id_layanan,
+                pelanggan.nama_pelanggan,
+                tagihan.nomor_meteran,
+                tagihan.nominal,
+                tagihan.tahun,
+                pemakaian.awal,
+                pemakaian.akhir,
+                pemakaian.pakai,
+                tagihan.waktu_awal,
+                tagihan.waktu_akhir,
+                tagihan.status_tagihan,
+                tagihan.status_pembayaran,
+                tarif_layanan.id_tarif_layanan,
+                tarif_layanan.id_layanan,
+                tarif_layanan.tier,
+                tarif_layanan.min_pemakaian,
+                tarif_layanan.max_pemakaian,
+                tarif_layanan.tarif
+        ";
+
+            $data = DB::select($sql, $bindings);
+
+            return response()->json([
+                'success' => true,
+                'data' => $data
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil data',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        return ApiResponse::success($pakaiList, "Data tagihan ditemukan", "0000", 200);
     }
 }
