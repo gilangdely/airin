@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 
 use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\PelangganController;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\API\UserController;
@@ -44,9 +45,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
 
+    Route::delete('/pemakaian/{pemakaian}', [PemakaianController::class, 'destroy']);
+
     Route::get('/pembayaran/meteran/{nomor_meteran}', [PembayaranController::class, 'PembayaranByMeteran']);
 
     Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
 
     Route::get('/pakai-by-tagihan', [TagihanController::class, 'getTotalTagihanPetugas']);
+
+    Route::post('/pelanggan/update', [PelangganController::class, 'UpdateData']);
 });
