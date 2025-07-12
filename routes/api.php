@@ -42,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
 
+    Route::delete('/pemakaian/{pemakaian}', [PemakaianController::class, 'destroy']);
+
     Route::get('/pembayaran/meteran/{nomor_meteran}', [PembayaranController::class, 'PembayaranByMeteran']);
 
     Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
@@ -49,7 +51,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pakai-by-tagihan', [TagihanController::class, 'getPakaiByMeteranAktif']);
 
     Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
-    
-    Route::post('/pelanggan/update', [PelangganController::class, 'UpdateData']);
 
+    Route::post('/pelanggan/update', [PelangganController::class, 'UpdateData']);
 });

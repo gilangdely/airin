@@ -92,7 +92,7 @@ class UserController extends BaseController implements HasMiddleware
 
             $validatedData = $request->validate([
                 'current_password' => ['required'],
-                'new_password' => ['required', 'min:6', 'confirmed'],
+                'new_password' => ['required', 'min:6', 'confirmed','unique:user'],
             ]);
 
             if (!Hash::check($validatedData['current_password'], $user->password)) {
@@ -117,7 +117,7 @@ class UserController extends BaseController implements HasMiddleware
             'id' => 'required|exists:pelanggan,id_pelanggan'
         ]);
 
-        $data = Pelanggan::where('id_pelanggan', $request->id)->first();
+        $data = Pelanggan::where('id_pelanggan', $request->id)->with(['meterans.layanan'])->first();
 
         return response()->json([
             'status' => true,

@@ -14,7 +14,7 @@ class PelangganController extends Controller
             'id' => 'required|exists:pelanggan,id_pelanggan'
         ]);
 
-        $data = Pelanggan::where('id_pelanggan', $request->id)->first();
+        $data = Pelanggan::where('id_pelanggan', $request->id)->with(['meterans'])->get();
 
         return response()->json([
             'status' => true,

@@ -36,13 +36,13 @@ class PembayaranController extends Controller
                 ])
                 ->get();
 
-            if ($data->isEmpty()) {
-                if ($request->wantsJson()) {
-                    return ApiResponse::error("Data pembayaran tidak ditemukan.", "2001", 404);
-                } else {
-                    return view('pembayaran.tidak_ditemukan');
-                }
-            }
+            // if ($data->isEmpty()) {
+            //     if ($request->wantsJson()) {
+            //         return ApiResponse::error("Data pembayaran tidak ditemukan.", "2001", 404);
+            //     } else {
+            //         return view('pembayaran.tidak_ditemukan');
+            //     }
+            // }
 
             if ($request->wantsJson()) {
                 return ApiResponse::success($data, "Data pembayaran ditemukan.", "0000", 200);

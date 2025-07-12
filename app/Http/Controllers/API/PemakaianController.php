@@ -10,6 +10,7 @@ use App\Models\Tagihan;
 use App\Models\Pemakaian;
 use Illuminate\Http\Request;
 use App\Models\DetailTagihan;
+use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -248,22 +249,24 @@ class PemakaianController extends BaseController implements HasMiddleware
     {
         try {
             $pemakaian->delete();
-        } catch (\Illuminate\Database\QueryException $e) {
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Pemakaian berhasil dihapus.'
+            ]);
+        } catch (QueryException $e) {
             if ($e->getCode() == '23000') {
                 return response()->json([
-                    'error' => 'Data pemakaian ini sudah digunakan dan tidak dapat dihapus.'
-                ], 409); // 409 Conflict karena ada referensi ke data lain
+                    'success' => false,
+                    'message' => 'Data pemakaian ini sudah digunakan dan tidak dapat dihapus.'
+                ], 409); // Conflict
             }
 
             return response()->json([
-                'error' => 'Terjadi kesalahan saat menghapus data.'
-            ], 500); // 500 Internal Server Error untuk kesalahan umum
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus data.'
+            ], 500);
         }
-
-        return response()->json([
-            'message' => 'Pemakaian berhasil dihapus'
-        ], 200); // 200 OK untuk operasi yang berhasil
-
     }
 
     public function pemakaianByMeteran(Request $request): JsonResponse
@@ -276,10 +279,10 @@ class PemakaianController extends BaseController implements HasMiddleware
             $pemakaian = Pemakaian::whereHas('meteran', function ($query) use ($request) {
                 $query->where('nomor_meteran', $request->input('nomor_meteran'));
             })->with(['meteran', 'tblbulan'])
-            ->orderBy('tahun', 'desc')
-            ->orderBy('bulan', 'desc')
-            ->get()
-            ->toArray();
+                ->orderBy('tahun', 'desc')
+                ->orderBy('bulan', 'desc')
+                ->get()
+                ->toArray();
 
             if (empty($pemakaian)) {
                 return ApiResponse::error("Tidak ada data pemakaian untuk nomor meteran ini.", "2001", 404);
