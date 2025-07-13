@@ -59,5 +59,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
 
     Route::post('/home/meteranbypetugas',[HomePetugasController::class, 'getMeteranByPetugas']);
+
+    Route::get('/getunpaidinvoice', [HomeController::class, 'getunpaidinvoice']);
+    Route::post('/getmeteranbypelanggan', [HomeController::class, 'getmeteranbypelanggan']);
+    Route::post('/gettagihanbymeteranaktif', [HomeController::class, 'gettagihanbymeteranaktif']);
+    Route::post('/riwayattagihanbymeteran', [HomeController::class, 'riwayattagihanbymeteran']);
     
 });
