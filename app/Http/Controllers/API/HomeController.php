@@ -99,9 +99,14 @@ class HomeController extends Controller
 
             $query_gettagihan = "
             SELECT 
-                tagihan.id_tagihan,tagihan.nomor_meteran, tagihan.id_bulan, bulan.nama_bulan, 
-                tagihan.nominal, tagihan.waktu_awal, tagihan.waktu_akhir, 
-                tagihan.status_tagihan, tagihan.status_pembayaran, 
+                ANY_VALUE(tagihan.nomor_meteran) AS nomor_meteran,
+                ANY_VALUE(tagihan.id_bulan) AS id_bulan,
+                ANY_VALUE(bulan.nama_bulan) AS nama_bulan,
+                ANY_VALUE(tagihan.nominal) AS nominal,
+                ANY_VALUE(tagihan.waktu_awal) AS waktu_awal,
+                ANY_VALUE(tagihan.waktu_akhir) AS waktu_akhir,
+                ANY_VALUE(tagihan.status_tagihan) AS status_tagihan,
+                ANY_VALUE(tagihan.status_pembayaran) AS status_pembayaran,
                 SUM(detail_tagihan.pakai) as total_pakai            
             FROM tagihan
             INNER JOIN detail_tagihan ON detail_tagihan.id_tagihan = tagihan.id_tagihan
@@ -139,5 +144,4 @@ class HomeController extends Controller
             );
         }
     }
-
 }
