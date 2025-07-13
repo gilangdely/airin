@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\ApiResponse;
 use App\Models\Pelanggan;
+use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -72,61 +73,17 @@ class UserController extends BaseController implements HasMiddleware
 
     public function loginPetugas(Request $request): JsonResponse
     {
-        try {
-            $validated = $request->validate([
-                'username' => 'required|string',
-                'password' => 'required|string',
-            ]);
-
-            // Gunakan hanya username & password untuk Auth::attempt
-            $credentials = [
-                'username' => $validated['username'],
-                'password' => $validated['password'],
-            ];
-
-            if (!Auth::attempt($credentials)) {
-                return ApiResponse::error("Username atau password salah.", "9001", 401);
-            }
-
-            $user = Auth::user();
-
-            if (strtolower($user->role ?? '') !== 'petugas') {
-                Auth::logout();
-                return ApiResponse::error("Hanya petugas yang dapat mengakses endpoint ini.", "9002", 403);
-            }
-
-            $petugas = DB::table('petugas')->where('nomor_induk_petugas', $user->username)->first();
-
-            $userData = [
-                'id' => $user->id,
-                'username' => $user->username,
-                'name' => $user->name,
-                'email' => $user->email,
-                'email_verified_at' => $user->email_verified_at,
-                'users_picture' => $user->users_picture
-                    ? (url('/api') . Storage::url($user->users_picture))
-                    : null,
-                'role' => $user->roles[0]['name'] ?? null,
-            ];
-
-            if (strtolower($userData['role']) === 'petugas' && $petugas) {
-                $userData['petugas_detail'] = [
-                    'nama_lengkap' => $petugas->nama_lengkap,
-                    'nomor_induk_petugas' => $petugas->nomor_induk_petugas,
-                    'nomor_telepon' => $petugas->nomor_telepon,
-                    'nomor_telepon_2' => $petugas->nomor_telepon_2 ?? null,
-                    'alamat' => $petugas->alamat,
-                ];
-            }
-
-            return ApiResponse::success([
-                'user' => $userData,
-            ], "Login berhasil.", "0000", 200);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return ApiResponse::error("Validasi gagal: " . implode(', ', $e->validator->errors()->all()), "9001", 422);
-        } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan saat login: " . $e->getMessage(), "9999", 500);
+        if(empty($request->input('nomor_induk_petugas'))) {
+            return ApiResponse::error("Nomor induk petugas harus diisi.", "9001", 422);
         }
+
+        $nomorPetugas = $request->input('nomor_induk_petugas');
+        $data = Petugas::where('nomor_induk_petugas', $nomorPetugas)->first();
+
+        return response()->json([
+            'status' => true,
+            'data' => $data,
+        ]);
     }
 
 
