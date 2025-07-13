@@ -60,6 +60,18 @@ $nav = [
             'route' => 'meteran.index',
             'permissions' => ['meteran view']
         ],
+        [
+            "title" => "Petugas",
+            "icon" => '<i class="menu-icon tf-icons bx bx-tachometer"></i>',
+            'route' => 'petugas.index',
+            'permissions' => ['petugas view']
+        ],
+        [
+            "title" => "Area Petugas",
+            "icon" => '<i class="menu-icon tf-icons bx bx-tachometer"></i>',
+            'route' => 'area-petugas.index',
+            'permissions' => ['area-petugas view']
+        ],
     ],
     "Settings" => [
         [
