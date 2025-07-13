@@ -58,4 +58,6 @@ class User extends Authenticatable
         }
         return "https://ui-avatars.com/api/?background=random&name=" . urlencode($this->name);
     }
+
+    
 }

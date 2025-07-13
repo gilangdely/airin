@@ -321,5 +321,25 @@ return [
                 'rekap view',
             ]
         ],
+        [
+            'group' => 'petugas',
+            'pengguna' => ['admin'],
+            'access' => [
+                'petugas view',
+                'petugas create',
+                'petugas edit',
+                'petugas delete',
+            ]
+        ],
+        [
+            'group' => 'area-petugas',
+            'pengguna' => ['admin'],
+            'access' => [
+                'area-petugas view',
+                'area-petugas create',
+                'area-petugas edit',
+                'area-petugas delete',
+            ]
+        ],
     ]
 ];

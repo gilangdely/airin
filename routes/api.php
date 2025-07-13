@@ -3,13 +3,14 @@
 use App\Http\Controllers\API\AuthController;
 
 use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\HomePetugasController;
+use App\Http\Controllers\API\PelangganController;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PemakaianController;
 use App\Http\Controllers\API\PembayaranController;
 use App\Http\Controllers\API\TagihanController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', function ($path) {
@@ -31,6 +32,7 @@ Route::post('/login', [AuthController::class, 'login']);  // ok
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [UserController::class, 'me']); // ok
     Route::post('/user', [UserController::class, 'updateProfile']); // ok
+    Route::post('/loginpetugas', [UserController::class, 'loginPetugas']);
     Route::post('/user/change-password', [UserController::class, 'changePassword']); // ok
     Route::post('/logout', [AuthController::class, 'logout']); // ok
 
@@ -44,9 +46,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pemakaian', [PemakaianController::class, 'store']);
     Route::put('/pemakaian', [PemakaianController::class, 'update']);
 
+    Route::delete('/pemakaian/{pemakaian}', [PemakaianController::class, 'destroy']);
+
     Route::get('/pembayaran/meteran/{nomor_meteran}', [PembayaranController::class, 'PembayaranByMeteran']);
 
     Route::post('/tagihan/meteran', [TagihanController::class, 'cekTagihanByMeteran']); // ok
 
     Route::get('/pakai-by-tagihan', [TagihanController::class, 'getTotalTagihanPetugas']);
+
+    Route::post('/pelanggan/update', [PelangganController::class, 'UpdateData']);
+
+    Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
+
+    Route::post('/home/meteranbypetugas',[HomePetugasController::class, 'getMeteranByPetugas']);
+    
 });

@@ -662,6 +662,7 @@ class TagihanController extends Controller
     public function getTotalTagihanPetugas(Request $request): JsonResponse
     {
         try {
+
             // Filter opsional dari query string
             $status = $request->query('status');
             $tahun = $request->query('tahun');
@@ -682,7 +683,7 @@ class TagihanController extends Controller
             }
 
             if (!is_null($bulan)) {
-                $whereClauses[] = 'MONTH(tagihan.waktu_awal) = ?';
+                $whereClauses[] = 'MONTH(tagihan.waktu_awal, unique) = ?';
                 $bindings[] = $bulan;
             }
 
@@ -698,7 +699,7 @@ class TagihanController extends Controller
             }
 
             $sql = "
-SELECT
+                SELECT
                 tagihan.id_tagihan,
                 tagihan.id_pelanggan,
                 pemakaian.id_pakai,
