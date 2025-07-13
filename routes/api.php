@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 
 use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\HomePetugasController;
 use App\Http\Controllers\API\PelangganController;
 use Illuminate\Http\Request;
 
@@ -56,4 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pelanggan/update', [PelangganController::class, 'UpdateData']);
 
     Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
+
+    Route::post('/home/meteranbypetugas',[HomePetugasController::class, 'getMeteranByPetugas']);
+    
 });
