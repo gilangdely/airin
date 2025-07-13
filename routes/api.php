@@ -10,7 +10,6 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\PemakaianController;
 use App\Http\Controllers\API\PembayaranController;
 use App\Http\Controllers\API\TagihanController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('storage/{path}', function ($path) {
@@ -54,4 +53,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/pakai-by-tagihan', [TagihanController::class, 'getTotalTagihanPetugas']);
 
     Route::post('/pelanggan/update', [PelangganController::class, 'UpdateData']);
+
+    Route::post('/pelanggan/by-id', [UserController::class, 'getById']);
 });

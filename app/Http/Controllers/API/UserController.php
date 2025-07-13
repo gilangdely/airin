@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Helpers\ApiResponse;
+use App\Models\Pelanggan;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -193,11 +194,11 @@ class UserController extends BaseController implements HasMiddleware
 
     public function getById(Request $request)
     {
-        $request->validate([
-            'id' => 'required|exists:pelanggan,id_pelanggan'
-        ]);
+        // $request->validate([
+        //     'id' => 'required|exists:pelanggan,id_pelanggan'
+        // ]);
 
-        $data = Pelanggan::where('id_pelanggan', $request->id)->with(['meterans.layanan'])->first();
+        $data = Pelanggan::where('id_pelanggan', Auth::user()->username)->with(['meterans.layanan'])->first();
 
         return response()->json([
             'status' => true,
