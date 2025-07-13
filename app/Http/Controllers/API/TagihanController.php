@@ -630,22 +630,29 @@ class TagihanController extends Controller
             $tagihan = Tagihan::where('nomor_meteran', $request->input('nomor_meteran'))
                 ->where('status_pembayaran', 0)
                 ->where('status_tagihan', 1)
-                ->first();
+                ->with(['detailtagihan', 'bulan', 'meteran', 'meteran.pelanggan'])
+                ->withSum('detailtagihan as total_pakai', 'pakai');
 
-            if (!$tagihan) {
-                return ApiResponse::error("Tagihan tidak ditemukan untuk nomor meteran ini.", "2001", 404);
+                if ($request->has('waktu_awal')) {
+                $startDate = Carbon::parse($request->input('waktu_awal'))->startOfDay();
+                $endDate = $request->has('waktu_akhir')
+                    ? Carbon::parse($request->input('waktu_akhir'))->endOfDay()
+                    : Carbon::now()->endOfDay();
+
+                // Menggunakan whereBetween pada created_at, atau sesuaikan dengan kolom tanggal
+                $tagihan->whereBetween('created_at', [$startDate, $endDate]);
+            }
+                $tagihan = $tagihan->paginate(10);
+
+            if ($tagihan->isEmpty()) {
+                return ApiResponse::error("Data tagihan tidak ditemukan.", "2001", 404);
             }
 
-            $detailtagihan = DetailTagihan::where('id_tagihan', $tagihan->id_tagihan)->get();
-
-            return ApiResponse::success([
-                'tagihan' => $tagihan,
-                'detail_tagihan' => $detailtagihan
-            ], "Tagihan ditemukan.", "0000", 200);
+            return ApiResponse::success($tagihan, "Data tagihan ditemukan.", "0000", 200);
         } catch (\Illuminate\Database\QueryException $e) {
-            return ApiResponse::error("Kesalahan database saat mengambil tagihan.", "9999", 500);
+            return ApiResponse::error("Kesalahan database.", "9999", 500);
         } catch (\Exception $e) {
-            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui saat mengambil tagihan.", "9999", 500);
+            return ApiResponse::error("Terjadi kesalahan yang tidak diketahui.", "9999", 500);
         }
     }
 
