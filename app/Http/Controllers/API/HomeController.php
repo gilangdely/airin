@@ -102,8 +102,7 @@ class HomeController extends Controller
                 tagihan.id_tagihan,tagihan.nomor_meteran, tagihan.id_bulan, bulan.nama_bulan, 
                 tagihan.nominal, tagihan.waktu_awal, tagihan.waktu_akhir, 
                 tagihan.status_tagihan, tagihan.status_pembayaran, 
-                SUM(detail_tagihan.pakai) as total_pakai,
-                ROUND(RAND()*(((1/10)*100)*tagihan.nominal), 2) as estimasi                
+                SUM(detail_tagihan.pakai) as total_pakai            
             FROM tagihan
             INNER JOIN detail_tagihan ON detail_tagihan.id_tagihan = tagihan.id_tagihan
             INNER JOIN bulan ON bulan.id_bulan = tagihan.id_bulan
@@ -112,7 +111,6 @@ class HomeController extends Controller
             ORDER BY tagihan.id_bulan DESC
         ";
 
-            
 
             $tagihan = DB::select($query_gettagihan, [
                 'nomormeteran' => $nomorMeteranAktif
