@@ -8,7 +8,7 @@
 
         <div class="card">
             <div class="card-body">
-                <x-error-list />
+                <x-ui.error-list />
 
                 <form action="{{ route('meteran.update', $meteran) }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf

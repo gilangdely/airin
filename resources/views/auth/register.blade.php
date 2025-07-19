@@ -101,7 +101,7 @@
                         <h4 class="mb-1">Adventure starts here 🚀</h4>
                         <p class="mb-6">Make your app management easy and fun!</p>
 
-                        <x-error-list />
+                        <x-ui.error-list />
 
                         <form id="formAuthentication" class="mb-6" action="{{ route('register') }}" method="POST">
                             @csrf

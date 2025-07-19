@@ -8,7 +8,7 @@
 
         <div class="card">
             <div class="card-body">
-                <x-error-list />
+                <x-ui.error-list />
 
                 <form action="{{ route('tarif-layanan.update', $tarifLayanan) }}" method="POST" role="form"
                     enctype="multipart/form-data">

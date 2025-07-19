@@ -8,7 +8,7 @@
 
         <div class="card">
             <div class="card-body">
-                <x-error-list />
+                <x-ui.error-list />
 
                 <section class="mt-5">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">

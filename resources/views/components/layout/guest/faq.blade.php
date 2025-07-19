@@ -2,11 +2,12 @@
     <div class="container fonts-color-primary">
         <div class="row justify-content-center align-items-start">
             <!-- Gambar Ilustrasi di Kiri -->
-            <div class="col-lg-5 mb-4 mb-lg-0 d-flex justify-content-center">
-                <div class="d-flex flex-column align-items-center text-center"
-                    style="width: 100%; height: 100%; padding: 2rem;">
-                    <div class="water-icon" style="font-size: 3rem;">💧</div>
-                    <p style="color: #9ca3af; margin-top: 1rem;">Water Meter Illustration</p>
+            <div class="col-lg-5 d-flex justify-content-center align-items-center">
+                <div class="text-center" style="width: 100%;">
+                    <img src="{{ asset('assets/img/illustrations/faq-ilustration.png') }}"
+                        alt="Water Meter Illustration"
+                        class="img-fluid"
+                        style="max-height: 400px; width: 100%; object-fit: contain; margin-top: -1.2rem;">
                 </div>
             </div>
 

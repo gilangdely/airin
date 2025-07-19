@@ -2,7 +2,7 @@
     <div class="container my-5">
         <x-ui.breadcrumb title="Change Password" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Change Password']]" />
 
-        <x-error-list />
+        <x-ui.error-list />
 
         <div class="card">
             <div class="card-body">

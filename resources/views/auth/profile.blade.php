@@ -2,7 +2,7 @@
     <div class="container my-5">
         <x-ui.breadcrumb title="Profile" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Profile']]" />
 
-        <x-error-list />
+        <x-ui.error-list />
 
         <div class="card">
             <div class="card-body">

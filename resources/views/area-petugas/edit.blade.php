@@ -8,7 +8,7 @@
 
         <div class="card">
             <div class="card-body">
-                <x-error-list />
+                <x-ui.error-list />
 
                 <form action="{{ route('area-petugas.update', $areaPetugas) }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
