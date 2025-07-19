@@ -1,6 +1,6 @@
 <x-layout.app title="Profile">
     <div class="container my-5">
-        <x-breadcrumb title="Profile" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Profile']]" />
+        <x-ui.breadcrumb title="Profile" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Profile']]" />
 
         <x-error-list />
 

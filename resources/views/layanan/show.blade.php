@@ -1,6 +1,6 @@
 <x-layout.app title="Detail Layanan" activeMenu="layanan.show" :withError="true">
     <div class="container my-5">
-        <x-breadcrumb title="Detail Layanan" :breadcrumbs="[
+        <x-ui.breadcrumb title="Detail Layanan" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => 'Layanan', 'url' => route('layanan.index')],
             ['label' => 'Detail Layanan'],

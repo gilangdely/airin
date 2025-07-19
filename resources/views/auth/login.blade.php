@@ -66,7 +66,7 @@
                         <h4 class="mb-1">Selamat datang!</h4>
                         <p class="mb-6">Silahkan Login untuk melihat informasi lebih lanjut.</p>
 
-                        <x-error-list />
+                        <x-ui.error-list />
 
                         <form id="formAuthentication" class="mb-6" action="{{ route('login') }}" method="post">
                             @csrf

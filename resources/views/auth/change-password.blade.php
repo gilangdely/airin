@@ -1,6 +1,6 @@
 <x-layout.app title="Change Password">
     <div class="container my-5">
-        <x-breadcrumb title="Change Password" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Change Password']]" />
+        <x-ui.breadcrumb title="Change Password" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Change Password']]" />
 
         <x-error-list />
 

@@ -10,7 +10,7 @@
                         </p>
                     </div>
 
-                    <x-breadcrumb>
+                    <x-ui.breadcrumb>
                         <li class="breadcrumb-item">
                             <a href="/">{{ __('Dashboard') }}</a>
                         </li>
@@ -20,7 +20,7 @@
                         <li class="breadcrumb-item active" aria-current="page">
                             {{ __('Detail') }}
                         </li>
-                    </x-breadcrumb>
+                    </x-ui.breadcrumb>
                 </div>
             </div>
 

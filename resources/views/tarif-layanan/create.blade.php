@@ -1,6 +1,6 @@
 <x-layout.app title="Tambah Tarif Layanan" activeMenu="tarif-layanan.create" :withError="false">
     <div class="container my-5">
-        <x-breadcrumb title="Tambah Tarif Layanan" :breadcrumbs="[
+        <x-ui.breadcrumb title="Tambah Tarif Layanan" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => 'Tarif Layanan', 'url' => route('tarif-layanan.index')],
             ['label' => 'Tambah Tarif Layanan'],

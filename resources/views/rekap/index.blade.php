@@ -21,7 +21,7 @@
 
 <x-layout.app title="Rekap Pembayaran" :withError="true">
     <div class="my-5 container-fluid">
-        <x-breadcrumb title="Rekap Pembayaran" :breadcrumbs="[
+        <x-ui.breadcrumb title="Rekap Pembayaran" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')], //
             ['label' => 'Rekap Pembayaran'],
         ]" />

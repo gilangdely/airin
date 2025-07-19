@@ -17,6 +17,7 @@
         "maatwebsite/excel": "^3.1",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-permission": "^6.10",
+        "twbs/bootstrap-icons": "^1.13",
         "woo/laravel-grid-view": "2.*"
     },
     "require-dev": {
