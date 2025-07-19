@@ -1,6 +1,6 @@
 <x-layout.app title="Pembayaran" activeMenu="pembayaran" :withError="true">
     <div class="my-5 container-fluid">
-        <x-breadcrumb title="Pembayaran" :breadcrumbs="[
+        <x-ui.breadcrumb title="Pembayaran" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => 'Pembayaran'],
         ]" />

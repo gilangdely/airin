@@ -1,6 +1,6 @@
 <x-layout.app title="Kriteria Layanan" activeMenu="kriteria-layanan" :withError="true">
     <div class="my-5 container-fluid">
-        <x-breadcrumb title="Kriteria Layanan" :breadcrumbs="[
+        <x-ui.breadcrumb title="Kriteria Layanan" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => 'Kriteria Layanan'],
         ]" />

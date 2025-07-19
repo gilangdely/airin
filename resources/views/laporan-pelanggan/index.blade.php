@@ -1,6 +1,6 @@
 <x-layout.app title="Laporan Per Meteran" activeMenu="laporan-pelanggan" :withError="true">
     <div class="my-5 container-fluid">
-        <x-breadcrumb title="Laporan Per Meteran" :breadcrumbs="[
+        <x-ui.breadcrumb title="Laporan Per Meteran" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')], //
             ['label' => 'Laporan Per Meteran'],
         ]" />

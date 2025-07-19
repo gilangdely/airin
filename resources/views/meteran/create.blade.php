@@ -1,6 +1,6 @@
 <x-layout.app title="Tambah Meteran" activeMenu="meteran.create" :withError="false">
     <div class="container my-5">
-        <x-breadcrumb title="Tambah Meteran" :breadcrumbs="[
+        <x-ui.breadcrumb title="Tambah Meteran" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => 'Meteran', 'url' => route('meteran.index')],
             ['label' => 'Tambah Meteran'],

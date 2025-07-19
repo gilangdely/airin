@@ -1,6 +1,6 @@
 <x-layout.app title="Perbarui {{modelTitle}}" activeMenu="{{modelRoute}}.edit" :withError="false">
     <div class="container my-5">
-        <x-breadcrumb title="Perbarui {{modelTitle}}" :breadcrumbs="[
+        <x-ui.breadcrumb title="Perbarui {{modelTitle}}" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => '{{modelTitle}}', 'url' => route('{{modelRoute}}.index')],
             ['label' => 'Perbarui {{modelTitle}}'],

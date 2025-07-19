@@ -1,6 +1,6 @@
 <x-layout.app title="Detail Tunggakan" activeMenu="tunggakan.show" :withError="true">
     <div class="container my-5">
-        <x-breadcrumb title="Detail Tunggakan" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Detail Tunggakan']]" />
+        <x-ui.breadcrumb title="Detail Tunggakan" :breadcrumbs="[['label' => 'Dashboard', 'url' => url('/')], ['label' => 'Detail Tunggakan']]" />
 
         <div class="card">
             <div class="card-header">

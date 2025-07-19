@@ -228,7 +228,7 @@
     @endpush
     <div class="container my-5">
         <div class="noprint">
-            <x-breadcrumb
+            <x-ui.breadcrumb
                 title="Cetak Kartu"
                 :breadcrumbs="[
                 ['label' => 'Dashboard', 'url' => url('/')],

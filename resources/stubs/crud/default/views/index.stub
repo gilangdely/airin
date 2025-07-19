@@ -1,6 +1,6 @@
 <x-layout.app title="{{modelTitle}}" activeMenu="{{modelRoute}}" :withError="true">
     <div class="my-5 container-fluid">
-        <x-breadcrumb title="{{modelTitle}}" :breadcrumbs="[
+        <x-ui.breadcrumb title="{{modelTitle}}" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => '{{modelTitle}}'],
         ]" />

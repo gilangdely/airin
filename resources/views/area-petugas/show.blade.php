@@ -1,6 +1,6 @@
 <x-layout.app title="Detail Area Petugas" activeMenu="area-petugas.show" :withError="true">
      <div class="container my-5">
-        <x-breadcrumb title="Detail Area Petugas" :breadcrumbs="[
+        <x-ui.breadcrumb title="Detail Area Petugas" :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => url('/')],
             ['label' => 'Area Petugas', 'url' => route('area-petugas.index')],
             ['label' => 'Detail Area Petugas'],
