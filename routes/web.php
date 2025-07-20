@@ -106,6 +106,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/rekap', [RekapPembayaran::class, 'index'])->name('rekap.index');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/chart-perbandingan', [DashboardController::class, 'getDataChartPerbandingan'])->name('dashboard.chart-perbandingan');
+    Route::get('/dashboard/chart', [DashboardController::class, 'grafikPembayaran'])->name('dashboard.chart');
+
     Route::get('/tunggakan/{id}', [DashboardController::class, 'showTunggakan'])->name('tunggakan.show');
 
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');

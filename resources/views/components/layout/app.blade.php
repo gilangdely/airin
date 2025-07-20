@@ -34,6 +34,7 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}">
+    
 
     {{-- Flatpicker --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -51,6 +52,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+    <script src="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+
+
+
     <style media="print">
         .noprint {
             display: none;
@@ -66,7 +75,7 @@
         <div class="layout-container">
             <!-- Toast default -->
             @if (isset($withError) ? $withError : false)
-                <x-bs-toast />
+                <x-ui.bs-toast />
             @endif
 
             <!-- Navbar -->
@@ -91,6 +100,8 @@
     <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
+    <script src="../../assets/vendor/libs/chartjs/chartjs.js"><script>
+    
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
