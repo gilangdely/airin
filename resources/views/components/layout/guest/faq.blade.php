@@ -2,8 +2,8 @@
     <div class="container fonts-color-primary">
         <div class="row justify-content-center align-items-start">
             <!-- Gambar Ilustrasi di Kiri -->
-            <div class="col-lg-5 d-flex justify-content-center align-items-center">
-                <div class="text-center" style="width: 100%;">
+            <div class="col-lg-5 d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800" data-aos-easing="ease-in-out">
+                <div class="text-center w-100">
                     <img src="{{ asset('assets/img/illustrations/faq-ilustration.png') }}"
                         alt="Water Meter Illustration"
                         class="img-fluid"
@@ -12,9 +12,9 @@
             </div>
 
             <!-- Konten Text di Kanan -->
-            <div class="col-lg-6 fonts-sora">
+            <div class="col-lg-6 fonts-sora" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800" data-aos-easing="ease-in-out">
                 <div class="text-start mb-4">
-                    <h3 class="fw-semibold lh-1" style="max-width: 500px;">
+                    <h3 class="fw-semibold lh-sm" style="max-width: 500px;">
                         Punya pertanyaan tentang Airin?
                     </h3>
                     <h5 class="lh-sm mt-4 fw-normal">
@@ -25,8 +25,8 @@
 
                 <!-- Daftar Accordion -->
                 <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
+                    <div class="accordion-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                        <div class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed d-flex align-items-center gap-3" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
@@ -37,8 +37,8 @@
                                 </div>
                                 <h5 class="mb-0 fw-light">Apa itu Airin dan siapa yang bisa menggunakannya?</h5>
                             </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                        </div>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
                             data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body fw-light">
                                 Airin adalah sistem digital untuk pengelolaan air bersih. Digunakan oleh warga, petugas lapangan, hingga admin pusat untuk memantau, mencatat, dan mengelola pemakaian air secara efisien dan transparan.
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="accordion-item">
+                    <div class="accordion-item" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
                         <h2 class="accordion-header" id="flush-headingTwo">
                             <button class="accordion-button collapsed d-flex align-items-center gap-3" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div class="accordion-item" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
                         <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed d-flex align-items-center gap-3" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"

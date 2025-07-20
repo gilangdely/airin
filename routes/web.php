@@ -27,7 +27,12 @@ require('auth.php');
  */
 Route::middleware('guest')->group(function () {
     Route::get('/', [LandingController::class, 'index'])->name('landing');
+
+    Route::get('/tentang-kami', function () {
+        return view('tentang-kami.index');
+    });
 });
+
 
 /*
  * Perlu login untuk mengakses
