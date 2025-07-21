@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -22,12 +23,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
         Paginator::useBootstrapFive();
 
         Validator::extend('username', function ($attribute, $value, $parameters, $validator) {
             return preg_match('/^[a-zA-Z0-9_]+$/', $value);
         });
-    
+
         Validator::replacer('username', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':attribute', $attribute, 'Username hanya boleh mengandung huruf, angka, dan underscore.');
         });

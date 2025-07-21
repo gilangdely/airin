@@ -1,4 +1,4 @@
-FROM php:8.3-apache
+FROM php:8.4-apache
 
 # COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     gnupg \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql intl zip mbstring # <-- TAMBAHKAN mbstring
+    && docker-php-ext-install gd pdo pdo_mysql intl zip
 
 RUN a2enmod rewrite
 
