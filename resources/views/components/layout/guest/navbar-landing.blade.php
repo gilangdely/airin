@@ -1,4 +1,8 @@
 <style>
+    .nav-link.active {
+        border-bottom: 2px solid #5C6BF9;
+    }
+
     .navbar-toggler {
         width: 42px;
         height: 42px;
@@ -80,13 +84,18 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
             <ul class="navbar-nav gap-4 d-none d-lg-flex">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('/') }}">Beranda</a>
+                    <a class="nav-link {{ Request::is('/') ? 'active text-primary fw-semibold' : '' }}" href="{{ url('/') }}">
+                        Beranda
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/tentang-kami') }}">Tentang Kami</a>
+                    <a class="nav-link {{ Request::is('tentang-kami') ? 'active text-primary fw-semibold' : '' }}" href="{{ url('/tentang-kami') }}">
+                        Tentang Kami
+                    </a>
                 </li>
             </ul>
         </div>
+
 
         <!-- Login Button (desktop only) -->
         <div class="d-none d-lg-flex align-items-center">
@@ -101,10 +110,14 @@
         data-aos="fade-down" data-aos-duration="600" data-aos-delay="100">
         <ul class="navbar-nav text-end">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ url('/') }}">Beranda</a>
+                <a class="nav-link {{ Request::is('/') ? 'active text-primary fw-semibold' : '' }}" href="{{ url('/') }}">
+                    Beranda
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/tentang-kami') }}">Tentang Kami</a>
+                <a class="nav-link {{ Request::is('tentang-kami') ? 'active text-primary fw-semibold' : '' }}" href="{{ url('/tentang-kami') }}">
+                    Tentang Kami
+                </a>
             </li>
             <li class="nav-item mt-3">
                 <a href="{{ route('login') }}" class="btn btn-outline-dark rounded-pill w-100">
