@@ -127,11 +127,8 @@
 
 <section style="padding: 5rem 0;" class="bg-white">
     <div class="container">
-        <div class="text-center fonts-sora fonts-color-primary"
-            data-aos="fade-up"
-            data-aos-delay="100"
-            data-aos-duration="800"
-            data-aos-easing="ease-in-out">
+        <div class="text-center fonts-sora fonts-color-primary" data-aos="fade-up" data-aos-delay="100"
+            data-aos-duration="800" data-aos-easing="ease-in-out">
 
             <h3 class="fw-semibold lh-sm mb-4" style="max-width: 680px; margin: 0 auto;">
                 Transparan. Efisien. Berkelanjutan.
@@ -145,24 +142,52 @@
         <div class="d-flex flex-wrap justify-content-center mt-5 gap-4 fonts-color-primary">
             <!-- Card Template -->
             @php
-            $fitur = [
-            ['icon' => 'humidity.svg', 'judul' => 'Pemantauan Pemakaian Air', 'deskripsi' => 'Lihat riwayat dan jumlah pemakaian air secara detail setiap bulan langsung dari dashboard.'],
-            ['icon' => 'wallet.svg', 'judul' => 'Bayar Air Tanpa Antre', 'deskripsi' => 'Cukup buka aplikasi, lihat jumlah tagihan, dan bayar dalam beberapa langkah sederhana.'],
-            ['icon' => 'Tablet.svg', 'judul' => 'Akses Mobile untuk Petugas', 'deskripsi' => 'Mencatat meteran, memantau, dan mengelola tagihan langsung dari perangkat mobile.'],
-            ['icon' => 'Pressure.svg', 'judul' => 'Pencatatan Meteran Otomatis', 'deskripsi' => 'Petugas cukup input angka meteran, sistem akan otomatis menghitung tagihan.'],
-            ['icon' => 'Waterfall.svg', 'judul' => 'Transparansi Data dan Riwayat', 'deskripsi' => 'Pelanggan bisa melihat semua riwayat pemakaian dan pembayaran.'],
-            ['icon' => 'Group.svg', 'judul' => 'Manajemen Pengguna & Petugas', 'deskripsi' => 'Admin dapat membuat dan mengelola akun petugas serta warga, dan mengatur hak akses.'],
-            ];
+                $fitur = [
+                    [
+                        'icon' => 'humidity.svg',
+                        'judul' => 'Pemantauan Pemakaian Air',
+                        'deskripsi' =>
+                            'Lihat riwayat dan jumlah pemakaian air secara detail setiap bulan langsung dari dashboard.',
+                    ],
+                    [
+                        'icon' => 'Wallet.svg',
+                        'judul' => 'Bayar Air Tanpa Antre',
+                        'deskripsi' =>
+                            'Cukup buka aplikasi, lihat jumlah tagihan, dan bayar dalam beberapa langkah sederhana.',
+                    ],
+                    [
+                        'icon' => 'Tablet.svg',
+                        'judul' => 'Akses Mobile untuk Petugas',
+                        'deskripsi' =>
+                            'Mencatat meteran, memantau, dan mengelola tagihan langsung dari perangkat mobile.',
+                    ],
+                    [
+                        'icon' => 'Pressure.svg',
+                        'judul' => 'Pencatatan Meteran Otomatis',
+                        'deskripsi' => 'Petugas cukup input angka meteran, sistem akan otomatis menghitung tagihan.',
+                    ],
+                    [
+                        'icon' => 'Waterfall.svg',
+                        'judul' => 'Transparansi Data dan Riwayat',
+                        'deskripsi' => 'Pelanggan bisa melihat semua riwayat pemakaian dan pembayaran.',
+                    ],
+                    [
+                        'icon' => 'Group.svg',
+                        'judul' => 'Manajemen Pengguna & Petugas',
+                        'deskripsi' =>
+                            'Admin dapat membuat dan mengelola akun petugas serta warga, dan mengatur hak akses.',
+                    ],
+                ];
             @endphp
 
             @foreach ($fitur as $item)
-            <div class="fitur-card mt-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <div class="fitur-icon-wrapper">
-                    <img src="{{ asset('assets/img/icons/' . $item['icon']) }}" alt="{{ $item['judul'] }}">
+                <div class="fitur-card mt-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="fitur-icon-wrapper">
+                        <img src="{{ asset('assets/img/icons/' . $item['icon']) }}" alt="{{ $item['judul'] }}">
+                    </div>
+                    <h5 class="fonts-sora fitur-title">{{ $item['judul'] }}</h5>
+                    <div class="fonts-sora fitur-desc">{{ $item['deskripsi'] }}</div>
                 </div>
-                <h5 class="fonts-sora fitur-title">{{ $item['judul'] }}</h5>
-                <div class="fonts-sora fitur-desc">{{ $item['deskripsi'] }}</div>
-            </div>
             @endforeach
         </div>
     </div>
