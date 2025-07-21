@@ -66,7 +66,7 @@
         <div class="layout-container">
             <!-- Toast default -->
             @if (isset($withError) ? $withError : false)
-                <x-bs-toast />
+                <x-ui.bs-toast />
             @endif
 
             <!-- Navbar -->
