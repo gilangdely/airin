@@ -125,7 +125,7 @@
     }
 </style>
 
-<section style="padding: 5rem 0;" class="bg-white">
+<section id="keunggulan-kami" style="padding: 5rem 0;" class="bg-white">
     <div class="container">
         <div class="text-center fonts-sora fonts-color-primary" data-aos="fade-up" data-aos-delay="100"
             data-aos-duration="800" data-aos-easing="ease-in-out">

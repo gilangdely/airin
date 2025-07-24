@@ -45,12 +45,12 @@
             <!-- Barisan Tim -->
             <div class="row justify-content-center gy-4 gx-2" style="margin-top: 2rem;">
                 @foreach([
-                ['name' => 'Firman Zamzami', 'role' => 'Machine Learning Developer', 'img' => 'Firman.jpg'],
+                ['name' => 'Firman Zamzami', 'role' => 'Ketua Tim', 'img' => 'Firman.jpg'],
                 ['name' => 'Akhmad Fauzan', 'role' => 'Backend Developer', 'img' => 'Fauzan.jpg'],
                 ['name' => 'Agus Priyanto', 'role' => 'Frontend Developer', 'img' => 'Iyan.jpg'],
-                ['name' => 'Gilang Dely', 'role' => 'Project Creative', 'img' => 'Gilang.png'],
-                ['name' => 'Afridho Zaki', 'role' => 'Blackbox Testing', 'img' => 'Dodo.jpg'],
-                ['name' => 'Aulia Hamdi', 'role' => 'Desain Creative', 'img' => 'AuliaHamdi.png'],
+                ['name' => 'Gilang Dely', 'role' => 'Perancang Basis Data & Alur Aplikasi', 'img' => 'Gilang.png'],
+                ['name' => 'Afridho Zaki', 'role' => 'Penguji Fungsionalitas', 'img' => 'Dodo.jpg'],
+                ['name' => 'Aulia Hamdi', 'role' => 'Dosen Pembimbing', 'img' => 'AuliaHamdi.png'],
                 ] as $member)
                 <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100" style="padding-left: 8px; padding-right: 8px;">
                     <div class="text-center">

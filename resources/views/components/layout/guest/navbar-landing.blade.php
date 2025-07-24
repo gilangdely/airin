@@ -67,10 +67,10 @@
 
         <!-- Logo adaptif -->
         <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
-            <img src="{{ asset('assets/img/logo/Logo-Airin.png') }}" alt="Logo"
-                style="height: 42px;" class="img-fluid d-none d-lg-block">
-            <img src="{{ asset('assets/img/logo/Logo-Airin.png') }}" alt="Logo"
-                style="height: 34px;" class="img-fluid d-block d-lg-none">
+            <img src="{{ asset('assets/img/logo/Airin-Logo-New.png') }}" alt="Logo"
+                style="height: 50px;" class="img-fluid d-none d-lg-block">
+            <img src="{{ asset('assets/img/logo/Airin-Logo-New.png') }}" alt="Logo"
+                style="height: 42px;" class="img-fluid d-block d-lg-none">
         </a>
 
         <!-- Hamburger -->

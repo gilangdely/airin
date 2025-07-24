@@ -1,4 +1,4 @@
-<section style="padding: 5rem 0;" class="bg-white">
+<section id="faq" style="padding: 5rem 0;" class="bg-white">
     <div class="container fonts-color-primary">
         <div class="row justify-content-center align-items-start">
             <!-- Gambar Ilustrasi di Kiri -->

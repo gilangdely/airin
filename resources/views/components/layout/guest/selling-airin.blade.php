@@ -1,4 +1,4 @@
-<section style="padding: 5rem 0;" class="bg-white">
+<section id="manfaat" style="padding: 5rem 0;" class="bg-white">
     <div class="container fonts-color-primary">
         <div class="row justify-content-center align-items-center flex-lg-row flex-column-reverse">
 

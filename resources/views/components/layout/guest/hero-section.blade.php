@@ -28,7 +28,7 @@
     </div>
 
     <!-- Konten Tengah -->
-    <div class="container text-center position-relative px-3" style="z-index: 1;">
+    <div class="container text-center position-relative px-3 pb-8" style="z-index: 1;">
         <!-- Badge -->
         <div class="mb-3" data-aos="fade" data-aos-delay="100">
             <div class="rounded-pill border border-dark px-3 py-1 fonts-sora d-inline-block"

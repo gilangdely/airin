@@ -8,7 +8,7 @@
             <!-- Brand Section -->
             <div class="col-lg-6 col-md-6 col-12 mb-4" data-aos="fade-up">
                 <a href="{{ url('/') }}" class="d-flex align-items-center mb-3">
-                    <img src="{{ asset('assets/img/logo/Logo-Airin.png') }}" alt="Airin Logo" height="45">
+                    <img src="{{ asset('assets/img/logo/Airin-Logo-New.png') }}" alt="Airin Logo" height="60">
                 </a>
                 <p class="text-white mb-4" style="font-size: 14px; line-height: 1.6; max-width: 400px; opacity: 0.9;">
                     Meningkatkan transparansi layanan air, memperkuat kepercayaan masyarakat dalam setiap langkah pelayanan.
@@ -36,13 +36,13 @@
                 <h5 class="text-white mb-3" style="font-weight: 500; font-size: 16px;">Home</h5>
                 <ul class="list-unstyled" style="line-height: 1.6;">
                     <li class="mb-2">
-                        <a href="#" class="text-white text-decoration-none" style="font-size: 14px; opacity: 0.8;">Keunggulan Kami</a>
+                        <a href="#keunggulan-kami" class="text-white text-decoration-none" style="font-size: 14px; opacity: 0.8;">Keunggulan Kami</a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="text-white text-decoration-none" style="font-size: 14px; opacity: 0.8;">Manfaat</a>
+                        <a href="#manfaat" class="text-white text-decoration-none" style="font-size: 14px; opacity: 0.8;">Manfaat</a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="text-white text-decoration-none" style="font-size: 14px; opacity: 0.8;">Pertanyaan Seputar Airin</a>
+                        <a href="#faq" class="text-white text-decoration-none" style="font-size: 14px; opacity: 0.8;">Pertanyaan Seputar Airin</a>
                     </li>
                 </ul>
             </div>
