@@ -3,7 +3,6 @@
 > Empowering Communities Through Seamless Water Management Innovation
 
 ![Last Commit](https://img.shields.io/badge/last%20commit-july-blue)
-![Blade](https://img.shields.io/badge/blade-52.3%-blue)
 ![Languages](https://img.shields.io/badge/languages-5-blue)
 
 Built with the tools and technologies:
